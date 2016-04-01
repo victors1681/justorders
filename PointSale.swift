@@ -30,6 +30,15 @@ protocol PointSaleType {
     func save()
 }
 
+
+enum ClientClasification: String {
+    case Personal
+    case Company
+    case Special
+    case Government
+}
+
+
 protocol ClientSelectionType {
     
     var name: String { get set }

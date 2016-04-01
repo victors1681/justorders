@@ -153,7 +153,7 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
         }
        
         cell.descriptionItem.text = currentItem.description
-        cell.url = "http://www.milescollins.com/images/pt-lb.jpg"
+        cell.url = "http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
         
         cell.selectedView.hidden = true
         cell.selectedView.alpha = 0
@@ -235,7 +235,7 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
         cell.quantity.text = "\(qty)"
         cell.subTotal.text = "\(subTotal)"
     
-            cell.url = "http://www.milescollins.com/images/pt-lb.jpg";
+            cell.url = "http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg";
         
             return cell
         
