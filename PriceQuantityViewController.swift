@@ -25,12 +25,9 @@ class PriceQuantityViewController: UIViewController {
     
     @IBOutlet weak var priceText: UITextField!
     @IBOutlet weak var quantityText: UITextField!
-    
     @IBOutlet weak var totalLabel: UILabel!
-    
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var containerView: DesignableView!
-    
     @IBAction func lessAction(sender: AnyObject) {
        
         let qty:Double? = Double(quantityText.text!.RemoveSymbolVS)

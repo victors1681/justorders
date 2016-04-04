@@ -17,6 +17,8 @@
 		575BC0A61CADBB3E005C708C /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57A0DCAC1CACC9E700C532BE /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		575BC0A91CADBB44005C708C /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A0DC8C1CACC9E700C532BE /* Kingfisher.framework */; };
 		575BC0AA1CADBB44005C708C /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57A0DC8C1CACC9E700C532BE /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		575BC0AE1CAE1FC1005C708C /* UserDefaultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575BC0AD1CAE1FC1005C708C /* UserDefaultModel.swift */; };
+		5760D4AB1CB1D49700010EF1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760D4AA1CB1D49700010EF1 /* PaymentViewController.swift */; };
 		5784318B1C979DCD00C713E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784318A1C979DCD00C713E0 /* AppDelegate.swift */; };
 		5784318D1C979DCD00C713E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784318C1C979DCD00C713E0 /* ViewController.swift */; };
 		578431901C979DCD00C713E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5784318E1C979DCD00C713E0 /* Main.storyboard */; };
@@ -61,7 +63,6 @@
 		578B2E1F1C98A12C00E9DE13 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B2E1E1C98A12C00E9DE13 /* SwiftyJSON.swift */; };
 		5798C2F11C9904330003B54A /* PointSaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798C2F01C9904330003B54A /* PointSaleViewController.swift */; };
 		5798C2F31C99055C0003B54A /* ItemsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798C2F21C99055C0003B54A /* ItemsCollectionCell.swift */; };
-		579DF91F1C99FF5A000706FA /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579DF91E1C99FF5A000706FA /* UserModel.swift */; };
 		579DF93D1C9A00A0000706FA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579DF93C1C9A00A0000706FA /* CoreData.framework */; };
 		579DF9691C9F6DFF000706FA /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579DF9681C9F6DFF000706FA /* ItemsTableViewCell.swift */; };
 		57A0DC111CACC90F00C532BE /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A0DC101CACC90F00C532BE /* ClientViewController.swift */; };
@@ -288,6 +289,8 @@
 		5731E8801CA9A516003A36F4 /* InventoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryModel.swift; sourceTree = "<group>"; };
 		5731E89E1CA9BE4A003A36F4 /* DBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBModel.swift; sourceTree = "<group>"; };
 		5731E8A41CAAFA88003A36F4 /* PriceQuantityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceQuantityViewController.swift; sourceTree = "<group>"; };
+		575BC0AD1CAE1FC1005C708C /* UserDefaultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultModel.swift; sourceTree = "<group>"; };
+		5760D4AA1CB1D49700010EF1 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		578431871C979DCD00C713E0 /* JustOrders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustOrders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784318A1C979DCD00C713E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5784318C1C979DCD00C713E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -342,7 +345,6 @@
 		5798C2C71C9901150003B54A /* Kingfisher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kingfisher.xcodeproj; path = "Kingfisher-master/Kingfisher.xcodeproj"; sourceTree = "<group>"; };
 		5798C2F01C9904330003B54A /* PointSaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointSaleViewController.swift; sourceTree = "<group>"; };
 		5798C2F21C99055C0003B54A /* ItemsCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsCollectionCell.swift; sourceTree = "<group>"; };
-		579DF91E1C99FF5A000706FA /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		579DF93C1C9A00A0000706FA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		579DF9681C9F6DFF000706FA /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
 		57A0DC101CACC90F00C532BE /* ClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				5731E8A41CAAFA88003A36F4 /* PriceQuantityViewController.swift */,
 				5798C2F01C9904330003B54A /* PointSaleViewController.swift */,
 				57A0DCCE1CAD952600C532BE /* LoginViewController.swift */,
+				5760D4AA1CB1D49700010EF1 /* PaymentViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -473,9 +476,9 @@
 				572E16B31CAB950E00C38B06 /* VSFormatNumber.swift */,
 				5731E89E1CA9BE4A003A36F4 /* DBModel.swift */,
 				5731E8801CA9A516003A36F4 /* InventoryModel.swift */,
-				579DF91E1C99FF5A000706FA /* UserModel.swift */,
 				5784319F1C97B4E000C713E0 /* PointSale.swift */,
 				578B2E1B1C98975F00E9DE13 /* ServicesData.swift */,
+				575BC0AD1CAE1FC1005C708C /* UserDefaultModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -811,6 +814,7 @@
 				578B2D771C98908F00E9DE13 /* SpringTextView.swift in Sources */,
 				578B2D5F1C98908F00E9DE13 /* AsyncButton.swift in Sources */,
 				578B2D681C98908F00E9DE13 /* DesignableTextView.swift in Sources */,
+				575BC0AE1CAE1FC1005C708C /* UserDefaultModel.swift in Sources */,
 				579DF9691C9F6DFF000706FA /* ItemsTableViewCell.swift in Sources */,
 				578B2D7B1C98908F00E9DE13 /* UnwindSegue.swift in Sources */,
 				578B2D751C98908F00E9DE13 /* SpringLabel.swift in Sources */,
@@ -823,11 +827,11 @@
 				578B2D761C98908F00E9DE13 /* SpringTextField.swift in Sources */,
 				5731E8A51CAAFA88003A36F4 /* PriceQuantityViewController.swift in Sources */,
 				578431931C979DCD00C713E0 /* JustOrders.xcdatamodeld in Sources */,
+				5760D4AB1CB1D49700010EF1 /* PaymentViewController.swift in Sources */,
 				578B2D641C98908F00E9DE13 /* DesignableImageView.swift in Sources */,
 				5731E89F1CA9BE4A003A36F4 /* DBModel.swift in Sources */,
 				578B2DCD1C98908F00E9DE13 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				57A0DC111CACC90F00C532BE /* ClientViewController.swift in Sources */,
-				579DF91F1C99FF5A000706FA /* UserModel.swift in Sources */,
 				5731E8811CA9A516003A36F4 /* InventoryModel.swift in Sources */,
 				578B2D701C98908F00E9DE13 /* SoundPlayer.swift in Sources */,
 				578B2D6F1C98908F00E9DE13 /* Misc.swift in Sources */,

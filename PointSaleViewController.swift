@@ -9,12 +9,19 @@
 import UIKit
 import Kingfisher
 
-class PointSaleViewController: UIViewController, PriceQuantityViewControllerDelegate {
+class PointSaleViewController: UIViewController, PriceQuantityViewControllerDelegate, ClientViewDelegate, PaymentViewDelegate {
     
-    let pointSale: PointSaleType
+    var pointSale: PointSaleType
     
     let reuseIdentifier = "collectionCell"
     let reuseIdentifierTable = "tableCell"
+    
+    
+    @IBOutlet weak var clientButton: SpringButton!
+    @IBOutlet weak var clientInformationView: SpringView!
+    @IBOutlet weak var clientPhone: UILabel!
+    @IBOutlet weak var clientEmail: UILabel!
+    @IBOutlet weak var clientName: UILabel!
     
     @IBOutlet weak var itemQty: DesignableLabel!
     @IBOutlet weak var tableView: UITableView!
@@ -53,8 +60,6 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         
        let ser = ServicesData()
         
-        ser.getToken("victor", password: "genio1681")
-        
         //Clear Cache
         let cache = KingfisherManager.sharedManager.cache
         cache.clearMemoryCache()
@@ -76,6 +81,8 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         super.didReceiveMemoryWarning()
     }
     
+    
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
@@ -87,12 +94,57 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
             
             let toView = segue.destinationViewController as! PriceQuantityViewController
             toView.delegate = self
-            
             toView.selectedItem = pointSale.inventory[(indexPath?.row)!]
+        }
+        
+        if segue.identifier == "Client" {
+            
+          let toView = segue.destinationViewController as! ClientViewController
+            toView.delegate = self
+            toView.client = pointSale.client
+            
+        }
+        
+        if segue.identifier == "Payment" {
+            let toPayment = segue.destinationViewController as! PaymentViewController
+            toPayment.delegate = self
+            
         }
     }
     
-    //MARK: Dlelegate Price & Quantity
+    
+    //MARK: Payment Delegate
+    func billPaid(controller: PaymentViewController) {
+        
+        
+    }
+    
+    //MARK: Client Delegate
+    
+    func clientReload(controller: ClientViewController, clientSelected: ClientSelection) {
+
+        pointSale.client = clientSelected
+        
+        //Hide Client Button
+        clientButton.animation = "fadeOut"
+        clientButton.animate()
+        
+        //Show Information
+        clientInformationView.hidden = false
+        clientInformationView.animation = "fadeIn"
+        clientInformationView.animate()
+        
+        
+        //Set text
+        clientName.text = clientSelected.name
+        clientEmail.text = clientSelected.email
+        clientPhone.text = clientSelected.phone
+        
+        print(clientSelected.name)
+        
+    }
+    
+    //MARK: Delegate Price & Quantity
     func updatePriceQuantity(controller: PriceQuantityViewController, netPrice: Double, amountTax:Double,  quantity: Double, selectedItem:ProductItems){
         
         //Add Select Item

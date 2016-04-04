@@ -41,20 +41,33 @@ enum ClientClasification: String {
 
 protocol ClientSelectionType {
     
+    var code: String { get set }
     var name: String { get set }
     var email: String  { get set }
     var address: String  { get set}
     var phone: String { get set }
     var celPhone: String { get set }
+    var taxId: String { get set }
+    var city: String { get set }
+    var clasification: String { get set }
+    var taxeable: Bool { get set }
+    
     
 }
 
 struct ClientSelection: ClientSelectionType {
+    
+    var code: String
     var name: String
     var email: String
     var address: String
     var phone: String
     var celPhone: String
+    var taxId: String
+    var city: String
+    var clasification: String
+    var taxeable: Bool
+    
 }
 
 protocol ProductType{
@@ -135,9 +148,26 @@ enum PaymentMethod {
 }
 
 
+enum KeyNumbers {
+    case one
+    case two
+    case three
+    case four
+    case five
+    case six
+    case seven
+    case eight
+    case nine
+    case zero
+    case zeroZero
+    case point
+}
+
+
 class PointSale: PointSaleType {
     
-    var client: ClientSelection = ClientSelection(name: "", email: "", address: "", phone: "", celPhone: "")
+    var client: ClientSelection = ClientSelection(code: "", name: "", email: "", address: "'", phone: "'", celPhone: "", taxId: "", city: "", clasification: "", taxeable: false)
+    
     var selection: [InventorySelectionItem] = []
     
     var totalOrder: Double = 0.0

@@ -18,10 +18,11 @@ class UserModel {
         var password : String = ""
         var token : String = ""
         var name: String = ""
+        var localPassword: String = ""
     }
     
     
-    func setUserInfo(user: String, password: String, token: String ) {
+    func setUserInfo(user: String, password: String, token: String, localPassword:String ) {
         
         let appDel : AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         let context : NSManagedObjectContext = appDel.managedObjectContext
@@ -38,6 +39,7 @@ class UserModel {
             newInformation.setValue(user, forKey: "username")
             newInformation.setValue(password, forKey: "password")
             newInformation.setValue(token, forKey: "token")
+            newInformation.setValue(localPassword, forKey: "localPassword")
         
         try context.save()
             print("Save!")
@@ -48,12 +50,42 @@ class UserModel {
     }
     
     
+    func updateToken(token: String) -> Bool {
+        
+        let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        let request = NSFetchRequest(entityName: "User")
+        
+        request.predicate = NSPredicate(format: "username != %@", "Administrator")
+        
+        do{
+            let results:NSArray = try context.executeFetchRequest(request)
+            
+            if(results.count > 0){
+                //Login Successful
+                let result = results[0] as! NSManagedObject
+                result.setValue("token", forKey: "token")
+                
+                
+            }
+        }catch{
+            print("Something wrong!")
+        }
+        
+        return false
+        
+    }
+    
+    
     func geUserInfo() -> UserInformation {
         
         let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         let context: NSManagedObjectContext = appDel.managedObjectContext
         let request = NSFetchRequest(entityName: "User")
-        var userInformation : UserInformation = UserInformation.init(username: "", password: "", token: "", name: "")
+        
+        request.predicate = NSPredicate(format: "username != %@", "Administrator")
+        
+        var userInformation : UserInformation = UserInformation.init(username: "", password: "", token: "", name: "", localPassword: "")
         
         do{
             let results:NSArray = try context.executeFetchRequest(request)
@@ -65,14 +97,78 @@ class UserModel {
                 let password = result.valueForKey("password") as? String ?? ""
                 let token = result.valueForKey("token") as? String ?? ""
                 let name = result.valueForKey("name") as? String ?? ""
-            
-                userInformation = UserInformation.init(username: username, password: password, token: token, name: name)
+                let localPassword = result.valueForKey("localPassword") as? String ?? ""
+                
+                userInformation = UserInformation.init(username: username, password: password, token: token, name: name, localPassword: localPassword)
             }
         }catch{
             print("Something wrong!")
         }
         
         return userInformation
+        
+    }
+    
+    
+    
+    //Default Administrator User
+    func setAdministratorUser() {
+        
+        let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        let request = NSFetchRequest(entityName: "User")
+        
+        request.predicate = NSPredicate(format: "username == %@", "Administrator")
+        
+        do{
+            let results:NSArray = try context.executeFetchRequest(request)
+            
+            if(results.count == 0){
+                
+                
+                let fetchRequest = NSFetchRequest(entityName: "User")
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                
+                try context.executeRequest(deleteRequest)
+                
+                let newInformation = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: context)
+                
+                newInformation.setValue("Administrator", forKey: "username")
+                newInformation.setValue("1681", forKey: "password")
+                newInformation.setValue("", forKey: "token")
+                newInformation.setValue("1681", forKey: "localPassword")
+                
+                try context.save()
+                
+            }
+        }catch{
+            print("Something wrong!")
+        }
+        
+        
+    }
+    
+    
+    func validateLogin(password: String) -> Bool {
+        
+        let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        let context: NSManagedObjectContext = appDel.managedObjectContext
+        let request = NSFetchRequest(entityName: "User")
+        
+        request.predicate = NSPredicate(format: "localPassword == %@", password)
+        
+        do{
+            let results:NSArray = try context.executeFetchRequest(request)
+            
+            if(results.count > 0){
+                //Login Successful
+                return true
+            }
+        }catch{
+            print("Something wrong!: \(error)")
+        }
+        
+        return false
         
     }
 

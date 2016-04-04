@@ -59,7 +59,7 @@ class ServicesData:ServicesDataType {
     
     
     
-    internal var gobalToken = UserModel().geUserInfo().token
+    internal var gobalToken = UserDefaultModel().getDataUser().token
     internal let prefixUrl = ""
 
     
@@ -117,9 +117,9 @@ class ServicesData:ServicesDataType {
             
             if let token = JSON["access_token"].string {
             
-                let saveDataUser = UserModel()
-               //save data info in Core Data
-                saveDataUser.setUserInfo(username, password: password, token: token)
+                let userToken = UserData(username: "", password: "", localPassword: "", token: token, name: "")
+               //save token
+                let saveDataUser = UserDefaultModel().addDataUser(userToken)
                
             }
         }

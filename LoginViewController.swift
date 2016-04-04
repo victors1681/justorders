@@ -8,18 +8,7 @@
 
 import UIKit
 
-enum KeyNumbers {
-    case one
-    case two
-    case three
-    case four
-    case five
-    case six
-    case seven
-    case eight
-    case nine
-    case zero
-}
+
 
 
 class LoginViewController: UIViewController {
@@ -98,6 +87,13 @@ class LoginViewController: UIViewController {
     
     func setNumber(number:KeyNumbers) {
         
+        //Reset Password
+        if passwordArr.count == 4 {
+            passwordArr.removeAll()
+            updateTextField(passwordArr)
+        }
+        
+        
         if passwordArr.count == 0 {
             
             enterPasswordLabel.autohide = true
@@ -149,6 +145,8 @@ class LoginViewController: UIViewController {
             passwordArr.append("0")
             updateTextField(passwordArr)
             
+        default:
+            break
         
         }
         
@@ -157,8 +155,15 @@ class LoginViewController: UIViewController {
         //Validate Password and enter
         if passwordArr.count == 4 {
             //Default Password
-            if String(passwordArr) == "1681" {
+            if (UserDefaultModel().validateLogin(String(passwordArr)))  {
+                
+                let userData = UserDefaultModel().getDataUser()
+                let ser = ServicesData()
+                
+                ser.getToken(userData.username , password: userData.password)
+                
                 performSegueWithIdentifier("home", sender: nil)
+                
             }else{
                 passwordField.animation = "shake"
                 passwordField.duration = 1
