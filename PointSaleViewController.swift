@@ -9,9 +9,10 @@
 import UIKit
 import Kingfisher
 
-class PointSaleViewController: UIViewController, PriceQuantityViewControllerDelegate, ClientViewDelegate, PaymentViewDelegate {
+class PointSaleViewController: UIViewController, PriceQuantityViewControllerDelegate, ClientViewDelegate, PaymentViewDelegate, CustomAlertDelegate {
     
     var pointSale: PointSaleType
+    var randomImg: [String] = []
     
     let reuseIdentifier = "collectionCell"
     let reuseIdentifierTable = "tableCell"
@@ -22,13 +23,19 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     @IBOutlet weak var clientPhone: UILabel!
     @IBOutlet weak var clientEmail: UILabel!
     @IBOutlet weak var clientName: UILabel!
-    
+    @IBOutlet weak var totalOrderLabel: UILabel!
     @IBOutlet weak var itemQty: DesignableLabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchText: UITextField!
+    
+    
     var isFilter: Bool = false
     var filterProducts: [ProductItems] = []
+    
+    private var alertTitle = ""
+    private var alertMessage = ""
+    private var alertIdentifier = ""
     
     @IBAction func search(sender: AnyObject) {
         
@@ -46,6 +53,31 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         collectionView.reloadData()
     }
     
+    @IBAction func goToEditClient(sender: AnyObject) {
+        
+        performSegueWithIdentifier("Client", sender: nil)
+    }
+    
+    @IBAction func goToPaymentAction(sender: AnyObject) {
+        
+        if pointSale.selection.count > 0{
+        
+        if !pointSale.client.name.isEmpty {
+            performSegueWithIdentifier("Payment", sender: nil)
+        }else{
+            performSegueWithIdentifier("Client", sender: nil)
+        }
+            
+        }else{
+            
+            alertTitle = "Ups..."
+            alertMessage = "Por favor escoja los productos que desea vender!"
+            alertIdentifier = "SeleccionarProducto"
+            
+            performSegueWithIdentifier("AlertView", sender: nil)
+        }
+    }
+    
     required  init?(coder aDecoder: NSCoder) {
         
         let productItems = InventoryModel().getInventory()
@@ -58,7 +90,23 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     
         super.viewDidLoad()
         
-       let ser = ServicesData()
+        randomImg = ["http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg",
+                     "http://topinspired.com/wp-content/uploads/2013/08/healthy-food-recipes-for-kids_01.jpg",
+        "http://cdn.aarp.net/content/dam/aarp/food/recipes/2013-02/740-low-fat-recipes-by-pam-anderso.imgcache.rev1360943709278.jpg/_jcr_content/renditions/cq5dam.web.420.270.jpeg",
+        "http://foodnetwork.sndimg.com/content/dam/images/food/fullset/2012/10/26/0/FNK_Healthy-Hot-Chocolate-Banana-Nut-Oatmeal_s4x3.jpg.rend.snigalleryslide.jpeg",
+        "http://www.livestrong.com/wp-content/uploads/2014/08/comfortfood.jpg",
+        "http://del.h-cdn.co/assets/16/07/shanghai-noodles-6-sm3.jpg",
+        "http://lilluna.com/wp-content/uploads/2012/01/chinese-1.jpg",
+        "http://www.perfectspice.com/image/data/recipe/Spicy%20Ribs.jpg",
+        "http://therawchef.com/wp-content/uploads/2007/01/raw-food-recipe-lasagne.jpg",
+        "http://3.bp.blogspot.com/-OYy3CYSsuz4/UlNOp8jKqeI/AAAAAAAAJlE/PtfiX4B3s1g/s1600/dashi+poached+salmon.jpg",
+        "http://www.thefullhelping.com/wp-content/uploads/2012/09/IMG_2581.jpg",
+        "http://www.glutenfreecat.com/wp-content/uploads/2012/07/Raw-Pakoras-by-Gluten-Free-Cat.jpg",
+        "http://www.zandyrestaurant.com/images/food/_MG_2661.jpg",
+        "http://www.topchinatravel.com/Pic/china-guide/cuisine/jiangsu-cuisine-1.jpg",
+        "http://www.thesaigoncafe.com/wp-content/uploads/2014/09/a1.jpg"]
+        
+        let ser = ServicesData()
         
         //Clear Cache
         let cache = KingfisherManager.sharedManager.cache
@@ -66,7 +114,8 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         cache.clearMemoryCache()
         do{
             
-        try ser.getDataInventory()
+             //ser.getToken("victor", password: "genio1681")
+            try ser.getDataInventory()
         }catch let error {
             print("error Something bad: \(error)")
         }
@@ -97,6 +146,17 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
             toView.selectedItem = pointSale.inventory[(indexPath?.row)!]
         }
         
+        if segue.identifier == "PriceQuantityEdit" {
+            
+            let indexPath = self.tableView.indexPathForSelectedRow
+            
+            let toView = segue.destinationViewController as! PriceQuantityViewController
+            toView.delegate = self
+            toView.selection = pointSale.selection[(indexPath?.row)!]
+            toView.indexPath = indexPath
+            toView.isEdit = true
+        }
+        
         if segue.identifier == "Client" {
             
           let toView = segue.destinationViewController as! ClientViewController
@@ -109,13 +169,49 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
             let toPayment = segue.destinationViewController as! PaymentViewController
             toPayment.delegate = self
             
+            toPayment.totalOrder = pointSale.totalOrder
+            toPayment.totalTax = pointSale.totalTax
+            toPayment.subTotal = pointSale.subTotal
+            toPayment.clientName = pointSale.client.name
+            
+        }
+        
+        if segue.identifier == "AlertView" {
+            let toAlert = segue.destinationViewController as! CustomAlertView
+            
+            toAlert.delegate = self
+            toAlert.alertTitle = alertTitle
+            toAlert.alertMesage = alertMessage
+            toAlert.alertIdentifier = alertIdentifier
         }
     }
     
     
     //MARK: Payment Delegate
     func billPaid(controller: PaymentViewController) {
+         cleanView()
+    }
+    
+    func cleanView() {
+        let productItems = InventoryModel().getInventory()
+        self.pointSale = PointSale(inventory: productItems)
+        tableView.reloadData()
         
+        //show Client Button
+        clientButton.animation = "fadeIn"
+        clientButton.animate()
+        
+        //hide Information
+        clientInformationView.hidden = true
+        clientInformationView.animation = "fadeOut"
+        clientInformationView.animate()
+        
+        totalOrderLabel.text = 0.0.FormatNumberCurrencyVS
+    }
+    
+    
+    //MARK: Custom Alert View Delegate
+    func alertAction(controller: CustomAlertView, alertIdentifier: String, action: Bool) {
         
     }
     
@@ -145,25 +241,40 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     }
     
     //MARK: Delegate Price & Quantity
-    func updatePriceQuantity(controller: PriceQuantityViewController, netPrice: Double, amountTax:Double,  quantity: Double, selectedItem:ProductItems){
+    func updatePriceQuantity(controller: PriceQuantityViewController, netPrice: Double, amountTax:Double,  quantity: Double, selectedItem:ProductItems?, indexPath:Int?){
         
+        
+        if selectedItem != nil {
         //Add Select Item
-        
-        let selectedItem  = InventorySelectionItem(code: selectedItem.code, description: selectedItem.description, unit: selectedItem.und, amountTax: amountTax, quantity: quantity, price: netPrice , discount1: 0.0, discountPorcent: 0.0)
+            
+        let selectedItem  = InventorySelectionItem(code: selectedItem!.code, description: selectedItem!.description, unit: selectedItem!.und, amountTax: amountTax, quantity: quantity, price: netPrice , discount1: 0.0, discountPorcent: 0.0)
         
         do{
-            try pointSale.vend(selectedItem, quantity: 0.0)
+            try pointSale.vend(selectedItem)
             
             
         }catch let e{
             print("Something happen \(e)")
         }
         
+        }else{
+            //Edit Product
+            
+            do{
+                try pointSale.editItem(quantity, price: netPrice, indexPath: indexPath!)
+            }catch{
+                print("error: \(error))")
+            }
+        }
+        
         
         self.tableView?.reloadData()
         
-        print("price:\(netPrice), qty:\(quantity)")
+        //show Total
+            totalOrderLabel.text = pointSale.totalOrder.FormatNumberCurrencyVS
     }
+  
+    
  
 }
 
@@ -205,7 +316,13 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
         }
        
         cell.descriptionItem.text = currentItem.description
-        cell.url = "http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
+        
+        let range = UInt32(randomImg.count)
+        let ranNum =  Int(arc4random_uniform(range))
+        
+        
+            print(randomImg[ranNum])
+            cell.url = (randomImg[ranNum])  //"http:/)/cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
         
         cell.selectedView.hidden = true
         cell.selectedView.alpha = 0
@@ -283,14 +400,20 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
         let qty = currenSelectedItem.quantity
         let subTotal = price * qty
         
-        cell.price.text = "\(price)"
-        cell.quantity.text = "\(qty)"
-        cell.subTotal.text = "\(subTotal)"
+        cell.price.text = "\(price.FormatNumberCurrencyVS)"
+        cell.quantity.text = "\(qty.FormatNumberNumberVS)"
+        cell.subTotal.text = "\(subTotal.FormatNumberCurrencyVS)"
     
             cell.url = "http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg";
         
             return cell
         
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        performSegueWithIdentifier("PriceQuantityEdit", sender: nil)
         
     }
     
@@ -300,6 +423,7 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
            
             do{
                 try pointSale.removeItem(indexPath.row)
+                totalOrderLabel.text = pointSale.totalOrder.FormatNumberCurrencyVS
                 
             }catch{
                 print("Error: \(error)")

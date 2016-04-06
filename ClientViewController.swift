@@ -35,8 +35,10 @@ class ClientViewController: UIViewController {
     @IBOutlet weak var containerView: DesignableView!
     @IBOutlet weak var clientOptionButton: SpringButton!
     @IBOutlet weak var segment: UISegmentedControl!
+    
+    
+    
     @IBAction func segmentAction(sender: AnyObject) {
-        
         
         switch segment.selectedSegmentIndex {
         case 0:
@@ -67,17 +69,24 @@ class ClientViewController: UIViewController {
     }
     
     @IBAction func doneAction(sender: AnyObject) {
+    
+        if(validateOption()){
+            
+            client?.name = name.text!
+            client?.phone = phone.text!
+            client?.email = email.text!
+            client?.taxId = taxId.text!
+            client?.address = address.text!
+            client?.city = city.text!
         
-        client?.name = name.text!
-        client?.phone = phone.text!
-        client?.email = email.text!
-        client?.taxId = taxId.text!
-        client?.address = address.text!
-        client?.city = city.text!
+            delegate?.clientReload(self, clientSelected: client!)
         
-        delegate?.clientReload(self, clientSelected: client!)
-        
-        dismissViewControllerAnimated(true, completion: nil)
+            dismissViewControllerAnimated(true, completion: nil)
+        }else{
+            containerView.animation = "shake"
+            containerView.duration = 1
+            containerView.animate()
+        }
     }
     
     @IBAction func clientOption(sender: AnyObject) {
@@ -97,11 +106,92 @@ class ClientViewController: UIViewController {
         
     }
     
+    @IBAction func clientOptionBack(sender: AnyObject) {
+        
+        client?.taxeable = false
+        
+        panelButtonView.animation = "fadeIn"
+        panelButtonView.animate()
+        
+        optionalPanelView.hidden = false
+        optionalPanelView.alpha = 1
+        optionalPanelView.animation = "fadeOut"
+        optionalPanelView.animate()
+        
+    }
+    
+    
+    //MARK: HELPER
+    
+    func validateOption()->Bool{
+        
+        let nameStr = name.text!
+        let phoneStr = phone.text!
+        
+        if nameStr.isEmpty || phoneStr.isEmpty {
+            return false
+        }
+        
+        if (client?.taxeable)! {
+            
+            let taxIdStr = taxId.text
+            
+            if (taxIdStr!.isEmpty ) {
+                return false
+            }
+            
+        }
+        
+        return true
+    }
+    
+    
+    func loadClient(){
+        //Validate if editing
+        if !(client?.name.isEmpty)! {
+            
+            name.text = client?.name
+            phone.text = client?.phone
+            email.text = client?.email
+            taxId.text = client?.taxId
+            address.text = client?.address
+            city.text = client?.city
+            
+            if (client!.taxeable) {
+                clientOption(self)
+            }
+            
+            switch client!.clasification {
+            case ClientClasification.Personal.rawValue:
+                //Personal
+                segment.selectedSegmentIndex = 0
+                break
+            case ClientClasification.Company.rawValue:
+                //Company
+               segment.selectedSegmentIndex = 1
+                break
+                
+            case ClientClasification.Special.rawValue:
+                //Special
+                segment.selectedSegmentIndex = 2
+                break
+            case ClientClasification.Government.rawValue:
+                //Gob
+                segment.selectedSegmentIndex = 3
+                break
+                
+            default:
+                break
+            }
+        }
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        loadClient()
+       
         
     }
     

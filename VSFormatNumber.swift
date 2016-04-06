@@ -32,6 +32,19 @@ extension Double {
         
         return newFormat
     }
+    
+    var FormatNumberPorcentVS: String {
+        
+        let numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let format = numberFormatter.stringFromNumber(self)!
+        
+        var newFormat = format.stringByReplacingOccurrencesOfString(".00", withString: "")
+        newFormat = newFormat + "%"
+                
+        return newFormat
+    }
+    
 }
 
 extension String {
@@ -43,6 +56,13 @@ extension String {
         let newStr = self.stringByReplacingOccurrencesOfString(code, withString: "")
         let newStr2 = newStr.stringByReplacingOccurrencesOfString(",", withString: "")
          return newStr2
+    }
+    
+    var RemovePercentVS: String { 
+        
+        let newStr = self.stringByReplacingOccurrencesOfString("%", withString: "")
+        let newStr2 = newStr.stringByReplacingOccurrencesOfString(",", withString: "")
+        return newStr2
     }
 }
 

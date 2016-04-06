@@ -50,11 +50,12 @@ private enum ResoursePath {
 enum ServicesDataError {
  
     case EmptyToken
+    case UserFail
 }
 
 class ServicesData:ServicesDataType {
     
-    internal let baseUrl = "http://192.168.1.106:8087"
+    internal let baseUrl = "http://192.168.2.236:8087"
    // internal let prefixUrl = "Webservice/WebService.asmx"
     
     
@@ -115,12 +116,15 @@ class ServicesData:ServicesDataType {
         
         self.jsonRequest(ResoursePath.Token.description, method: Alamofire.Method.POST ,header: headers, parameter: parameters ) { (JSON) -> () in
             
+            print(JSON)
             if let token = JSON["access_token"].string {
             
                 let userToken = UserData(username: "", password: "", localPassword: "", token: token, name: "")
                //save token
-                let saveDataUser = UserDefaultModel().addDataUser(userToken)
+                 UserDefaultModel().addDataUser(userToken)
                
+            }else{
+                print(ServicesDataError.UserFail)
             }
         }
     }

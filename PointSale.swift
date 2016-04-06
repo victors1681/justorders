@@ -17,16 +17,20 @@ protocol PointSaleType {
     
     var totalOrder: Double { get set}
     var totalTax: Double { get set }
+    var subTotal: Double { get set }
+    var amountPaid: Double { get set }
+    var amountChange: Double { get set }
     
     init(inventory: [ProductItems])
     
-    func vend(selection: InventorySelectionItem, quantity: Double) throws
+    func vend(selection: InventorySelectionItem) throws
     func removeItem(index: Int) throws
-    func editItem(selection: InventorySelectionItem, quantity: Double) throws
-    func mergeItems(selection: InventorySelectionItem) throws
+    func editItem(quantity: Double, price: Double, indexPath:Int) throws
+    func mergeItems(selection: InventorySelectionItem)throws ->Bool
     func itemForCurrentSelection(selection: InventorySelectionItem)
     
     func setPaymentMethod(method: PaymentMethod)
+    func updateBalance()
     func save()
 }
 
@@ -139,6 +143,7 @@ struct InventorySelectionItem: InventoryItemType {
 enum PointSaleError: ErrorType {
     case InvalidSelection
     case InvalidItemIndex
+    case InvalidMarge
 }
 
 
@@ -172,6 +177,9 @@ class PointSale: PointSaleType {
     
     var totalOrder: Double = 0.0
     var totalTax: Double = 0.0
+    var subTotal: Double = 0.0
+    var amountPaid: Double = 0.0
+    var amountChange: Double = 0.0
     
     var inventory : [ProductItems]
     var paymentMethod: PaymentMethod = PaymentMethod.NoPayment
@@ -181,9 +189,17 @@ class PointSale: PointSaleType {
         self.inventory = inventory
     }
     
-    func vend(selection: InventorySelectionItem, quantity: Double) throws {
+    func vend(selection: InventorySelectionItem) throws {
         
-        self.selection.append(selection)
+        do {
+          if try !mergeItems(selection) {
+            self.selection.append(selection)
+            updateBalance()
+        }
+        }catch{
+            throw PointSaleError.InvalidMarge
+        }
+        
     }
     
     func removeItem(index: Int) throws {
@@ -193,14 +209,64 @@ class PointSale: PointSaleType {
         }
         
         self.selection.removeAtIndex(index)
+        updateBalance()
     }
-    func editItem(selection: InventorySelectionItem, quantity: Double) throws {}
-    func mergeItems(selection: InventorySelectionItem) throws {}
+    func editItem(quantity: Double, price: Double, indexPath:Int) throws {
+        
+        selection[indexPath].price = price
+        selection[indexPath].quantity = quantity
+        updateBalance()
+    }
+    
+    func mergeItems(selection: InventorySelectionItem)throws ->Bool {
+    
+        for (index, currentSelection) in self.selection.enumerate() {
+            
+            //Looking for item inserted return true whether found
+            if currentSelection.code == selection.code {
+                let newQty = currentSelection.quantity + selection.quantity
+                
+                let newProduct = InventorySelectionItem(code: currentSelection.code, description: currentSelection.description, unit: currentSelection.unit, amountTax: currentSelection.amountTax, quantity: newQty, price: currentSelection.price, discount1: currentSelection.discount1, discountPorcent: currentSelection.discountPorcent)
+                
+                
+                do{
+                    try removeItem(index)
+                    try vend(newProduct)
+                    
+                    return true
+                }catch{
+                    print("error removing object:\(error)")
+                }
+                
+            }
+        }
+        
+        return false
+    }
+    
     func itemForCurrentSelection(selection: InventorySelectionItem){}
     
     func setPaymentMethod(method: PaymentMethod){
         self.paymentMethod = method
     }
+    
+    func updateBalance() {  //Automatic updating
+        self.totalOrder = 0
+        self.totalTax = 0
+         self.subTotal = 0
+        
+        for item in selection {
+            
+            self.totalOrder += item.quantity * (item.price + item.amountTax)
+            self.totalTax += item.amountTax
+        }
+        
+        self.subTotal = totalOrder - totalTax
+                
+    }
+    
+    
+    
     func save(){
         
     }

@@ -10,7 +10,7 @@ import UIKit
 
 protocol PriceQuantityViewControllerDelegate:
 class {
-    func updatePriceQuantity(controller: PriceQuantityViewController, netPrice: Double, amountTax:Double,  quantity: Double, selectedItem:ProductItems)
+    func updatePriceQuantity(controller: PriceQuantityViewController, netPrice: Double, amountTax:Double,  quantity: Double, selectedItem:ProductItems?, indexPath:Int?)
 }
 
 
@@ -18,16 +18,21 @@ class PriceQuantityViewController: UIViewController {
 
     weak var delegate: PriceQuantityViewControllerDelegate?
     var selectedItem : ProductItems?
+    var selection: InventorySelectionItem?
+    var isEdit = false
+    var indexPath:NSIndexPath?
     
     @IBAction func closeView(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceText: UITextField!
     @IBOutlet weak var quantityText: UITextField!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var containerView: DesignableView!
+    
     @IBAction func lessAction(sender: AnyObject) {
        
         let qty:Double? = Double(quantityText.text!.RemoveSymbolVS)
@@ -55,16 +60,24 @@ class PriceQuantityViewController: UIViewController {
         
         let qty:Double? = Double((quantityText.text?.RemoveSymbolVS)!)
         let price:Double? = Double((priceText.text?.RemoveSymbolVS)!)
-        let tax: Double? = selectedItem?.tax
+        var tax: Double? = selectedItem?.tax
         
         if(qty != nil && price != nil){
+            
+            if tax == nil {
+                tax = 0
+            }
             
             let netPrice = subtractTaxes(price!, tax: tax!)
             
             let taxes = price! - netPrice
             
-        delegate?.updatePriceQuantity(self,netPrice: netPrice, amountTax:taxes, quantity: qty!, selectedItem: selectedItem!)
-        
+            if isEdit {
+                delegate?.updatePriceQuantity(self, netPrice: netPrice, amountTax: taxes, quantity: qty!, selectedItem: selectedItem, indexPath: indexPath?.row)
+            }else{
+           
+        delegate?.updatePriceQuantity(self,netPrice: netPrice, amountTax:taxes, quantity: qty!, selectedItem: selectedItem!, indexPath: nil)
+            }
        
             dismissViewControllerAnimated(true, completion: nil)
         }else{
@@ -97,14 +110,26 @@ class PriceQuantityViewController: UIViewController {
         super.viewDidLoad()
         // Do view setup here.
         
+        
+        
         if((selectedItem?.prices.price1) != nil && selectedItem?.tax != nil){
             
             let result = taxesCalculate(selectedItem!.prices.price1, tax: selectedItem!.tax)
             
-            priceText.text = "\(result.pricePlusTax.FormatNumberCurrencyVS)"
+            priceText.text = result.pricePlusTax.FormatNumberCurrencyVS
+            descriptionLabel.text = selectedItem?.description
+            
+            
             updateTotal(self)
         }else{
             priceText.text = "0.0"
+        }
+        
+        if isEdit { 
+            
+            quantityText.text =  selection!.quantity.FormatNumberNumberVS
+            priceText.text =  selection!.price.FormatNumberCurrencyVS
+            updateTotal(self)
         }
         
     }
