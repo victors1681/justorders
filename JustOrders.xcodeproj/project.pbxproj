@@ -11,6 +11,8 @@
 		5731E8811CA9A516003A36F4 /* InventoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731E8801CA9A516003A36F4 /* InventoryModel.swift */; };
 		5731E89F1CA9BE4A003A36F4 /* DBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731E89E1CA9BE4A003A36F4 /* DBModel.swift */; };
 		5731E8A51CAAFA88003A36F4 /* PriceQuantityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731E8A41CAAFA88003A36F4 /* PriceQuantityViewController.swift */; };
+		573F6D5A1CB7EE0F002D9EF4 /* CustomAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 573F6D591CB7EE0E002D9EF4 /* CustomAlertView.xib */; };
+		573F6D721CB7FEF2002D9EF4 /* CustomeAlertView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573F6D711CB7FEF2002D9EF4 /* CustomeAlertView2.swift */; };
 		575BC08F1CADBB38005C708C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A0DCC11CACC9E700C532BE /* Alamofire.framework */; };
 		575BC0901CADBB38005C708C /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57A0DCC11CACC9E700C532BE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		575BC0A51CADBB3E005C708C /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A0DCAC1CACC9E700C532BE /* SQLite.framework */; };
@@ -20,6 +22,8 @@
 		575BC0AE1CAE1FC1005C708C /* UserDefaultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575BC0AD1CAE1FC1005C708C /* UserDefaultModel.swift */; };
 		5760D4AB1CB1D49700010EF1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760D4AA1CB1D49700010EF1 /* PaymentViewController.swift */; };
 		5760D4AD1CB2E35300010EF1 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760D4AC1CB2E35300010EF1 /* CustomAlertView.swift */; };
+		5760D4AF1CB5F8BF00010EF1 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760D4AE1CB5F8BF00010EF1 /* MenuViewController.swift */; };
+		5760D4B11CB6106200010EF1 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5760D4B01CB6106200010EF1 /* ConfigurationViewController.swift */; };
 		5784318B1C979DCD00C713E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784318A1C979DCD00C713E0 /* AppDelegate.swift */; };
 		5784318D1C979DCD00C713E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784318C1C979DCD00C713E0 /* ViewController.swift */; };
 		578431901C979DCD00C713E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5784318E1C979DCD00C713E0 /* Main.storyboard */; };
@@ -290,9 +294,13 @@
 		5731E8801CA9A516003A36F4 /* InventoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryModel.swift; sourceTree = "<group>"; };
 		5731E89E1CA9BE4A003A36F4 /* DBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBModel.swift; sourceTree = "<group>"; };
 		5731E8A41CAAFA88003A36F4 /* PriceQuantityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceQuantityViewController.swift; sourceTree = "<group>"; };
+		573F6D591CB7EE0E002D9EF4 /* CustomAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlertView.xib; sourceTree = "<group>"; };
+		573F6D711CB7FEF2002D9EF4 /* CustomeAlertView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeAlertView2.swift; sourceTree = "<group>"; };
 		575BC0AD1CAE1FC1005C708C /* UserDefaultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultModel.swift; sourceTree = "<group>"; };
 		5760D4AA1CB1D49700010EF1 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		5760D4AC1CB2E35300010EF1 /* CustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		5760D4AE1CB5F8BF00010EF1 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		5760D4B01CB6106200010EF1 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		578431871C979DCD00C713E0 /* JustOrders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustOrders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5784318A1C979DCD00C713E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5784318C1C979DCD00C713E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -469,6 +477,10 @@
 				57A0DCCE1CAD952600C532BE /* LoginViewController.swift */,
 				5760D4AA1CB1D49700010EF1 /* PaymentViewController.swift */,
 				5760D4AC1CB2E35300010EF1 /* CustomAlertView.swift */,
+				573F6D591CB7EE0E002D9EF4 /* CustomAlertView.xib */,
+				5760D4B01CB6106200010EF1 /* ConfigurationViewController.swift */,
+				5760D4AE1CB5F8BF00010EF1 /* MenuViewController.swift */,
+				573F6D711CB7FEF2002D9EF4 /* CustomeAlertView2.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -796,6 +808,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				573F6D5A1CB7EE0F002D9EF4 /* CustomAlertView.xib in Resources */,
 				578B2D6B1C98908F00E9DE13 /* Info.plist in Resources */,
 				578431981C979DCD00C713E0 /* LaunchScreen.storyboard in Resources */,
 				578431951C979DCD00C713E0 /* Assets.xcassets in Resources */,
@@ -836,6 +849,9 @@
 				578B2DCD1C98908F00E9DE13 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				57A0DC111CACC90F00C532BE /* ClientViewController.swift in Sources */,
 				5731E8811CA9A516003A36F4 /* InventoryModel.swift in Sources */,
+				5760D4AF1CB5F8BF00010EF1 /* MenuViewController.swift in Sources */,
+				5760D4B11CB6106200010EF1 /* ConfigurationViewController.swift in Sources */,
+				573F6D721CB7FEF2002D9EF4 /* CustomeAlertView2.swift in Sources */,
 				578B2D701C98908F00E9DE13 /* SoundPlayer.swift in Sources */,
 				578B2D6F1C98908F00E9DE13 /* Misc.swift in Sources */,
 				578B2D691C98908F00E9DE13 /* DesignableView.swift in Sources */,

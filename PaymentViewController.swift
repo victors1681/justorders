@@ -42,6 +42,7 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var keypadTopBg: UIView!
     @IBOutlet weak var keypadView: DesignableView!
     @IBOutlet weak var keypadTextLabel: UILabel!
+    @IBOutlet weak var discountBtn: UIButton!
     
     
     @IBOutlet weak var activePaidView: SpringView!
@@ -198,6 +199,10 @@ class PaymentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !UserDefaultModel().getConfiguration().discount {
+            discountBtn.enabled = false
+        }
         
         totalOrderLabel.text = totalOrder.FormatNumberCurrencyVS
         subTotalLabel.text = subTotal.FormatNumberCurrencyVS

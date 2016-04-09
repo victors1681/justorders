@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class PointSaleViewController: UIViewController, PriceQuantityViewControllerDelegate, ClientViewDelegate, PaymentViewDelegate, CustomAlertDelegate {
+class PointSaleViewController: UIViewController, PriceQuantityViewControllerDelegate, ClientViewDelegate, PaymentViewDelegate {
     
     var pointSale: PointSaleType
     var randomImg: [String] = []
@@ -42,9 +42,9 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         let searchInput = searchText.text
         
         if !(searchInput?.isEmpty)!{
-         filterProducts = pointSale.inventory.filter { ProductItems in
-            return ProductItems.description.lowercaseString.containsString(searchInput!)
-        }
+            filterProducts = pointSale.inventory.filter { ProductItems in
+                return ProductItems.description.lowercaseString.containsString(searchInput!)
+            }
             isFilter = true
         }else{
             isFilter = false
@@ -61,23 +61,25 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     @IBAction func goToPaymentAction(sender: AnyObject) {
         
         if pointSale.selection.count > 0{
-        
-        if !pointSale.client.name.isEmpty {
-            performSegueWithIdentifier("Payment", sender: nil)
-        }else{
-            performSegueWithIdentifier("Client", sender: nil)
-        }
+            
+            if !pointSale.client.name.isEmpty {
+                performSegueWithIdentifier("Payment", sender: nil)
+            }else{
+                performSegueWithIdentifier("Client", sender: nil)
+            }
             
         }else{
             
             alertTitle = "Ups..."
             alertMessage = "Por favor escoja los productos que desea vender!"
             alertIdentifier = "SeleccionarProducto"
+        
+            self.view.showCustomeAlert(title:"Ups...", message:"Por favor escoja los productos que desea vender!")
             
-            performSegueWithIdentifier("AlertView", sender: nil)
         }
     }
     
+ 
     required  init?(coder aDecoder: NSCoder) {
         
         let productItems = InventoryModel().getInventory()
@@ -87,41 +89,45 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     }
     
     override func viewDidLoad() {
-    
+        
         super.viewDidLoad()
         
         randomImg = ["http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg",
                      "http://topinspired.com/wp-content/uploads/2013/08/healthy-food-recipes-for-kids_01.jpg",
-        "http://cdn.aarp.net/content/dam/aarp/food/recipes/2013-02/740-low-fat-recipes-by-pam-anderso.imgcache.rev1360943709278.jpg/_jcr_content/renditions/cq5dam.web.420.270.jpeg",
-        "http://foodnetwork.sndimg.com/content/dam/images/food/fullset/2012/10/26/0/FNK_Healthy-Hot-Chocolate-Banana-Nut-Oatmeal_s4x3.jpg.rend.snigalleryslide.jpeg",
-        "http://www.livestrong.com/wp-content/uploads/2014/08/comfortfood.jpg",
-        "http://del.h-cdn.co/assets/16/07/shanghai-noodles-6-sm3.jpg",
-        "http://lilluna.com/wp-content/uploads/2012/01/chinese-1.jpg",
-        "http://www.perfectspice.com/image/data/recipe/Spicy%20Ribs.jpg",
-        "http://therawchef.com/wp-content/uploads/2007/01/raw-food-recipe-lasagne.jpg",
-        "http://3.bp.blogspot.com/-OYy3CYSsuz4/UlNOp8jKqeI/AAAAAAAAJlE/PtfiX4B3s1g/s1600/dashi+poached+salmon.jpg",
-        "http://www.thefullhelping.com/wp-content/uploads/2012/09/IMG_2581.jpg",
-        "http://www.glutenfreecat.com/wp-content/uploads/2012/07/Raw-Pakoras-by-Gluten-Free-Cat.jpg",
-        "http://www.zandyrestaurant.com/images/food/_MG_2661.jpg",
-        "http://www.topchinatravel.com/Pic/china-guide/cuisine/jiangsu-cuisine-1.jpg",
-        "http://www.thesaigoncafe.com/wp-content/uploads/2014/09/a1.jpg"]
+                     "http://cdn.aarp.net/content/dam/aarp/food/recipes/2013-02/740-low-fat-recipes-by-pam-anderso.imgcache.rev1360943709278.jpg/_jcr_content/renditions/cq5dam.web.420.270.jpeg",
+                     "http://foodnetwork.sndimg.com/content/dam/images/food/fullset/2012/10/26/0/FNK_Healthy-Hot-Chocolate-Banana-Nut-Oatmeal_s4x3.jpg.rend.snigalleryslide.jpeg",
+                     "http://www.livestrong.com/wp-content/uploads/2014/08/comfortfood.jpg",
+                     "http://del.h-cdn.co/assets/16/07/shanghai-noodles-6-sm3.jpg",
+                     "http://lilluna.com/wp-content/uploads/2012/01/chinese-1.jpg",
+                     "http://www.perfectspice.com/image/data/recipe/Spicy%20Ribs.jpg",
+                     "http://therawchef.com/wp-content/uploads/2007/01/raw-food-recipe-lasagne.jpg",
+                     "http://3.bp.blogspot.com/-OYy3CYSsuz4/UlNOp8jKqeI/AAAAAAAAJlE/PtfiX4B3s1g/s1600/dashi+poached+salmon.jpg",
+                     "http://www.thefullhelping.com/wp-content/uploads/2012/09/IMG_2581.jpg",
+                     "http://www.glutenfreecat.com/wp-content/uploads/2012/07/Raw-Pakoras-by-Gluten-Free-Cat.jpg",
+                     "http://www.zandyrestaurant.com/images/food/_MG_2661.jpg",
+                     "http://www.topchinatravel.com/Pic/china-guide/cuisine/jiangsu-cuisine-1.jpg",
+                     "http://www.thesaigoncafe.com/wp-content/uploads/2014/09/a1.jpg"]
         
         let ser = ServicesData()
+      //  ser.getToken("victor", password: "genio1681")
+
         
         //Clear Cache
         let cache = KingfisherManager.sharedManager.cache
         cache.clearMemoryCache()
         cache.clearMemoryCache()
+        
+        
         do{
             
-             //ser.getToken("victor", password: "genio1681")
-            try ser.getDataInventory()
+           
+          //  try ser.getDataInventory()
         }catch let error {
             print("error Something bad: \(error)")
         }
         
         //Load Point of Sale
-       // inventory = InventoryModel().getInventory()
+        // inventory = InventoryModel().getInventory()
         
         
     }
@@ -137,7 +143,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-       
+        
         if segue.identifier == "PriceQuantity" {
             let indexPath = self.collectionView.indexPathForCell(sender as! UICollectionViewCell)
             
@@ -159,7 +165,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         
         if segue.identifier == "Client" {
             
-          let toView = segue.destinationViewController as! ClientViewController
+            let toView = segue.destinationViewController as! ClientViewController
             toView.delegate = self
             toView.client = pointSale.client
             
@@ -176,20 +182,30 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
             
         }
         
-        if segue.identifier == "AlertView" {
-            let toAlert = segue.destinationViewController as! CustomAlertView
-            
-            toAlert.delegate = self
-            toAlert.alertTitle = alertTitle
-            toAlert.alertMesage = alertMessage
-            toAlert.alertIdentifier = alertIdentifier
-        }
+        
+        
+    }
+    
+    
+    //MARK: View Effect
+    func minimizeView(sender: AnyObject) {
+        SpringAnimation.spring(0.7, animations: {
+            self.view.transform = CGAffineTransformMakeScale(0.955, 0.955)
+        })
+        
+    }
+    
+    func maximizeView(sender: AnyObject) {
+        SpringAnimation.spring(0.7, animations: {
+            self.view.transform = CGAffineTransformMakeScale(1, 1)
+        })
+        
     }
     
     
     //MARK: Payment Delegate
     func billPaid(controller: PaymentViewController) {
-         cleanView()
+        cleanView()
     }
     
     func cleanView() {
@@ -210,15 +226,11 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     }
     
     
-    //MARK: Custom Alert View Delegate
-    func alertAction(controller: CustomAlertView, alertIdentifier: String, action: Bool) {
-        
-    }
-    
+   
     //MARK: Client Delegate
     
     func clientReload(controller: ClientViewController, clientSelected: ClientSelection) {
-
+        
         pointSale.client = clientSelected
         
         //Hide Client Button
@@ -245,18 +257,18 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         
         
         if selectedItem != nil {
-        //Add Select Item
+            //Add Select Item
             
-        let selectedItem  = InventorySelectionItem(code: selectedItem!.code, description: selectedItem!.description, unit: selectedItem!.und, amountTax: amountTax, quantity: quantity, price: netPrice , discount1: 0.0, discountPorcent: 0.0)
-        
-        do{
-            try pointSale.vend(selectedItem)
+            let selectedItem  = InventorySelectionItem(code: selectedItem!.code, description: selectedItem!.description, unit: selectedItem!.und, amountTax: amountTax, quantity: quantity, price: netPrice , discount1: 0.0, discountPorcent: 0.0)
             
+            do{
+                try pointSale.vend(selectedItem)
+                
+                
+            }catch let e{
+                print("Something happen \(e)")
+            }
             
-        }catch let e{
-            print("Something happen \(e)")
-        }
-        
         }else{
             //Edit Product
             
@@ -271,11 +283,11 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         self.tableView?.reloadData()
         
         //show Total
-            totalOrderLabel.text = pointSale.totalOrder.FormatNumberCurrencyVS
+        totalOrderLabel.text = pointSale.totalOrder.FormatNumberCurrencyVS
     }
-  
     
- 
+    
+    
 }
 
 extension PointSaleViewController :  UICollectionViewDataSource, UICollectionViewDelegate {
@@ -297,12 +309,12 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ItemsCollectionCell
         /*
-        let business = selectedBusiness[indexPath.row]
-        
-        business.imageURL
-        
-        cell.imageView.setURL(business.imageURL, placeholderImage: UIImage(named: "content-avatar-default"))
-        */
+         let business = selectedBusiness[indexPath.row]
+         
+         business.imageURL
+         
+         cell.imageView.setURL(business.imageURL, placeholderImage: UIImage(named: "content-avatar-default"))
+         */
         
         // Configure the cell
         
@@ -311,18 +323,17 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
         if isFilter {
             currentItem = filterProducts[indexPath.row]
         }else{
-        
+            
             currentItem = pointSale.inventory[indexPath.row]
         }
-       
+        
         cell.descriptionItem.text = currentItem.description
         
         let range = UInt32(randomImg.count)
         let ranNum =  Int(arc4random_uniform(range))
         
         
-            print(randomImg[ranNum])
-            cell.url = (randomImg[ranNum])  //"http:/)/cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
+        cell.url = (randomImg[ranNum])  //"http:/)/cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
         
         cell.selectedView.hidden = true
         cell.selectedView.alpha = 0
@@ -338,7 +349,7 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
         
         let cell : ItemsCollectionCell = collectionView.cellForItemAtIndexPath(indexPath) as! ItemsCollectionCell
         
-       
+        
         if !cell.checked.hidden {
             
             cell.checked.hidden = true
@@ -354,7 +365,7 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
             cell.checked.animation = "zoomOut"
             cell.checked.animate()
             cell.checked.animateNext({ () -> () in
-            cell.checked.hidden = false
+                cell.checked.hidden = false
             })
             
             cell.selectedView.hidden = false
@@ -363,7 +374,7 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
             cell.selectedView.alpha = 0.5
         }
     }
-
+    
 }
 
 
@@ -389,8 +400,8 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifierTable) as! ItemsTableViewCell
         
-           // cell.selectedView.hidden = false
-           // cell.checked.hidden = true
+        // cell.selectedView.hidden = false
+        // cell.checked.hidden = true
         
         let currenSelectedItem = pointSale.selection[indexPath.row]
         
@@ -403,10 +414,10 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
         cell.price.text = "\(price.FormatNumberCurrencyVS)"
         cell.quantity.text = "\(qty.FormatNumberNumberVS)"
         cell.subTotal.text = "\(subTotal.FormatNumberCurrencyVS)"
-    
-            cell.url = "http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg";
         
-            return cell
+        cell.url = "http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg";
+        
+        return cell
         
         
     }
@@ -420,7 +431,7 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-           
+            
             do{
                 try pointSale.removeItem(indexPath.row)
                 totalOrderLabel.text = pointSale.totalOrder.FormatNumberCurrencyVS
@@ -432,5 +443,5 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
-
+    
 }

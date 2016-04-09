@@ -160,7 +160,7 @@ class LoginViewController: UIViewController {
                 let userData = UserDefaultModel().getDataUser()
                 let ser = ServicesData()
                 
-                ser.getToken(userData.username , password: userData.password)
+                //ser.getToken(userData.username , password: userData.password)
                 
                 performSegueWithIdentifier("home", sender: nil)
                 

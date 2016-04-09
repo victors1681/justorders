@@ -110,7 +110,11 @@ class PriceQuantityViewController: UIViewController {
         super.viewDidLoad()
         // Do view setup here.
         
+        //Check whether user can change prices
         
+        if !UserDefaultModel().getConfiguration().changePrice {
+            priceText.enabled = false
+        }
         
         if((selectedItem?.prices.price1) != nil && selectedItem?.tax != nil){
             

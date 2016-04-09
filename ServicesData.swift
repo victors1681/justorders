@@ -20,7 +20,7 @@ protocol ServicesDataType {
     
     //func jsonRequest(resource: String, method: Alamofire.Method, header: [String:String], parameter: String , responseData:(JSON)->())
     
-    func getToken(username: String, password: String)
+    //func getToken(username: String, password: String)
 }
 
 
@@ -47,19 +47,17 @@ private enum ResoursePath {
 }
 
 
-enum ServicesDataError {
+enum ServicesDataError:ErrorType {
  
     case EmptyToken
     case UserFail
+    case ServerFail
+    case NoError
 }
 
 class ServicesData:ServicesDataType {
     
-    internal let baseUrl = "http://192.168.2.236:8087"
-   // internal let prefixUrl = "Webservice/WebService.asmx"
-    
-    
-    
+    internal let baseUrl = UserDefaultModel().getServerPath()
     internal var gobalToken = UserDefaultModel().getDataUser().token
     internal let prefixUrl = ""
 
@@ -86,7 +84,7 @@ class ServicesData:ServicesDataType {
                
                 //Json Result from request convert to data producto
                 let inventory = InventoryModel()
-                let data  = inventory.convertJson(JSON["data"])
+                let data  = inventory.convertJson(JSON!["data"])
                 
                 //Insert in DB
                 if(data.count > 0){
@@ -101,8 +99,9 @@ class ServicesData:ServicesDataType {
         }
     }
     
-    func getToken(username: String, password: String){
+    func getToken(username: String, password: String, completion: (error: ServicesDataError) -> Void) {
     
+        
         let headers = [
             "Content-Type": "application/x-www-form-urlencoded",
             "Content-Length" : "50"
@@ -116,36 +115,48 @@ class ServicesData:ServicesDataType {
         
         self.jsonRequest(ResoursePath.Token.description, method: Alamofire.Method.POST ,header: headers, parameter: parameters ) { (JSON) -> () in
             
-            print(JSON)
-            if let token = JSON["access_token"].string {
+            if JSON != nil {
+                
+                print(JSON!)
+            if let token = JSON!["access_token"].string {
             
-                let userToken = UserData(username: "", password: "", localPassword: "", token: token, name: "")
-               //save token
+                let userToken = UserData(username: "", password: "", localPassword: "", token: token, localUser: "", terminal: "", serverUrl: "", serverPort: "")
+                //save token
                  UserDefaultModel().addDataUser(userToken)
-               
-            }else{
-                print(ServicesDataError.UserFail)
+                
+                completion(error: .NoError) // Success
+              
+            }else if JSON!["error"].stringValue == "invalid_grant" {
+                print(JSON!)
+                
+               completion(error: .UserFail)
             }
+            }else{
+                completion(error:.ServerFail)
+            }
+        
         }
+        
     }
     
-    
     //Json Request.
-    internal func jsonRequest(resource: String, method: Alamofire.Method? = .GET, header:[String:String]?=[:] , parameter:[String:AnyObject]?=[:], responseData: (JSON) -> ()) {
+    internal func jsonRequest(resource: String, method: Alamofire.Method? = .GET, header:[String:String]?=[:] , parameter:[String:AnyObject]?=[:], responseData: (JSON?) -> ()) {
         
         let longUrl  = "\(baseUrl)/\(prefixUrl)\(resource)"
-        
         
         Alamofire.request(method!, longUrl, headers: header, parameters: parameter, encoding: .URL )
             .responseJSON { response in
                 
-              //  print(response.request)  // original URL request
-                print(response.response) // URL response
-                print(response.result)   // result of response serialization
-                
                 if let response = response.result.value {
+                    //print(response.response) // URL response
+                    //print(response.result)   // result of response serialization
                     
                     responseData(JSON(response))
+                }else{
+                    if response.response == nil {
+                        print(ServicesDataError.ServerFail)
+                        responseData(nil)
+                    }
                 }
         }
         

@@ -34,6 +34,7 @@ public class LoadingView: UIView {
         animation.duration = 0.9
         animation.repeatCount = HUGE
         indicatorView.layer.addAnimation(animation, forKey: "")
+        
     }
 
     class func designCodeLoadingView() -> UIView {
