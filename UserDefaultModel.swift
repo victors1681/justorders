@@ -42,6 +42,8 @@ struct Configurations {
 
 class UserDefaultModel {
     
+    internal let userDefault = NSUserDefaults.standardUserDefaults()
+    
     //MARK: Server and user
     func addDataUser(user: UserData) {
         
@@ -54,7 +56,6 @@ class UserDefaultModel {
         let serverUrl = user.serverUrl
         let serverPort = user.serverPort
         
-        let userDefault = NSUserDefaults.standardUserDefaults()
         
         if !username.isEmpty { userDefault.setValue(username, forKey: "username") }
         if !password.isEmpty { userDefault.setValue(password, forKey: "password") }
@@ -72,7 +73,6 @@ class UserDefaultModel {
    
     func getDataUser() -> UserData {
         
-        let userDefault = NSUserDefaults.standardUserDefaults()
         
             let username = userDefault.stringForKey("username") ?? ""
             let password = userDefault.stringForKey("password") ?? ""
@@ -89,6 +89,14 @@ class UserDefaultModel {
         
     }
     
+    func  getAdministratorPassword() -> String? {
+        
+        if let obj = userDefault.objectForKey("administratorPassword") as? String {
+            return obj
+        }
+        return nil
+    }
+    
     func getServerPath() -> String {
         
         let data = getDataUser()
@@ -98,14 +106,13 @@ class UserDefaultModel {
         return ("\(serverUrl):\(serverPort)")
         
     }
-   
+    
     
     func setAdministratorPassword(password: String)  {
         
         //Set Administrator Local Password
-        let userDefault = NSUserDefaults.standardUserDefaults()
         
-        userDefault.setObject("1681", forKey: "administratorPassword")
+        userDefault.setObject(password, forKey: "administratorPassword")
           
         userDefault.synchronize()
     }
@@ -113,7 +120,7 @@ class UserDefaultModel {
     func setAdministratorPasswordFisrtTime()  {
         
         //Set Administrator Local Password
-        let userDefault = NSUserDefaults.standardUserDefaults()
+        
         if ((userDefault.objectForKey("administratorPassword") as? String) == nil){
            
             userDefault.setObject("1681", forKey: "administratorPassword")
@@ -122,16 +129,6 @@ class UserDefaultModel {
         
     }
     
-    func  getAdministratorPassword() -> String? {
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        
-        if let obj = userDefault.objectForKey("administratorPassword") as? String {
-            return obj
-        }
-        
-        return nil
-        
-    }
     
     func validateLogin(password: String)-> Bool {
         
@@ -139,12 +136,26 @@ class UserDefaultModel {
         let userdata = getDataUser()
         let adminPass = getAdministratorPassword()
         
-        if userdata.password == password || password == adminPass  {
+        if userdata.localPassword == password || password == adminPass  {
+            //Register password login
+            let userDefault = NSUserDefaults.standardUserDefaults()
+            userDefault.setObject(password, forKey: "lastPasswordLogin")
+            userDefault.synchronize()
             return true
         }
         
         return false
     }
+    
+    func getLastPasswordLogin()->String {
+        
+        guard let lastPwdLogin:String = userDefault.stringForKey("lastPasswordLogin") else {
+            return ""
+        }
+        
+        return lastPwdLogin
+    }
+    
     
     
     //MARK: Company
@@ -160,7 +171,6 @@ class UserDefaultModel {
         let email = company.email
         let web = company.web
         
-        let userDefault = NSUserDefaults.standardUserDefaults()
         
         if !name.isEmpty { userDefault.setValue(name, forKey: "companyName") }
         if !phone.isEmpty { userDefault.setValue(phone, forKey: "companyPhone") }
@@ -178,7 +188,6 @@ class UserDefaultModel {
     func getCompany()-> CompanyData {
         
         
-        let userDefault = NSUserDefaults.standardUserDefaults()
         
         let name = userDefault.stringForKey("companyName")  ?? ""
         let phone = userDefault.stringForKey("companyPhone")  ?? ""
@@ -202,7 +211,6 @@ class UserDefaultModel {
         let discount = config.discount
         let changePrice = config.changePrice
         
-        let userDefault = NSUserDefaults.standardUserDefaults()
         
          userDefault.setBool(discount, forKey: "discount")
          userDefault.setBool(changePrice, forKey: "changePrice")
@@ -212,13 +220,82 @@ class UserDefaultModel {
     
     func getConfiguration() -> Configurations{
         
-        let userDefault = NSUserDefaults.standardUserDefaults()
         
         let discount = userDefault.boolForKey("discount")
         let changePrice = userDefault.boolForKey("changePrice")
      
         return Configurations(discount: discount, changePrice: changePrice)
     }
+    
+    
+    //MARK: Secuences Order and Client
+    
+    func setOrderSec(sec: String) {
+        
+        // Sec is String whether someday we need a alphanumeric secuences
+        guard let intSec = Int(sec) else{
+            print("Error to set Secuences")
+            return
+        }
+        let newSec = intSec + 1
+        
+        userDefault.setValue(newSec, forKey: "orderSec") //New Secuence stored
+        
+        userDefault.synchronize()
+    }
+    
+    func getOrderSec()->String {
+        
+        guard let sec:String = userDefault.valueForKey("orderSec") as? String else {
+            //Setting initial Value
+            userDefault.setValue("1", forKey: "orderSec")
+            userDefault.synchronize()
+             print("Setting new order number")
+            return "1" //initial secuence
+        }
+        
+        return sec
+    }
+    
+    
+    func setClientSec(sec: String) {
+        
+        // Sec is String whether someday we need a alphanumeric secuences
+        let part = sec.componentsSeparatedByString("-") //part[0] terminal number, part[2] client secuence
+        
+        guard let newSec:Int = (Int(part[1])! + 1) else{
+            print("Error to set Client Secuences")
+            return
+        }
+        
+        let terminal = userDefault.valueForKey("terminal") as? String ?? "0"
+        let newClientSec = "\(terminal)-\(newSec)"
+        
+        
+        userDefault.setValue(newClientSec, forKey: "clientSec") //New Secuence stored
+        
+        userDefault.synchronize()
+    }
+    
+    func getClientSec()->String {
+        
+        //Client ID is conformed by terminal number + Client Sec
+        
+        guard let sec:String = userDefault.valueForKey("clientSec") as? String else {
+            //Setting initial Value
+            let terminal:String = userDefault.valueForKey("terminal") as? String ??  "0"
+            
+            let newSec = "\(terminal)-1"
+            
+            userDefault.setValue(newSec, forKey: "clientSec")
+            userDefault.synchronize()
+            print("Setting new client sec number")
+            return newSec //initial secuence
+        }
+         
+        return sec
+    }
+    
     
     
 }

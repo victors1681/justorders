@@ -66,6 +66,8 @@
 		578B2DCF1C98908F00E9DE13 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 578B2D5E1C98908F00E9DE13 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		578B2E1C1C98975F00E9DE13 /* ServicesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B2E1B1C98975F00E9DE13 /* ServicesData.swift */; };
 		578B2E1F1C98A12C00E9DE13 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B2E1E1C98A12C00E9DE13 /* SwiftyJSON.swift */; };
+		578DA7B71CBAB77300B8A847 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578DA7B61CBAB77300B8A847 /* OrderModel.swift */; };
+		578DA7CF1CBAD8B300B8A847 /* ClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578DA7CE1CBAD8B300B8A847 /* ClientModel.swift */; };
 		5798C2F11C9904330003B54A /* PointSaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798C2F01C9904330003B54A /* PointSaleViewController.swift */; };
 		5798C2F31C99055C0003B54A /* ItemsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798C2F21C99055C0003B54A /* ItemsCollectionCell.swift */; };
 		579DF93D1C9A00A0000706FA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579DF93C1C9A00A0000706FA /* CoreData.framework */; };
@@ -350,6 +352,8 @@
 		578B2D5E1C98908F00E9DE13 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		578B2E1B1C98975F00E9DE13 /* ServicesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesData.swift; sourceTree = "<group>"; };
 		578B2E1E1C98A12C00E9DE13 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		578DA7B61CBAB77300B8A847 /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
+		578DA7CE1CBAD8B300B8A847 /* ClientModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientModel.swift; sourceTree = "<group>"; };
 		5798C2621C98A9030003B54A /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		5798C27E1C98A9230003B54A /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		5798C2C71C9901150003B54A /* Kingfisher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kingfisher.xcodeproj; path = "Kingfisher-master/Kingfisher.xcodeproj"; sourceTree = "<group>"; };
@@ -494,6 +498,8 @@
 				5784319F1C97B4E000C713E0 /* PointSale.swift */,
 				578B2E1B1C98975F00E9DE13 /* ServicesData.swift */,
 				575BC0AD1CAE1FC1005C708C /* UserDefaultModel.swift */,
+				578DA7B61CBAB77300B8A847 /* OrderModel.swift */,
+				578DA7CE1CBAD8B300B8A847 /* ClientModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -876,6 +882,8 @@
 				578B2D6D1C98908F00E9DE13 /* LoadingView.swift in Sources */,
 				578B2D711C98908F00E9DE13 /* Spring.swift in Sources */,
 				572E16B41CAB950E00C38B06 /* VSFormatNumber.swift in Sources */,
+				578DA7CF1CBAD8B300B8A847 /* ClientModel.swift in Sources */,
+				578DA7B71CBAB77300B8A847 /* OrderModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

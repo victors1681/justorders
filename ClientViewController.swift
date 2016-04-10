@@ -12,7 +12,7 @@ import UIKit
 
 protocol ClientViewDelegate : class{
 
-    func clientReload(controller:ClientViewController, clientSelected: ClientSelection)
+    func clientReload(controller:ClientViewController, clientSelected: ClientSelection, isButtonPayPressed:Bool)
     
 }
 
@@ -21,6 +21,7 @@ class ClientViewController: UIViewController {
     
     var client:ClientSelection?
     weak var delegate: ClientViewDelegate?
+    var isButtonPayPressed = false
     
     @IBOutlet weak var name: DesignableTextField!
     @IBOutlet weak var phone: DesignableTextField!
@@ -71,6 +72,8 @@ class ClientViewController: UIViewController {
     @IBAction func doneAction(sender: AnyObject) {
     
         if(validateOption()){
+            //New client
+            client?.code = UserDefaultModel().getClientSec()
             
             client?.name = name.text!
             client?.phone = phone.text!
@@ -79,9 +82,10 @@ class ClientViewController: UIViewController {
             client?.address = address.text!
             client?.city = city.text!
         
-            delegate?.clientReload(self, clientSelected: client!)
-        
-            dismissViewControllerAnimated(true, completion: nil)
+            dismissViewControllerAnimated(true, completion: { 
+                self.delegate?.clientReload(self, clientSelected: self.client!, isButtonPayPressed: self.isButtonPayPressed)
+            })
+            
         }else{
             containerView.animation = "shake"
             containerView.duration = 1
@@ -191,8 +195,8 @@ class ClientViewController: UIViewController {
         super.viewDidLoad()
         
         loadClient()
+         name.becomeFirstResponder()
        
-        
     }
     
 

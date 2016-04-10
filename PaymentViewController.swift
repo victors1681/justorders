@@ -27,6 +27,7 @@ class PaymentViewController: UIViewController {
     var amountChange: Double = 0.0
     var totalDiscount: Double = 0.0
     var discountPercent: Double = 0.0
+    var orderNote: String = ""
     
     var clientName = ""
     
@@ -60,6 +61,11 @@ class PaymentViewController: UIViewController {
     @IBAction func discountButton(sender: AnyObject) {
         chooseButton(Selector.discount)
     }
+    
+    @IBAction func orderNoteAction(sender: AnyObject) {
+        orderNote = observation.text!
+    }
+    
     
     func chooseButton(selector:Selector) {
         

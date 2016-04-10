@@ -35,6 +35,8 @@ class ConfigurationViewController:UIViewController {
     @IBOutlet weak var discountSW: UISwitch!
     @IBOutlet weak var changePriceSW: UISwitch!
     
+    //Administrator
+    @IBOutlet weak var administratorPassword: UITextField!
     
     //Printer
     
@@ -46,6 +48,14 @@ class ConfigurationViewController:UIViewController {
     @IBAction func closeView(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func administratorPasswordAction(sender: AnyObject) {
+        
+        let admPwd = administratorPassword.text!
+        
+        UserDefaultModel().setAdministratorPassword(admPwd)
+    }
+    
     
     
     @IBAction func refreshTokenAction(sender: AnyObject) {
@@ -174,6 +184,10 @@ class ConfigurationViewController:UIViewController {
         
     }
     
+    func loadAdministrator(){
+        administratorPassword.text = UserDefaultModel().getAdministratorPassword()
+    }
+    
     //MARK: HELPERS
     
     func validateLongField(long: Int, field:UITextField)-> Bool{
@@ -204,6 +218,7 @@ class ConfigurationViewController:UIViewController {
         loadUserAndServer()
         loadCompany()
         loadConfiguration()
+        loadAdministrator()
     }
     
     override func didReceiveMemoryWarning() {

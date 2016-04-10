@@ -18,23 +18,17 @@ class DBModel {
     
     init?()  {
         
-        
         do{
             
             let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
             let fileURL = documentsURL.URLByAppendingPathComponent("MBS.sqlite")
             
-             self.db = try Connection(fileURL.path!)
-        
-            
-            //Create Table Default
-           /* do{
-                let inventory = Table("inventory")
-                try db.run(inventory.drop())
-            }catch{
-                
-            }*/
+            self.db = try Connection(fileURL.path!)
+           
             createInventoryDB()
+            createOrdersDB()
+            createOrderDetailDB()
+            createClientDB()
             
         }catch{
            print("Error to connect to DB: \(error)")
@@ -48,7 +42,8 @@ class DBModel {
         return self.db
     }
     
-   
+  //MARK: Inventory Table
+    
     func createInventoryDB(){
         
         let inventory = Table("inventory")
@@ -142,5 +137,149 @@ class DBModel {
             print("creation failed: \(error)")
         }
     }
+    
+    
+    
+  //MARK: Orders Table
+    
+    func createOrdersDB(){
+        
+        let orders = Table("orders")
+        
+        let numReg = Expression<Int64>("numReg")
+        let orderId = Expression<Int64>("orderId")
+        let clientId = Expression<String>("clientId")
+        let newClient = Expression<Bool>("newClient")
+        let terminalNo  = Expression<Int64>("terminalNo")
+        let totalOrder = Expression<Double>("totalOrder")
+        let totalTax = Expression<Double>("totalTax")
+        let subTotal = Expression<Double>("subTotal")
+        let amountPaid = Expression<Double>("amountPaid")
+        let amountChange = Expression<Double>("amountChange")
+        let paymentMethod  = Expression<Double>("paymentMethod")
+        let totalDiscount = Expression<Double>("totalDiscount")
+        let discountPercent = Expression<Double>("discountPercent")
+        let documentType  = Expression<String>("documentType")
+        let ncf  = Expression<String>("ncf")
+        let orderNote  = Expression<String>("orderNote")
+        let userName  = Expression<String>("userName")
+        let date  = Expression<String>("date")
+        let sync  = Expression<Bool>("sync")
+        let syncDate  = Expression<String>("syncDate")
+        
+        do{
+            
+            try self.db.run(orders.create(ifNotExists: true) { t in
+                t.column(numReg, primaryKey:.Autoincrement)
+                t.column(orderId, unique: true)
+                t.column(clientId)
+                t.column(newClient, defaultValue: false)
+                t.column(terminalNo)
+                t.column(totalOrder)
+                t.column(totalTax)
+                t.column(subTotal)
+                t.column(amountPaid)
+                t.column(amountChange)
+                t.column(paymentMethod)
+                t.column(totalDiscount)
+                t.column(discountPercent)
+                t.column(documentType)
+                t.column(ncf)
+                t.column(orderNote)
+                t.column(userName)
+                t.column(date)
+                t.column(sync, defaultValue: false)
+                t.column(syncDate)
+                
+                })
+            
+        }catch {
+            print("creation failed: \(error)")
+        }
+    }
+
+    
+    func createOrderDetailDB(){
+        
+        let orderDetail = Table("orderDetail")
+        
+        let numReg = Expression<Int64>("numReg")
+        let orderId = Expression<Int64>("orderId")
+        let terminalNo  = Expression<Int64>("terminalNo")
+        
+        let code = Expression<String>("code")
+        let description = Expression<String>("description")
+        let unit = Expression<String>("unit")
+        let amountTax = Expression<Double>("amountTax")
+        let quantity = Expression<Double>("quantity")
+        let price  = Expression<Double>("price")
+        let discount1 = Expression<Double>("discount1")
+        let discount2 = Expression<Double>("discountPercent")
+        
+        
+        do{
+            
+            try self.db.run(orderDetail.create(ifNotExists: true) { t in
+                t.column(numReg, primaryKey:.Autoincrement)
+                t.column(orderId)
+                t.column(terminalNo)
+                t.column(code)
+                t.column(description)
+                t.column(unit)
+                t.column(amountTax)
+                t.column(quantity)
+                t.column(price)
+                t.column(discount1)
+                t.column(discount2)
+                
+                })
+            
+        }catch {
+            print("creation failed: \(error)")
+        }
+    }
+    
+    
+    //MARK: Client Table
+    
+    func createClientDB(){
+        
+        let client = Table("clients")
+        
+        let numReg = Expression<Int64>("numReg")
+        let clientId = Expression<String>("clientId") // TerminalNo '-' Sec.No
+        let name  = Expression<String>("name")
+        let email = Expression<String>("email")
+        let address = Expression<String>("address")
+        let phone = Expression<String>("phone")
+        let cellPhone = Expression<String>("cellPhone")
+        let taxId = Expression<String>("taxId")
+        let city  = Expression<String>("city")
+        let clasification = Expression<String>("clasification")
+        let taxeable = Expression<Bool>("taxeable")
+        
+        
+        do{
+            
+            try self.db.run(client.create(ifNotExists: true) { t in
+                t.column(numReg, primaryKey:.Autoincrement)
+                t.column(clientId, unique: true)
+                t.column(name)
+                t.column(email)
+                t.column(address)
+                t.column(phone)
+                t.column(cellPhone)
+                t.column(taxId)
+                t.column(city)
+                t.column(clasification)
+                t.column(taxeable)
+                
+                })
+            
+        }catch {
+            print("creation failed: \(error)")
+        }
+    }
+    
     
 }

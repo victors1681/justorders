@@ -14,6 +14,7 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var panelMenuView: DesignableView!
     @IBOutlet weak var darkBackground: SpringView!
+    @IBOutlet weak var configBtn: UIButton!
     
     @IBAction func closeView(sender: AnyObject) {
         
@@ -31,6 +32,12 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Validate user
+        if UserDefaultModel().getLastPasswordLogin() != UserDefaultModel().getAdministratorPassword() {
+            configBtn.enabled = false
+        }
+        
         
     }
     

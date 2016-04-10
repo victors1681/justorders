@@ -63,9 +63,9 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         if pointSale.selection.count > 0{
             
             if !pointSale.client.name.isEmpty {
-                performSegueWithIdentifier("Payment", sender: nil)
+                performSegueWithIdentifier("Payment", sender: sender)
             }else{
-                performSegueWithIdentifier("Client", sender: nil)
+                performSegueWithIdentifier("Client", sender: sender)
             }
             
         }else{
@@ -132,6 +132,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         
     }
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -169,9 +170,23 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
             toView.delegate = self
             toView.client = pointSale.client
             
+            
+            //This option identifier whether client button was pressed or pay button
+            //Whether pay button is pressed without client the client view will appear
+            //and then payment view will appear automatically
+            
+            guard let id = sender?.restorationIdentifier! else{
+                return
+            }
+            
+            if id == "PayBtn" {
+                toView.isButtonPayPressed = true
+            }
         }
         
         if segue.identifier == "Payment" {
+            
+            
             let toPayment = segue.destinationViewController as! PaymentViewController
             toPayment.delegate = self
             
@@ -229,7 +244,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
    
     //MARK: Client Delegate
     
-    func clientReload(controller: ClientViewController, clientSelected: ClientSelection) {
+    func clientReload(controller: ClientViewController, clientSelected: ClientSelection, isButtonPayPressed:Bool) {
         
         pointSale.client = clientSelected
         
@@ -248,6 +263,11 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         clientEmail.text = clientSelected.email
         clientPhone.text = clientSelected.phone
         
+        //Load Payment View whether pay button was pressed
+        if isButtonPayPressed {
+            performSegueWithIdentifier("Payment", sender: nil)
+        }
+        
         print(clientSelected.name)
         
     }
@@ -259,7 +279,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         if selectedItem != nil {
             //Add Select Item
             
-            let selectedItem  = InventorySelectionItem(code: selectedItem!.code, description: selectedItem!.description, unit: selectedItem!.und, amountTax: amountTax, quantity: quantity, price: netPrice , discount1: 0.0, discountPorcent: 0.0)
+            let selectedItem  = InventorySelectionItem(code: selectedItem!.code, description: selectedItem!.description, unit: selectedItem!.und, amountTax: amountTax, quantity: quantity, price: netPrice , discount1: 0.0, discountPercent: 0.0)
             
             do{
                 try pointSale.vend(selectedItem)

@@ -20,6 +20,13 @@ protocol PointSaleType {
     var subTotal: Double { get set }
     var amountPaid: Double { get set }
     var amountChange: Double { get set }
+    var orderNote: String { get set }
+    var userName: String { get set }
+    var totalDiscount: Double { get set }
+    var discountPercent: Double { get set }
+    var documentType: DocumentType { get set }
+    var ncf: String { get set }
+    
     
     init(inventory: [ProductItems])
     
@@ -34,6 +41,9 @@ protocol PointSaleType {
     func save()
 }
 
+enum DocumentType: String {
+    case Order, Invoice
+}
 
 enum ClientClasification: String {
     case Personal
@@ -50,11 +60,12 @@ protocol ClientSelectionType {
     var email: String  { get set }
     var address: String  { get set}
     var phone: String { get set }
-    var celPhone: String { get set }
+    var cellPhone: String { get set }
     var taxId: String { get set }
     var city: String { get set }
     var clasification: String { get set }
     var taxeable: Bool { get set }
+    var newClient: Bool { get set }
     
     
 }
@@ -66,11 +77,12 @@ struct ClientSelection: ClientSelectionType {
     var email: String
     var address: String
     var phone: String
-    var celPhone: String
+    var cellPhone: String
     var taxId: String
     var city: String
     var clasification: String
     var taxeable: Bool
+    var newClient: Bool
     
 }
 
@@ -124,7 +136,7 @@ protocol InventoryItemType: ProductType {
     var quantity: Double { get set }
     var price: Double { get set }
     var discount1: Double { get set }
-    var discountPorcent: Double { get set }
+    var discountPercent: Double { get set }
     
 }
 
@@ -137,7 +149,7 @@ struct InventorySelectionItem: InventoryItemType {
     var quantity: Double
     var price: Double
     var discount1: Double
-    var discountPorcent: Double
+    var discountPercent: Double
 }
 
 enum PointSaleError: ErrorType {
@@ -147,7 +159,7 @@ enum PointSaleError: ErrorType {
 }
 
 
-enum PaymentMethod {
+enum PaymentMethod: String {
     case NoPayment, Cash, CreditCard
     
 }
@@ -171,15 +183,21 @@ enum KeyNumbers {
 
 class PointSale: PointSaleType {
     
-    var client: ClientSelection = ClientSelection(code: "", name: "", email: "", address: "'", phone: "'", celPhone: "", taxId: "", city: "", clasification: "", taxeable: false)
+    var client: ClientSelection = ClientSelection(code: "", name: "", email: "", address: "'", phone: "'", cellPhone: "", taxId: "", city: "", clasification: "", taxeable: false, newClient: false)
     
     var selection: [InventorySelectionItem] = []
+    var documentType: DocumentType = DocumentType.Order //Default Order
     
     var totalOrder: Double = 0.0
     var totalTax: Double = 0.0
     var subTotal: Double = 0.0
     var amountPaid: Double = 0.0
     var amountChange: Double = 0.0
+    var orderNote: String = ""
+    var userName: String = UserDefaultModel().getDataUser().localUser
+    var totalDiscount: Double = 0.0
+    var discountPercent: Double = 0.0
+    var ncf: String = ""
     
     var inventory : [ProductItems]
     var paymentMethod: PaymentMethod = PaymentMethod.NoPayment
@@ -226,7 +244,7 @@ class PointSale: PointSaleType {
             if currentSelection.code == selection.code {
                 let newQty = currentSelection.quantity + selection.quantity
                 
-                let newProduct = InventorySelectionItem(code: currentSelection.code, description: currentSelection.description, unit: currentSelection.unit, amountTax: currentSelection.amountTax, quantity: newQty, price: currentSelection.price, discount1: currentSelection.discount1, discountPorcent: currentSelection.discountPorcent)
+                let newProduct = InventorySelectionItem(code: currentSelection.code, description: currentSelection.description, unit: currentSelection.unit, amountTax: currentSelection.amountTax, quantity: newQty, price: currentSelection.price, discount1: currentSelection.discount1, discountPercent: currentSelection.discountPercent)
                 
                 
                 do{
