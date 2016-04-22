@@ -230,6 +230,25 @@ class UserDefaultModel {
     
     //MARK: Secuences Order and Client
     
+    func increaseOrderSec() {
+        guard let sec:String = userDefault.valueForKey("orderSec") as? String else {
+            //Setting initial Value
+            userDefault.setValue("1", forKey: "orderSec")
+            userDefault.synchronize()
+            print("Setting new order number")
+            return
+        }
+        
+        if Int(sec) != nil {
+            let newSec = Int(sec)! + 1
+            
+            userDefault.setValue(String(newSec), forKey: "orderSec") //New Secuence stored
+            userDefault.synchronize()
+        }else{
+            print("Error to set Order Secuences")
+        }
+    }
+    
     func setOrderSec(sec: String) {
         
         // Sec is String whether someday we need a alphanumeric secuences
@@ -237,10 +256,8 @@ class UserDefaultModel {
             print("Error to set Secuences")
             return
         }
-        let newSec = intSec + 1
         
-        userDefault.setValue(newSec, forKey: "orderSec") //New Secuence stored
-        
+        userDefault.setValue(String(intSec), forKey: "orderSec") //New Secuence stored
         userDefault.synchronize()
     }
     
@@ -257,10 +274,11 @@ class UserDefaultModel {
         return sec
     }
     
-    
-    func setClientSec(sec: String) {
-        
-        // Sec is String whether someday we need a alphanumeric secuences
+    func increaseClienSec() {
+        guard let sec:String = userDefault.valueForKey("clientSec") as? String else {
+         return
+        }
+
         let part = sec.componentsSeparatedByString("-") //part[0] terminal number, part[2] client secuence
         
         guard let newSec:Int = (Int(part[1])! + 1) else{
@@ -271,9 +289,38 @@ class UserDefaultModel {
         let terminal = userDefault.valueForKey("terminal") as? String ?? "0"
         let newClientSec = "\(terminal)-\(newSec)"
         
+        userDefault.setValue(newClientSec, forKey: "clientSec") //New Secuence stored
+        userDefault.synchronize()
+
+    }
+    
+    
+    func setClientSec(sec: String) {
+        
+        // Sec is String whether someday we need a alphanumeric secuences
+        let part = sec.componentsSeparatedByString("-") //part[0] terminal number, part[2] client secuence
+        var newSec:Int = 0
+        
+        if  part.count == 2 { //has tow part terminal number and Secuences
+            if Int(part[1]) != nil  {
+                newSec = (Int(part[1])! + 1)
+            }else{
+                newSec = 0
+            }
+            
+            
+        }else{ //increase sec and concat terminal number
+            if Int(sec) != nil {
+                newSec = Int(sec)! + 1
+            }else{
+                newSec = 0
+            }
+        }
+        
+        let terminal = userDefault.valueForKey("terminal") as? String ?? "0"
+        let newClientSec = "\(terminal)-\(newSec)"
         
         userDefault.setValue(newClientSec, forKey: "clientSec") //New Secuence stored
-        
         userDefault.synchronize()
     }
     

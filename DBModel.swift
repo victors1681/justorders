@@ -26,6 +26,7 @@ class DBModel {
             self.db = try Connection(fileURL.path!)
            
             createInventoryDB()
+           
             createOrdersDB()
             createOrderDetailDB()
             createClientDB()
@@ -146,6 +147,13 @@ class DBModel {
         
         let orders = Table("orders")
         
+      /*  do{
+            try db.run(orders.drop())
+        }catch{
+            
+        }
+        */
+        
         let numReg = Expression<Int64>("numReg")
         let orderId = Expression<Int64>("orderId")
         let clientId = Expression<String>("clientId")
@@ -156,7 +164,7 @@ class DBModel {
         let subTotal = Expression<Double>("subTotal")
         let amountPaid = Expression<Double>("amountPaid")
         let amountChange = Expression<Double>("amountChange")
-        let paymentMethod  = Expression<Double>("paymentMethod")
+        let paymentMethod  = Expression<String>("paymentMethod")
         let totalDiscount = Expression<Double>("totalDiscount")
         let discountPercent = Expression<Double>("discountPercent")
         let documentType  = Expression<String>("documentType")
@@ -164,6 +172,7 @@ class DBModel {
         let orderNote  = Expression<String>("orderNote")
         let userName  = Expression<String>("userName")
         let date  = Expression<String>("date")
+        let sendTo  = Expression<String>("sendTo")
         let sync  = Expression<Bool>("sync")
         let syncDate  = Expression<String>("syncDate")
         
@@ -188,8 +197,9 @@ class DBModel {
                 t.column(orderNote)
                 t.column(userName)
                 t.column(date)
+                t.column(sendTo)
                 t.column(sync, defaultValue: false)
-                t.column(syncDate)
+                t.column(syncDate, defaultValue: "")
                 
                 })
             
@@ -203,6 +213,12 @@ class DBModel {
         
         let orderDetail = Table("orderDetail")
         
+      /*  do{
+            try db.run(orderDetail.drop())
+        }catch{
+            
+        }
+        */
         let numReg = Expression<Int64>("numReg")
         let orderId = Expression<Int64>("orderId")
         let terminalNo  = Expression<Int64>("terminalNo")
@@ -210,7 +226,7 @@ class DBModel {
         let code = Expression<String>("code")
         let description = Expression<String>("description")
         let unit = Expression<String>("unit")
-        let amountTax = Expression<Double>("amountTax")
+        let amountTax = Expression<Double>("amoudeptTax")
         let quantity = Expression<Double>("quantity")
         let price  = Expression<Double>("price")
         let discount1 = Expression<Double>("discount1")
@@ -229,8 +245,8 @@ class DBModel {
                 t.column(amountTax)
                 t.column(quantity)
                 t.column(price)
-                t.column(discount1)
-                t.column(discount2)
+                t.column(discount1, defaultValue:0.0)
+                t.column(discount2, defaultValue:0.0)
                 
                 })
             
@@ -245,6 +261,13 @@ class DBModel {
     func createClientDB(){
         
         let client = Table("clients")
+        
+      /*  do{
+            try db.run(client.drop())
+        }catch{
+            
+        }
+        */
         
         let numReg = Expression<Int64>("numReg")
         let clientId = Expression<String>("clientId") // TerminalNo '-' Sec.No
@@ -272,7 +295,7 @@ class DBModel {
                 t.column(taxId)
                 t.column(city)
                 t.column(clasification)
-                t.column(taxeable)
+                t.column(taxeable, defaultValue:false)
                 
                 })
             

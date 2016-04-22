@@ -220,6 +220,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     
     //MARK: Payment Delegate
     func billPaid(controller: PaymentViewController) {
+        OrderModel().insertOrder(pointSale)
         cleanView()
     }
     
@@ -430,6 +431,7 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
         let tax = currenSelectedItem.amountTax
         let qty = currenSelectedItem.quantity
         let subTotal = price * qty
+        
         
         cell.price.text = "\(price.FormatNumberCurrencyVS)"
         cell.quantity.text = "\(qty.FormatNumberNumberVS)"

@@ -68,6 +68,8 @@
 		578B2E1F1C98A12C00E9DE13 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B2E1E1C98A12C00E9DE13 /* SwiftyJSON.swift */; };
 		578DA7B71CBAB77300B8A847 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578DA7B61CBAB77300B8A847 /* OrderModel.swift */; };
 		578DA7CF1CBAD8B300B8A847 /* ClientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578DA7CE1CBAD8B300B8A847 /* ClientModel.swift */; };
+		578DA7D11CBB2FAB00B8A847 /* OrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578DA7D01CBB2FAB00B8A847 /* OrdersTableViewController.swift */; };
+		578DA7F31CBB30DB00B8A847 /* OrdersDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578DA7F21CBB30DB00B8A847 /* OrdersDetailTableViewController.swift */; };
 		5798C2F11C9904330003B54A /* PointSaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798C2F01C9904330003B54A /* PointSaleViewController.swift */; };
 		5798C2F31C99055C0003B54A /* ItemsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798C2F21C99055C0003B54A /* ItemsCollectionCell.swift */; };
 		579DF93D1C9A00A0000706FA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579DF93C1C9A00A0000706FA /* CoreData.framework */; };
@@ -354,6 +356,8 @@
 		578B2E1E1C98A12C00E9DE13 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		578DA7B61CBAB77300B8A847 /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		578DA7CE1CBAD8B300B8A847 /* ClientModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientModel.swift; sourceTree = "<group>"; };
+		578DA7D01CBB2FAB00B8A847 /* OrdersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewController.swift; sourceTree = "<group>"; };
+		578DA7F21CBB30DB00B8A847 /* OrdersDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersDetailTableViewController.swift; sourceTree = "<group>"; };
 		5798C2621C98A9030003B54A /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		5798C27E1C98A9230003B54A /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		5798C2C71C9901150003B54A /* Kingfisher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kingfisher.xcodeproj; path = "Kingfisher-master/Kingfisher.xcodeproj"; sourceTree = "<group>"; };
@@ -485,6 +489,8 @@
 				5760D4B01CB6106200010EF1 /* ConfigurationViewController.swift */,
 				5760D4AE1CB5F8BF00010EF1 /* MenuViewController.swift */,
 				573F6D711CB7FEF2002D9EF4 /* CustomeAlertView2.swift */,
+				578DA7D01CBB2FAB00B8A847 /* OrdersTableViewController.swift */,
+				578DA7F21CBB30DB00B8A847 /* OrdersDetailTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -855,6 +861,7 @@
 				578B2DCD1C98908F00E9DE13 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				57A0DC111CACC90F00C532BE /* ClientViewController.swift in Sources */,
 				5731E8811CA9A516003A36F4 /* InventoryModel.swift in Sources */,
+				578DA7D11CBB2FAB00B8A847 /* OrdersTableViewController.swift in Sources */,
 				5760D4AF1CB5F8BF00010EF1 /* MenuViewController.swift in Sources */,
 				5760D4B11CB6106200010EF1 /* ConfigurationViewController.swift in Sources */,
 				573F6D721CB7FEF2002D9EF4 /* CustomeAlertView2.swift in Sources */,
@@ -866,6 +873,7 @@
 				578B2D781C98908F00E9DE13 /* SpringView.swift in Sources */,
 				5784318B1C979DCD00C713E0 /* AppDelegate.swift in Sources */,
 				578B2D601C98908F00E9DE13 /* AsyncImageView.swift in Sources */,
+				578DA7F31CBB30DB00B8A847 /* OrdersDetailTableViewController.swift in Sources */,
 				578B2D631C98908F00E9DE13 /* DesignableButton.swift in Sources */,
 				578B2E1C1C98975F00E9DE13 /* ServicesData.swift in Sources */,
 				578B2D7A1C98908F00E9DE13 /* TransitionZoom.swift in Sources */,

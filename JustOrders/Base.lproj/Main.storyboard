@@ -1260,6 +1260,30 @@
                                                             <action selector="orderNoteAction:" destination="l4d-kO-mgO" eventType="editingChanged" id="nBo-jd-5C5"/>
                                                         </connections>
                                                     </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enviar Orden a:" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ezO-tg-l3j" customClass="DesignableTextField" customModule="JustOrders" customModuleProvider="target">
+                                                        <rect key="frame" x="299" y="15" width="231" height="29"/>
+                                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.26019230769230767" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" red="0.98398476839065552" green="0.99217706918716431" blue="0.99621230363845825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" red="0.98398476839065552" green="0.99217706918716431" blue="0.99621230363845825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9QZ-iQ-X47">
+                                                        <rect key="frame" x="321" y="14" width="181" height="30"/>
+                                                        <connections>
+                                                            <action selector="chooseSendMethodAction:" destination="l4d-kO-mgO" eventType="touchUpInside" id="QBI-Uw-OdS"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.7888445258140564" green="0.89317131042480469" blue="0.96835452318191528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
@@ -1425,6 +1449,40 @@
                                             <action selector="creditCarPaymentAction:" destination="l4d-kO-mgO" eventType="touchUpInside" id="acR-Er-koV"/>
                                         </connections>
                                     </button>
+                                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WqB-2T-swb" customClass="SpringView" customModule="JustOrders" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="540" width="1024" height="228"/>
+                                        <subviews>
+                                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mqv-pd-fNs">
+                                                <rect key="frame" x="0.0" y="8" width="1024" height="216"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="l4d-kO-mgO" id="w7Y-D5-gDP"/>
+                                                    <outlet property="delegate" destination="l4d-kO-mgO" id="N4m-2N-1q3"/>
+                                                </connections>
+                                            </pickerView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="63s-Xw-umI" customClass="DesignableButton" customModule="JustOrders" customModuleProvider="target">
+                                                <rect key="frame" x="932" y="8" width="80" height="30"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                                <state key="normal" title="Listo">
+                                                    <color key="titleColor" red="0.48152422904968262" green="0.69784212112426758" blue="0.92645150423049927" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.48152422904968262" green="0.69784212112426758" blue="0.92645150423049927" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="hideChooseSendMethod:" destination="l4d-kO-mgO" eventType="touchUpInside" id="anh-4Z-y7W"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34733173080000002" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -1438,6 +1496,7 @@
                         <outlet property="activePaidView" destination="pD9-vg-8j5" id="J07-AS-LU3"/>
                         <outlet property="amountReceivedLabel" destination="ohu-gB-7hw" id="prV-cs-8BY"/>
                         <outlet property="changeLabel" destination="aZK-6J-ZOL" id="9eJ-5S-BDR"/>
+                        <outlet property="chooseSendMethod" destination="9QZ-iQ-X47" id="3bQ-Be-0sZ"/>
                         <outlet property="clientNameLabel" destination="PEV-ZU-aBs" id="Npr-mU-T3w"/>
                         <outlet property="discountBtn" destination="RhJ-XJ-Ehi" id="dng-Fn-RYn"/>
                         <outlet property="discountText" destination="wRd-CM-fPJ" id="Jrh-0s-ImR"/>
@@ -1447,6 +1506,9 @@
                         <outlet property="observation" destination="Z6y-MU-fYT" id="bed-6s-76g"/>
                         <outlet property="paymentLabel" destination="8v6-q6-9ac" id="qch-2M-h7N"/>
                         <outlet property="paymentView" destination="lbu-mK-mLa" id="xqR-C5-ILM"/>
+                        <outlet property="pickerContainer" destination="WqB-2T-swb" id="02f-Uc-qgd"/>
+                        <outlet property="pickerView" destination="mqv-pd-fNs" id="Kq1-Iv-tZb"/>
+                        <outlet property="sendToText" destination="ezO-tg-l3j" id="aQ7-Xf-j8D"/>
                         <outlet property="subTotalLabel" destination="W93-Xt-lwm" id="9lq-DJ-jEI"/>
                         <outlet property="taxLabel" destination="kMw-7r-ycu" id="7Je-DA-6pg"/>
                         <outlet property="totalOrderLabel" destination="Vh7-aS-MhU" id="oB2-qo-HI0"/>
@@ -1462,6 +1524,103 @@
                 <viewControllerPlaceholder id="gwp-1n-Ga0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lKL-kL-BWy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Order Detail Table View Controller-->
+        <scene sceneID="Hmb-za-rNj">
+            <objects>
+                <viewController id="bpE-vg-AJU" customClass="OrderDetailTableViewController" customModule="JustOrders" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O6K-Ii-5y4"/>
+                        <viewControllerLayoutGuide type="bottom" id="VRf-JS-t8L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xSc-i0-euu">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4ig-Pa-ydv"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CU2-Po-rQD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5256" y="-136"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="0Bz-UW-jpb">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="ndX-IO-uMX" customClass="OrdersTableViewController" customModule="JustOrders" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="rKU-Lu-q4D">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" textLabel="mLq-5q-Uf3" style="IBUITableViewCellStyleDefault" id="YAm-fw-nuH">
+                                <rect key="frame" x="0.0" y="92" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YAm-fw-nuH" id="8Dj-CI-cDI">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mLq-5q-Uf3">
+                                            <rect key="frame" x="196" y="0.0" width="632" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="YH5-eo-xeQ" kind="showDetail" identifier="showDetail" id="baS-bq-h9W"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ndX-IO-uMX" id="dpj-NT-E1D"/>
+                            <outlet property="delegate" destination="ndX-IO-uMX" id="gyw-Xx-cCu"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="mzh-qD-say"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HRr-Ib-lxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5205" y="-1072"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SfF-aS-ON3">
+            <objects>
+                <navigationController id="SCp-kb-lLQ" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eci-LC-ccG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ndX-IO-uMX" kind="relationship" relationship="rootViewController" id="jZO-zW-eb1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JOZ-RS-swK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4045" y="-1072"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="ngl-MI-DeS">
+            <objects>
+                <splitViewController id="vFU-30-vSs" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <segue destination="SCp-kb-lLQ" kind="relationship" relationship="masterViewController" id="M37-nb-Tl4"/>
+                        <segue destination="YH5-eo-xeQ" kind="relationship" relationship="detailViewController" id="ahl-3C-Iu8"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Fi-Nv-7zm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2873" y="-660"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="YVw-Kg-7Ih">
@@ -2465,7 +2624,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BIH-WQ-urT" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
-                                        <rect key="frame" x="757" y="9" width="258" height="115"/>
+                                        <rect key="frame" x="757" y="9" width="258" height="186"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ADMINISTRACION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvd-iU-Brm">
                                                 <rect key="frame" x="20" y="10" width="147" height="24"/>
@@ -2493,6 +2652,54 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Orden Secuencia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLn-N7-kgS">
+                                        <rect key="frame" x="767" y="109" width="152" height="24"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="FieldBackgroundPlane" translatesAutoresizingMaskIntoConstraints="NO" id="BTJ-pL-jXS">
+                                        <rect key="frame" x="927" y="104" width="73" height="30"/>
+                                        <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="administratorPasswordAction:" destination="GvV-gd-Pj1" eventType="editingChanged" id="OW4-tE-xQe"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cliente Secuencia" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMB-64-c5U">
+                                        <rect key="frame" x="767" y="146" width="152" height="24"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TerminalNo. + Secuences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vk-kB-Lwp">
+                                        <rect key="frame" x="767" y="161" width="152" height="24"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="11"/>
+                                        <color key="textColor" red="0.63365107774734497" green="0.68981462717056274" blue="0.7828858494758606" alpha="0.37166819852941174" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Última Orden." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4m-pR-cgN">
+                                        <rect key="frame" x="763" y="122" width="69" height="24"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="11"/>
+                                        <color key="textColor" red="0.63365107774734497" green="0.68981462717056274" blue="0.7828858494758606" alpha="0.37166819849999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbI-2S-AfC">
+                                        <rect key="frame" x="837" y="122" width="65" height="24"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                        <color key="textColor" red="0.63365107774734497" green="0.68981462717056274" blue="0.7828858494758606" alpha="0.73015541443850263" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="FieldBackgroundPlane" translatesAutoresizingMaskIntoConstraints="NO" id="7sE-c0-Tpt">
+                                        <rect key="frame" x="930" y="141" width="73" height="30"/>
+                                        <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="administratorPasswordAction:" destination="GvV-gd-Pj1" eventType="editingChanged" id="DbX-bT-yJ3"/>
+                                        </connections>
+                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Clave Administrativa" textAlignment="center" minimumFontSize="17" background="FieldBackgroundPlane" translatesAutoresizingMaskIntoConstraints="NO" id="Zb4-MI-Z9z">
                                         <rect key="frame" x="773.5" y="63" width="227" height="30"/>
                                         <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2521,6 +2728,7 @@
                     <connections>
                         <outlet property="administratorPassword" destination="Zb4-MI-Z9z" id="WML-el-hh3"/>
                         <outlet property="changePriceSW" destination="aoE-j8-cNR" id="WCL-Gd-tMo"/>
+                        <outlet property="clientSecuences" destination="7sE-c0-Tpt" id="P5z-l1-LL0"/>
                         <outlet property="companyAddress" destination="cxy-l2-bYf" id="YoL-SE-5NI"/>
                         <outlet property="companyCity" destination="hBA-81-zik" id="dzu-pg-sCU"/>
                         <outlet property="companyEmail" destination="Ged-S6-QOT" id="4RK-oy-XBJ"/>
@@ -2531,8 +2739,10 @@
                         <outlet property="companyWeb" destination="s33-yG-5X5" id="9SD-pu-tXk"/>
                         <outlet property="discountSW" destination="Y5Q-KW-Pwa" id="dEC-Rk-xAp"/>
                         <outlet property="footerPrint" destination="muI-iU-qy1" id="Reb-ef-0Xr"/>
+                        <outlet property="lastOrderSec" destination="IbI-2S-AfC" id="tvu-GZ-F7a"/>
                         <outlet property="localPassword" destination="n9I-Lh-OJ3" id="QoP-rt-Bm7"/>
                         <outlet property="localUser" destination="j1X-GJ-a3M" id="JoN-18-NNI"/>
+                        <outlet property="orderSecuences" destination="BTJ-pL-jXS" id="KDV-Qf-8C9"/>
                         <outlet property="passwordAPI" destination="jOI-qu-IDk" id="wca-2O-O25"/>
                         <outlet property="port" destination="6zi-pe-rPH" id="mHx-iL-Z9M"/>
                         <outlet property="serverUrl" destination="Ldz-nA-o7y" id="oVg-JB-v5R"/>
@@ -2591,7 +2801,7 @@
                                                     <color key="titleColor" red="0.37818926572799683" green="0.64579451084136963" blue="0.87901562452316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="GvV-gd-Pj1" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="XZY-UV-Ufc"/>
+                                                    <segue destination="GvV-gd-Pj1" kind="presentation" identifier="Configurations" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="XZY-UV-Ufc"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7s-V1-jk3">
@@ -2632,6 +2842,9 @@
                                                 <state key="normal" title="MIS ORDENES">
                                                     <color key="titleColor" red="0.37818926572799683" green="0.64579451084136963" blue="0.87901562452316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="vFU-30-vSs" kind="presentation" identifier="Orders" id="Bg6-WL-GvX"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2696,6 +2909,24 @@
             </objects>
             <point key="canvasLocation" x="-563" y="-657"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0Qk-yP-TUo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YH5-eo-xeQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RtO-i7-tTt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bpE-vg-AJU" kind="relationship" relationship="rootViewController" id="Tck-7q-1Un"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jJT-pG-Kx1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4044.5" y="-128"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AddClient" width="175" height="45"/>
@@ -2730,5 +2961,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MkX-IH-pvN"/>
+        <segue reference="baS-bq-h9W"/>
     </inferredMetricsTieBreakers>
 </document>

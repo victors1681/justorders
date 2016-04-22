@@ -15,6 +15,7 @@ protocol PointSaleType {
     var inventory : [ProductItems]{ get }
     var paymentMethod: PaymentMethod { get }
     
+    var orderId: Int { get set }
     var totalOrder: Double { get set}
     var totalTax: Double { get set }
     var subTotal: Double { get set }
@@ -27,6 +28,11 @@ protocol PointSaleType {
     var documentType: DocumentType { get set }
     var ncf: String { get set }
     
+    var terminalNo: Int { get set }
+    var date: String { get set }
+    var sync: Bool { get set }
+    var syncDate: String { get set }
+    var sendTo: String { get set }
     
     init(inventory: [ProductItems])
     
@@ -188,6 +194,7 @@ class PointSale: PointSaleType {
     var selection: [InventorySelectionItem] = []
     var documentType: DocumentType = DocumentType.Order //Default Order
     
+    var orderId: Int = 0
     var totalOrder: Double = 0.0
     var totalTax: Double = 0.0
     var subTotal: Double = 0.0
@@ -198,6 +205,12 @@ class PointSale: PointSaleType {
     var totalDiscount: Double = 0.0
     var discountPercent: Double = 0.0
     var ncf: String = ""
+    
+    var terminalNo: Int = 0
+    var date: String = ""
+    var sync: Bool = false
+    var syncDate: String = ""
+    var sendTo: String = ""
     
     var inventory : [ProductItems]
     var paymentMethod: PaymentMethod = PaymentMethod.NoPayment

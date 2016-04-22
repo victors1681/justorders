@@ -30,6 +30,8 @@ class PaymentViewController: UIViewController {
     var orderNote: String = ""
     
     var clientName = ""
+    var sendTo = ""
+    let pickerData = ["Independencia","Bolivar","Los Jardines","Otras"]
     
     @IBOutlet weak var amountReceivedLabel: UITextField!
     
@@ -44,8 +46,10 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var keypadView: DesignableView!
     @IBOutlet weak var keypadTextLabel: UILabel!
     @IBOutlet weak var discountBtn: UIButton!
-    
-    
+    @IBOutlet weak var pickerContainer: SpringView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var sendToText: UITextField!
+    @IBOutlet weak var chooseSendMethod: UIButton!
     @IBOutlet weak var activePaidView: SpringView!
     @IBOutlet weak var activeDiscrountView: SpringView!
     
@@ -64,6 +68,16 @@ class PaymentViewController: UIViewController {
     
     @IBAction func orderNoteAction(sender: AnyObject) {
         orderNote = observation.text!
+    }
+    
+    
+    @IBAction func chooseSendMethodAction(sender: AnyObject) {
+        showPickerView()
+    }
+    
+    @IBAction func hideChooseSendMethod(sender: AnyObject) {
+        
+        hidePickerView()
     }
     
     
@@ -215,6 +229,8 @@ class PaymentViewController: UIViewController {
         taxLabel.text = totalTax.FormatNumberCurrencyVS
         clientNameLabel.text = clientName
         
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -222,20 +238,24 @@ class PaymentViewController: UIViewController {
     }
     
     
+    
+    
     //MASK: HELPERS
     
     
     func payNow(){
         
-        if Double(String(amountArr)) > 0 {
+        sendTo = sendToText.text!
+        
+        if Double(String(amountArr)) > 0 || !sendTo.isEmpty {
             
             subTotal =  Double((subTotalLabel.text?.RemoveSymbolVS)!)!
-            
             
             print("Total:\(totalOrder)\n Subtotal:\(subTotal) \n AmountRecibe: \(amountPaid)\n Change: \(amountChange)\n Discount: \(totalDiscount) \n DiscountPercent\(discountPercent)")
             
             delegate?.billPaid(self)
             dismissViewControllerAnimated(true, completion: nil)
+            
         }else{
             paymentView.animation = "shake"
             paymentView.duration = 1
@@ -524,4 +544,83 @@ class PaymentViewController: UIViewController {
         }
     }
     
+    
+    func showPickerView() {
+        pickerContainer.hidden = false
+        
+        pickerContainer.transform = CGAffineTransformMakeTranslation(0, 200)
+        
+        SpringAnimation.spring(0.5){
+            
+            self.pickerContainer.transform = CGAffineTransformMakeTranslation(0, 0)
+        }
+        
+    }
+    
+    func hidePickerView(){
+        
+        
+        SpringAnimation.springWithCompletion(0.5, animations: { 
+             self.pickerContainer.transform = CGAffineTransformMakeTranslation(0, 250)
+            }) { (true) in
+                self.pickerContainer.hidden = true
+        }
+        
+        
+        
+    }
+    
+    
 }
+
+
+
+extension PaymentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+   
+    //MARK: - Delegates and data sources
+    //MARK: Data Sources
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    //MARK: Delegates
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        sendToText.text = pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let titleData = pickerData[row]
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Avenir", size: 26.0)!,NSForegroundColorAttributeName:UIColor(red:0.42, green:0.64, blue:0.89, alpha:1.00)])
+        return myTitle
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

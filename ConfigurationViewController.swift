@@ -37,6 +37,10 @@ class ConfigurationViewController:UIViewController {
     
     //Administrator
     @IBOutlet weak var administratorPassword: UITextField!
+    @IBOutlet weak var orderSecuences: UITextField!
+    @IBOutlet weak var clientSecuences: UITextField!
+    @IBOutlet weak var lastOrderSec: UILabel!
+    
     
     //Printer
     
@@ -54,6 +58,13 @@ class ConfigurationViewController:UIViewController {
         let admPwd = administratorPassword.text!
         
         UserDefaultModel().setAdministratorPassword(admPwd)
+        
+        let orderSec = orderSecuences.text!
+        let clientSec = clientSecuences.text!
+        
+        UserDefaultModel().setOrderSec(orderSec)
+        UserDefaultModel().setClientSec(clientSec)
+        
     }
     
     
@@ -186,6 +197,10 @@ class ConfigurationViewController:UIViewController {
     
     func loadAdministrator(){
         administratorPassword.text = UserDefaultModel().getAdministratorPassword()
+        orderSecuences.text = UserDefaultModel().getOrderSec()
+        clientSecuences.text = UserDefaultModel().getClientSec()
+        lastOrderSec.text = "\(OrderModel().getLastOrderNumber())"
+        
     }
     
     //MARK: HELPERS
