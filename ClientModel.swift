@@ -80,7 +80,7 @@ class ClientModel {
                 
                 for row in try db!.prepare(query) {
                     
-                    let client = ClientSelection(code: row[clientId], name: row[name], email: row[email], address: row[address], phone: row[phone], cellPhone: row[cellPhone], taxId: row[taxId], city: row[city], clasification: row[clasification], taxeable: row[taxeable], newClient: false)
+                    let client = ClientSelection(code: row[clientId], name: row[name], email: row[email], address: row[address], phone: row[phone], cellPhone: row[cellPhone], taxId: row[taxId], city: row[city], clasification: row[clasification], taxeable: row[taxeable])
                     
                     clientsArr.append(client)
                     
@@ -95,7 +95,7 @@ class ClientModel {
             return clientsArr[0]
         }
         
-        return ClientSelection(code: "", name: "", email: "", address: "", phone: "", cellPhone: "", taxId: "", city: "", clasification: "", taxeable: false, newClient: false)
+        return ClientSelection(code: "", name: "", email: "", address: "", phone: "", cellPhone: "", taxId: "", city: "", clasification: "", taxeable: false)
         
     }
 }

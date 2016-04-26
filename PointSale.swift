@@ -33,6 +33,7 @@ protocol PointSaleType {
     var sync: Bool { get set }
     var syncDate: String { get set }
     var sendTo: String { get set }
+    var newClient: Bool { get set }
     
     init(inventory: [ProductItems])
     
@@ -71,8 +72,7 @@ protocol ClientSelectionType {
     var city: String { get set }
     var clasification: String { get set }
     var taxeable: Bool { get set }
-    var newClient: Bool { get set }
-    
+   
     
 }
 
@@ -88,7 +88,7 @@ struct ClientSelection: ClientSelectionType {
     var city: String
     var clasification: String
     var taxeable: Bool
-    var newClient: Bool
+    
     
 }
 
@@ -189,7 +189,7 @@ enum KeyNumbers {
 
 class PointSale: PointSaleType {
     
-    var client: ClientSelection = ClientSelection(code: "", name: "", email: "", address: "'", phone: "'", cellPhone: "", taxId: "", city: "", clasification: "", taxeable: false, newClient: false)
+    var client: ClientSelection = ClientSelection(code: "", name: "", email: "", address: "'", phone: "'", cellPhone: "", taxId: "", city: "", clasification: "", taxeable: false)
     
     var selection: [InventorySelectionItem] = []
     var documentType: DocumentType = DocumentType.Order //Default Order
@@ -211,6 +211,7 @@ class PointSale: PointSaleType {
     var sync: Bool = false
     var syncDate: String = ""
     var sendTo: String = ""
+    var newClient: Bool = true
     
     var inventory : [ProductItems]
     var paymentMethod: PaymentMethod = PaymentMethod.NoPayment

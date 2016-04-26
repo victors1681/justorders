@@ -76,6 +76,8 @@
 		579DF9691C9F6DFF000706FA /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579DF9681C9F6DFF000706FA /* ItemsTableViewCell.swift */; };
 		57A0DC111CACC90F00C532BE /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A0DC101CACC90F00C532BE /* ClientViewController.swift */; };
 		57A0DCCF1CAD952600C532BE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A0DCCE1CAD952600C532BE /* LoginViewController.swift */; };
+		57F313CB1CCE9AEA00E4832E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F313C91CCE9AEA00E4832E /* Fabric.framework */; };
+		57F313CC1CCE9AEA00E4832E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F313CA1CCE9AEA00E4832E /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -367,6 +369,8 @@
 		579DF9681C9F6DFF000706FA /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
 		57A0DC101CACC90F00C532BE /* ClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
 		57A0DCCE1CAD952600C532BE /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		57F313C91CCE9AEA00E4832E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		57F313CA1CCE9AEA00E4832E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,8 +379,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				579DF93D1C9A00A0000706FA /* CoreData.framework in Frameworks */,
+				57F313CB1CCE9AEA00E4832E /* Fabric.framework in Frameworks */,
 				575BC08F1CADBB38005C708C /* Alamofire.framework in Frameworks */,
 				575BC0A91CADBB44005C708C /* Kingfisher.framework in Frameworks */,
+				57F313CC1CCE9AEA00E4832E /* Crashlytics.framework in Frameworks */,
 				575BC0A51CADBB3E005C708C /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +405,8 @@
 				5798C2621C98A9030003B54A /* Alamofire.xcodeproj */,
 				5798C2C71C9901150003B54A /* Kingfisher.xcodeproj */,
 				578B2E1E1C98A12C00E9DE13 /* SwiftyJSON.swift */,
+				57F313C91CCE9AEA00E4832E /* Fabric.framework */,
+				57F313CA1CCE9AEA00E4832E /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -576,6 +584,7 @@
 				578431841C979DCD00C713E0 /* Frameworks */,
 				578431851C979DCD00C713E0 /* Resources */,
 				5798C2611C98A8950003B54A /* Embed Frameworks */,
+				57F313B21CCE9AB600E4832E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -831,6 +840,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		57F313B21CCE9AB600E4832E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/myfile",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run a9ed4b5b7bebb91283230f9db02d5d2f11a6c898 9517eec42d741cec3a83228c5a35f79b35aac7169301fc13e34fd9df9ed4f060";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		578431831C979DCD00C713E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1020,12 +1046,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = JustOrders/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.itsoluclick.JustOrders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c9f77067-729e-4a1c-a340-719875346904";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1034,12 +1065,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = JustOrders/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.itsoluclick.JustOrders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c9f77067-729e-4a1c-a340-719875346904";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

@@ -82,6 +82,7 @@ class ClientViewController: UIViewController {
             client?.address = address.text!
             client?.city = city.text!
         
+        
             dismissViewControllerAnimated(true, completion: { 
                 self.delegate?.clientReload(self, clientSelected: self.client!, isButtonPayPressed: self.isButtonPayPressed)
             })

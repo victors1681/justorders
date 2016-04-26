@@ -16,7 +16,7 @@ protocol ServicesDataType {
     var prefixUrl : String { get }
     
     func getDataClient() throws
-    func getDataInventory() throws
+    func getDataInventory(responseData:(qty:Int)-> ()) throws
     
     //func jsonRequest(resource: String, method: Alamofire.Method, header: [String:String], parameter: String , responseData:(JSON)->())
     
@@ -73,7 +73,7 @@ class ServicesData:ServicesDataType {
       //  }
     }
 
-    func getDataInventory() throws {
+    func getDataInventory(responseData:(qty:Int)-> ()) throws {
         
         if !gobalToken.isEmpty {
             let headers = [
@@ -93,6 +93,7 @@ class ServicesData:ServicesDataType {
                     
                     let qty = inventory.insertProducts(data)
                     print("Cantidad insertadas \(qty)")
+                    responseData(qty: qty)
                 }
             })
             
@@ -155,7 +156,7 @@ class ServicesData:ServicesDataType {
         Alamofire.request(.POST, longUrl, headers: headers, parameters:json.dictionaryObject!, encoding:.JSON)
             .responseJSON { response in
                 
-                print(response.request)
+              //  print(response.request)
                 
                 if let response = response.result.value {
                     //print(response.result) // URL response

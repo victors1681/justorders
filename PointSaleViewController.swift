@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import Crashlytics
 
 class PointSaleViewController: UIViewController, PriceQuantityViewControllerDelegate, ClientViewDelegate, PaymentViewDelegate {
     
@@ -195,6 +196,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
             toPayment.subTotal = pointSale.subTotal
             toPayment.clientName = pointSale.client.name
             
+            toPayment.pointSaleData = pointSale
         }
         
         
@@ -219,7 +221,8 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     
     
     //MARK: Payment Delegate
-    func billPaid(controller: PaymentViewController) {
+    func billPaid(controller: PaymentViewController, pointData:PointSaleType) {
+        pointSale = pointData
         OrderModel().insertOrder(pointSale)
         cleanView()
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 protocol PaymentViewDelegate: class {
-    func billPaid(controller:PaymentViewController)
+    func billPaid(controller:PaymentViewController, pointData:PointSaleType)
 }
 
 enum Selector {
@@ -19,6 +19,8 @@ enum Selector {
 class PaymentViewController: UIViewController {
     
     weak var delegate: PaymentViewDelegate?
+    
+    var pointSaleData: PointSaleType?
     
     var totalOrder:Double = 0.0
     var subTotal: Double = 0.0
@@ -240,7 +242,7 @@ class PaymentViewController: UIViewController {
     
     
     
-    //MASK: HELPERS
+    //MARK: HELPERS
     
     
     func payNow(){
@@ -249,11 +251,23 @@ class PaymentViewController: UIViewController {
         
         if Double(String(amountArr)) > 0 || !sendTo.isEmpty {
             
+            pointSaleData?.totalOrder = totalOrder
+            pointSaleData?.subTotal = subTotal
+            pointSaleData?.totalTax = totalTax
+            pointSaleData?.amountPaid = amountPaid
+            pointSaleData?.amountChange = amountChange
+            pointSaleData?.totalDiscount = totalDiscount
+            pointSaleData?.discountPercent = discountPercent
+            pointSaleData?.orderNote = orderNote
+            pointSaleData?.sendTo = sendTo
+            
+           
+            
             subTotal =  Double((subTotalLabel.text?.RemoveSymbolVS)!)!
             
             print("Total:\(totalOrder)\n Subtotal:\(subTotal) \n AmountRecibe: \(amountPaid)\n Change: \(amountChange)\n Discount: \(totalDiscount) \n DiscountPercent\(discountPercent)")
             
-            delegate?.billPaid(self)
+            delegate?.billPaid(self, pointData: pointSaleData!)
             dismissViewControllerAnimated(true, completion: nil)
             
         }else{

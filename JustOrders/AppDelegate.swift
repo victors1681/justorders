@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Set Adminsitrator default password
         UserDefaultModel().setAdministratorPasswordFisrtTime()
         // Override point for customization after application launch.
+        
+        Fabric.with([Crashlytics.self])
+        // TODO: Move this to where you establish a user session
+        self.logUser()
+
+
         return true
     }
 
@@ -44,6 +53,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         
+    }
+
+    func logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+       // Crashlytics.sharedInstance().setUserEmail("user@fabric.io")
+        //Crashlytics.sharedInstance().setUserIdentifier("12345")
+        Crashlytics.sharedInstance().setUserName(UserDefaultModel().getDataUser().terminal)
     }
 
    

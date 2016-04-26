@@ -30,6 +30,22 @@ class MenuViewController: UIViewController {
         
     }
     
+    @IBAction func productSync(sender: AnyObject) {
+        
+        //Syn Product
+         self.view.showLoading()
+        
+        do{
+            try ServicesData().getDataInventory({ (qty) in
+                self.view.hideLoading()
+            })
+        }catch{
+            
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

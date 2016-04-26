@@ -33,7 +33,7 @@ class OrderModel {
             
             let orderSec:String = userDef.getOrderSec()
             let clientId: String = order.client.code
-            let newClient: Bool = order.client.newClient
+            let newClient: Bool = order.newClient
             let terminalNo: Int = Int(userDef.getDataUser().terminal) ?? 0
             let totalOrder: Double = order.totalOrder
             let totalTax: Double = order.totalTax
@@ -58,7 +58,7 @@ class OrderModel {
                 //Increase Order number
                 userDef.increaseOrderSec()
                 //Whether is a new client insert
-                if order.client.newClient {
+                if order.newClient {
                     ClientModel().insertClient(order.client)
                 }
                 
@@ -291,12 +291,13 @@ class OrderModel {
         let dbModel = DBModel.init()
         let db = dbModel?.getDB()
    
-        
         if((db) != nil){
             let orders = Table("orders")
             let orderId = Expression<Int>("orderId")
            
-            let max:Int =  db!.scalar(orders.select(orderId.max))!
+            guard let max:Int =  db!.scalar(orders.select(orderId.max)) else{
+                return 0
+            }
             return max
         }
         
@@ -343,6 +344,8 @@ class OrderModel {
             
             
             let dic:[String:AnyObject] = ["client": clientObj,
+                       "clientId": order.client.code,
+                       "Client": order.client.name,
                        "selection": selectionDic,
                        "orderId": order.orderId,
                        "totalOrder": order.totalOrder,
@@ -367,7 +370,7 @@ class OrderModel {
         
         //Group
         let data:[String:AnyObject] = ["data":ordersObj]
-        print(JSON(data))
+      //  print(JSON(data))
         
         ServicesData().sendOrders(JSON(data)) { (response) in
            // print(response);)

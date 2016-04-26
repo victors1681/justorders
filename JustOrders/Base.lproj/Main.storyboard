@@ -2846,6 +2846,31 @@
                                                     <segue destination="vFU-30-vSs" kind="presentation" identifier="Orders" id="Bg6-WL-GvX"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6Z-Ov-pLd">
+                                                <rect key="frame" x="0.0" y="205" width="353" height="36"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sincronizacion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KE3-Qd-fN6">
+                                                        <rect key="frame" x="52" y="2" width="213" height="33"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                                        <color key="textColor" red="0.9698452353" green="0.97799009079999999" blue="0.99045842890000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.47251039743423462" green="0.69338124990463257" blue="0.93562662601470947" alpha="0.49216661096256686" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNN-80-kyf">
+                                                <rect key="frame" x="-1" y="240" width="300" height="55"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="Elh-ew-YHS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                                                <state key="normal" title="PRODUCTOS">
+                                                    <color key="titleColor" red="0.3781892657" green="0.64579451080000005" blue="0.87901562450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="productSync:" destination="2EN-hk-yCW" eventType="touchUpInside" id="IMO-ZM-5jE"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
