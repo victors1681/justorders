@@ -117,6 +117,8 @@ class OrderModel {
             
             let orders = Table("orders")
             
+            var orderFilter = orders
+            
             let orderId = Expression<Int>("orderId")
             let clientId = Expression<String>("clientId")
             let terminalNo  = Expression<Int>("terminalNo")
@@ -140,19 +142,19 @@ class OrderModel {
           
             switch getBy! {
             case .Client:
-               orders
+               orderFilter = orders
                 break
                 
             case .Id:
-                orders.filter(orderId == Int(parameter!)!)
+                orderFilter = orders.filter(orderId == Int(parameter!)!)
                 break
                 
             case .NoSync:
-                orders.filter(sync == false)
+                orderFilter = orders.filter(sync == false)
                 break
                 
             case .Sync:
-                orders.filter(sync == true)
+                orderFilter = orders.filter(sync == true)
                 break
             case .Date:
                 guard dateIn != nil && dateEnd != nil  else {
@@ -161,11 +163,11 @@ class OrderModel {
                 }
                 
                 if !dateIn!.isEmpty && dateEnd!.isEmpty {
-                    orders.filter(date >=  dateIn!)
+                   orderFilter = orders.filter(date >=  dateIn!)
                 }else if dateIn!.isEmpty && !dateEnd!.isEmpty{
-                    orders.filter(date <= dateEnd!)
+                   orderFilter = orders.filter(date <= dateEnd!)
                 }else{
-                    orders.filter(date >= dateIn! && date <= dateEnd!)
+                   orderFilter = orders.filter(date >= dateIn! && date <= dateEnd!)
                 }
                 
                 break
@@ -178,7 +180,7 @@ class OrderModel {
             do{
                 
                 
-                for order in try db!.prepare(orders) {
+                for order in try db!.prepare(orderFilter) {
                     
                     let orderObj = PointSale(inventory: products)
                     
@@ -304,10 +306,47 @@ class OrderModel {
         return 0
     }
     
-    
-    func sendOrders() {
+    func getOrderPerdingSend() -> Int {
+        let dbModel = DBModel.init()
+        let db = dbModel?.getDB()
         
-       let orders = getOrders()
+        if((db) != nil){
+            let orders = Table("orders")
+            let orderId = Expression<Int>("orderId")
+            let sync  = Expression<Bool>("sync")
+            
+            guard let max:Int =  db!.scalar(orders.filter(sync == false).select(orderId.count)) else{
+                return 0
+            }
+            return max
+        }
+        
+        return 0
+    }
+    
+    func updateOrder(orderInId:Int) {
+        let dbModel = DBModel.init()
+        let db = dbModel?.getDB()
+        
+        if((db) != nil){
+            let orders = Table("orders")
+            let orderId = Expression<Int>("orderId")
+            let sync  = Expression<Bool>("sync")
+          
+            do{
+             try db!.run(orders.filter(orderId == orderInId).update(sync <- true))
+            }catch{
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    func sendOrders(orderQty:Int ->()) {
+        
+       let orders = getOrders(OrderModel.FindOrderBy.NoSync)
         
         var ordersObj = [[String: AnyObject]]()
         for order in orders {
@@ -345,7 +384,8 @@ class OrderModel {
             
             let dic:[String:AnyObject] = ["client": clientObj,
                        "clientId": order.client.code,
-                       "Client": order.client.name,
+                       "ClientName": order.client.name,
+                       "newClient": order.newClient,
                        "selection": selectionDic,
                        "orderId": order.orderId,
                        "totalOrder": order.totalOrder,
@@ -373,7 +413,27 @@ class OrderModel {
       //  print(JSON(data))
         
         ServicesData().sendOrders(JSON(data)) { (response) in
-           // print(response);)
+          //  print(response)
+            
+            //Update Orders
+            if response?.count > 0 {
+                var qty = 0
+                for res in (response?.arrayValue)!{
+                    
+                    let orderId:Int = res["NoPedido"].intValue
+                    //let errro:String = res["Error"].stringValue //future Options
+                    let status:Int = res["Status"].intValue
+                    
+                    if status == 1{
+                        self.updateOrder(orderId)
+                        qty += 1
+                    }
+
+                }
+                orderQty(qty)
+            }
+         
+            
         }
         
     }

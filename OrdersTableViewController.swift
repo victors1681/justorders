@@ -21,9 +21,7 @@ class OrdersTableViewController: UITableViewController {
         
         orders = OrderModel().getOrders()
        
-        OrderModel().sendOrders()
-        
-        
+      
         
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()

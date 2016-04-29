@@ -36,6 +36,7 @@ struct CompanyData {
 struct Configurations {
     var discount: Bool
     var changePrice: Bool
+    var sendMode: Bool
 }
 
 
@@ -210,10 +211,12 @@ class UserDefaultModel {
         
         let discount = config.discount
         let changePrice = config.changePrice
+        let sendMode = config.sendMode
         
         
          userDefault.setBool(discount, forKey: "discount")
          userDefault.setBool(changePrice, forKey: "changePrice")
+         userDefault.setBool(sendMode, forKey: "sendMode")
         
         userDefault.synchronize()
     }
@@ -223,8 +226,9 @@ class UserDefaultModel {
         
         let discount = userDefault.boolForKey("discount")
         let changePrice = userDefault.boolForKey("changePrice")
+        let sendMode = userDefault.boolForKey("sendMode")
      
-        return Configurations(discount: discount, changePrice: changePrice)
+        return Configurations(discount: discount, changePrice: changePrice, sendMode: sendMode)
     }
     
     

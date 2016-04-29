@@ -32,6 +32,7 @@ private enum ResoursePath {
     case SendOrders
     case Token
     case Value
+    case Stores
 
     var description: String{
         
@@ -41,7 +42,7 @@ private enum ResoursePath {
         case .SendOrders : return ("api/Pedidos")
         case .Token : return ("token")
         case .Value : return ("api/values")
-            
+        case .Stores : return ("api/Stores")
         }
         
     }
@@ -101,6 +102,37 @@ class ServicesData:ServicesDataType {
             print(ServicesDataError.EmptyToken)
         }
     }
+    
+    
+    func getDataStores(responseData:(qty:Int)-> ()) throws {
+        
+        if !gobalToken.isEmpty {
+            let headers = [
+                "Authorization" : "bearer \(gobalToken)"
+            ]
+            
+            let resource = ResoursePath.Stores.description
+            
+            self.jsonRequest(resource, header: headers, responseData: { (JSON) -> () in
+                
+                //Json Result from request convert to data producto
+                let store = StoreModel()
+                let data  = store.convertJson(JSON!["data"])
+                
+                //Insert in DB
+                if(data.count > 0){
+                    
+                    let qty = store.insertStore(data)
+                    print("Stores insertados \(qty)")
+                    responseData(qty: qty)
+                }
+            })
+            
+        }else{
+            print(ServicesDataError.EmptyToken)
+        }
+    }
+    
     
     func getToken(username: String, password: String, completion: (error: ServicesDataError) -> Void) {
     

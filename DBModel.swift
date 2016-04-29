@@ -30,6 +30,8 @@ class DBModel {
             createOrdersDB()
             createOrderDetailDB()
             createClientDB()
+            createStoreDB()
+            
             
         }catch{
            print("Error to connect to DB: \(error)")
@@ -226,7 +228,7 @@ class DBModel {
         let code = Expression<String>("code")
         let description = Expression<String>("description")
         let unit = Expression<String>("unit")
-        let amountTax = Expression<Double>("amoudeptTax")
+        let amountTax = Expression<Double>("amountTax")
         let quantity = Expression<Double>("quantity")
         let price  = Expression<Double>("price")
         let discount1 = Expression<Double>("discount1")
@@ -302,6 +304,51 @@ class DBModel {
         }catch {
             print("creation failed: \(error)")
         }
+    }
+    
+    
+    
+    //MARK: Stores Table
+    
+    func createStoreDB(){
+        
+        let stores = Table("Stores")
+        
+        /*  do{
+         try db.run(stores.drop())
+         }catch{
+         
+         }
+         */
+        
+        let storeId = Expression<Int>("storeId")
+        let name  = Expression<String>("name")
+        let phone = Expression<String>("phone")
+        
+        
+        do{
+            
+            try self.db.run(stores.create(ifNotExists: true) { t in
+                t.column(storeId)
+                t.column(name)
+                t.column(phone)
+   
+                })
+            
+        }catch {
+            print("creation failed: \(error)")
+        }
+    }
+    
+    func cleanStoreDB(){
+        let stores = Table("Stores")
+        
+          do{
+            try db.run(stores.delete())
+         }catch{
+         
+         }
+ 
     }
     
     

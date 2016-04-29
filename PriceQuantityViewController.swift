@@ -133,6 +133,8 @@ class PriceQuantityViewController: UIViewController {
             
             quantityText.text =  selection!.quantity.FormatNumberNumberVS
             priceText.text =  selection!.price.FormatNumberCurrencyVS
+            descriptionLabel.text = selection!.description
+            
             updateTotal(self)
         }
         

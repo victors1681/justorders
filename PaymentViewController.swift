@@ -33,7 +33,8 @@ class PaymentViewController: UIViewController {
     
     var clientName = ""
     var sendTo = ""
-    let pickerData = ["Independencia","Bolivar","Los Jardines","Otras"]
+    
+    var pickerData = [Stores]()
     
     @IBOutlet weak var amountReceivedLabel: UITextField!
     
@@ -226,6 +227,8 @@ class PaymentViewController: UIViewController {
             discountBtn.enabled = false
         }
         
+        pickerData =  StoreModel().getStore(0)
+        
         totalOrderLabel.text = totalOrder.FormatNumberCurrencyVS
         subTotalLabel.text = subTotal.FormatNumberCurrencyVS
         taxLabel.text = totalTax.FormatNumberCurrencyVS
@@ -248,8 +251,19 @@ class PaymentViewController: UIViewController {
     func payNow(){
         
         sendTo = sendToText.text!
+        var validateSendTo = true
         
-        if Double(String(amountArr)) > 0 || !sendTo.isEmpty {
+        let data = UserDefaultModel().getConfiguration()
+        if data.sendMode {
+            //Choose Strore validation
+            if sendTo.isEmpty {
+                validateSendTo = false
+            }else{
+                validateSendTo = true
+            }
+        }
+        
+        if Double(String(amountArr)) > 0 && validateSendTo {
             
             pointSaleData?.totalOrder = totalOrder
             pointSaleData?.subTotal = subTotal
@@ -573,8 +587,12 @@ class PaymentViewController: UIViewController {
     
     func hidePickerView(){
         
+        //default element
+        if pickerData.indices.contains(0) && (sendToText.text?.isEmpty)! {
+            sendToText.text = pickerData[0].name
+        }
         
-        SpringAnimation.springWithCompletion(0.5, animations: { 
+        SpringAnimation.springWithCompletion(0.5, animations: {
              self.pickerContainer.transform = CGAffineTransformMakeTranslation(0, 250)
             }) { (true) in
                 self.pickerContainer.hidden = true
@@ -602,15 +620,23 @@ extension PaymentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     //MARK: Delegates
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        if pickerData.indices.contains(row){
+            
+            return pickerData[row].name
+        }
+        return "Actualiza los Stores"
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        sendToText.text = pickerData[row]
+        
+        if pickerData.indices.contains(row){
+            sendToText.text = pickerData[row].name
+        }
+        
     }
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let titleData = pickerData[row]
+        let titleData = pickerData[row].name
         let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Avenir", size: 26.0)!,NSForegroundColorAttributeName:UIColor(red:0.42, green:0.64, blue:0.89, alpha:1.00)])
         return myTitle
     }

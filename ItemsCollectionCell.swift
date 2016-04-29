@@ -18,6 +18,22 @@ class ItemsCollectionCell: UICollectionViewCell {
     @IBOutlet weak var descriptionItem: UILabel!
     
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+  
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+       // contentView.layer.borderColor = UIColor.redColor().CGColor
+       // contentView.layer.borderWidth = 0.5
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+         
+    
+    }
     
     var url: String? {
         
@@ -25,8 +41,7 @@ class ItemsCollectionCell: UICollectionViewCell {
             setImage(url!)
         }
     }
-    
-    
+     
     //Save cache.. default a week
     //more info https://github.com/onevcat/Kingfisher
     

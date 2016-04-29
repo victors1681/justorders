@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qbC-Sw-GID">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
@@ -26,7 +25,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfN-8n-jWy" userLabel="BackgroundButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                             </button>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjC-tC-U5l" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjC-tC-U5l">
                                                 <rect key="frame" x="293" y="182" width="490" height="316"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Poa-fq-isl">
@@ -115,25 +114,6 @@
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="0.0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideUp"/>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" red="0.037582661956548691" green="0.11794043332338333" blue="0.20688411593437195" alpha="0.42005765369999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                        <real key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetY">
-                                                        <real key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ouh-Mr-QK3" customClass="SpringButton" customModule="JustOrders" customModuleProvider="target">
                                                 <rect key="frame" x="696" y="456" width="84" height="79"/>
@@ -142,7 +122,6 @@
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideUp"/>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="delay">
                                                         <real key="value" value="0.10000000000000001"/>
                                                     </userDefinedRuntimeAttribute>
@@ -425,6 +404,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uk1-EC-YMW">
                                         <rect key="frame" x="662" y="26" width="21" height="21"/>
                                         <state key="normal" image="SearchIcon"/>
+                                        <connections>
+                                            <action selector="findProduct:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vzN-DZ-5hg"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eF8-R7-G2K">
                                         <rect key="frame" x="0.0" y="50" width="104" height="5"/>
@@ -469,67 +451,49 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M72-1X-8m3">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M72-1X-8m3">
                                 <rect key="frame" x="-1" y="56" width="695" height="712"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="0.0" id="yRI-Cb-x2G">
-                                    <size key="itemSize" width="135" height="135"/>
+                                    <size key="itemSize" width="137" height="137"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="2" minY="2" maxX="8" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="NyU-xX-2bu" customClass="ItemsCollectionCell" customModule="JustOrders" customModuleProvider="target">
-                                        <rect key="frame" x="2" y="2" width="135" height="135"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="NyU-xX-2bu" customClass="ItemsCollectionCell" customModule="JustOrders" customModuleProvider="target">
+                                        <rect key="frame" x="2" y="2" width="137" height="137"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="137" height="137"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4sn-wq-nBd" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4sn-wq-nBd">
                                                     <rect key="frame" x="2" y="2" width="135" height="135"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vqJ-ez-4Fe">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="vqJ-ez-4Fe">
                                                             <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pj0-Ae-xbd" customClass="SpringImageView" customModule="JustOrders" customModuleProvider="target">
-                                                            <rect key="frame" x="89" y="0.0" width="43" height="41"/>
-                                                        </imageView>
-                                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7HZ-Ns-REw">
-                                                            <rect key="frame" x="0.0" y="98" width="135" height="37"/>
-                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="9se-Pi-ryl">
-                                                                <rect key="frame" x="0.0" y="0.0" width="135" height="37"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            </view>
-                                                            <blurEffect style="extraLight"/>
-                                                        </visualEffectView>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Mf-Gv-PtQ">
+                                                            <rect key="frame" x="0.0" y="98" width="137" height="37"/>
+                                                            <color key="backgroundColor" white="1" alpha="0.70417067307692305" colorSpace="calibratedWhite"/>
+                                                        </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label Label Label Label Label Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3CZ-bo-E0f">
                                                             <rect key="frame" x="8" y="98" width="115" height="36"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pht-Ci-q5R" customClass="SpringView" customModule="JustOrders" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="131" height="131"/>
-                                                            <color key="backgroundColor" white="1" alpha="0.40575721149999999" colorSpace="calibratedWhite"/>
-                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" red="0.9698452353477478" green="0.97799009084701538" blue="0.99045842885971069" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <size key="customSize" width="135" height="135"/>
+                                        <size key="customSize" width="137" height="137"/>
                                         <connections>
-                                            <outlet property="checked" destination="Pj0-Ae-xbd" id="w2Z-ds-oo8"/>
                                             <outlet property="descriptionItem" destination="3CZ-bo-E0f" id="JXZ-j6-EmG"/>
-                                            <outlet property="imageView" destination="vqJ-ez-4Fe" id="E7C-4J-Eyt"/>
-                                            <outlet property="selectedView" destination="pht-Ci-q5R" id="evk-Lh-DXR"/>
+                                            <outlet property="imageView" destination="vqJ-ez-4Fe" id="FiD-gT-kRU"/>
                                             <segue destination="qk6-ba-PDC" kind="presentation" identifier="PriceQuantity" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Ye6-8R-hPk"/>
                                         </connections>
                                     </collectionViewCell>
@@ -539,6 +503,54 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="P1q-A5-LQN"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lpx-br-8OB">
+                                <rect key="frame" x="0.0" y="719" width="694" height="49"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ohu-0b-9F3">
+                                        <rect key="frame" x="0.0" y="0.0" width="694" height="49"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="883-Ww-Tpn">
+                                            <rect key="frame" x="0.0" y="0.0" width="694" height="49"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Victor Santos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxj-Rj-MZd">
+                                                    <rect key="frame" x="478" y="11" width="204" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                    <color key="textColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="USUARIO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V72-SF-Kv2">
+                                                    <rect key="frame" x="480" y="28" width="204" height="20"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                                    <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="062-y5-ctQ" customClass="DesignableButton" customModule="JustOrders" customModuleProvider="target">
+                                                    <rect key="frame" x="18.5" y="10" width="197" height="30"/>
+                                                    <color key="backgroundColor" red="1" green="0.59282988309860229" blue="0.364296555519104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                    <color key="tintColor" red="0.98398476839065552" green="0.99217706918716431" blue="0.99621230363845825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="1 Pendiente por enviar"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" red="0.98398476839065552" green="0.99217706918716431" blue="0.99621230363845825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="sendOrders:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zzf-Iu-RHO"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <blurEffect style="light"/>
+                                    </visualEffectView>
+                                </subviews>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.9698452353477478" green="0.97799009084701538" blue="0.99045842885971069" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -553,8 +565,10 @@
                         <outlet property="collectionView" destination="M72-1X-8m3" id="o4q-3f-dbN"/>
                         <outlet property="itemQty" destination="Q6h-No-dDs" id="2G0-51-G6M"/>
                         <outlet property="searchText" destination="cMM-Qc-bxu" id="2mY-GN-lEw"/>
+                        <outlet property="sendOrdersBtn" destination="062-y5-ctQ" id="t1I-Bs-99D"/>
                         <outlet property="tableView" destination="xfa-sM-Pj5" id="sPv-01-seY"/>
                         <outlet property="totalOrderLabel" destination="y4T-mw-ZkH" id="n6L-8f-V3u"/>
+                        <outlet property="userName" destination="Sxj-Rj-MZd" id="QGw-fv-TKD"/>
                         <segue destination="l4d-kO-mgO" kind="presentation" identifier="Payment" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="wBQ-p6-csB"/>
                         <segue destination="qj4-hL-rNT" kind="presentation" identifier="AlertView" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Pzt-Pk-Rti"/>
                         <segue destination="qk6-ba-PDC" kind="presentation" identifier="PriceQuantityEdit" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="MkX-IH-pvN"/>
@@ -595,7 +609,7 @@
                                                         <rect key="frame" x="-9" y="-10" width="633" height="63"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9a-iO-VEc">
-                                                                <rect key="frame" x="573" y="18" width="50" height="40"/>
+                                                                <rect key="frame" x="573" y="18" width="40" height="40"/>
                                                                 <state key="normal" image="CloseButton"/>
                                                                 <connections>
                                                                     <action selector="closeView:" destination="wgT-c2-I2C" eventType="touchUpInside" id="XJe-Px-J4h"/>
@@ -719,14 +733,19 @@
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ad-Ut-YFN" userLabel="Container Button" customClass="SpringView" customModule="JustOrders" customModuleProvider="target">
                                                         <rect key="frame" x="329" y="102" width="281" height="147"/>
                                                         <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opciones Adicionales" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDs-wL-1as">
+                                                                <rect key="frame" x="58" y="99" width="165" height="21"/>
+                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                                <color key="textColor" red="0.2627450980392157" green="0.41960784313725491" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8D-sg-uzr" customClass="SpringButton" customModule="JustOrders" customModuleProvider="target">
-                                                                <rect key="frame" x="46" y="38" width="188" height="62"/>
+                                                                <rect key="frame" x="46" y="43" width="188" height="62"/>
                                                                 <state key="normal" title="Crédito Fiscal?" backgroundImage="OrangeButtonPlain">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideUp"/>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="delay">
                                                                         <real key="value" value="0.10000000000000001"/>
                                                                     </userDefinedRuntimeAttribute>
@@ -735,12 +754,6 @@
                                                                     <action selector="clientOption:" destination="wgT-c2-I2C" eventType="touchUpInside" id="EDQ-c3-yxw"/>
                                                                 </connections>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opciones Adicionales" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDs-wL-1as">
-                                                                <rect key="frame" x="58" y="99" width="165" height="21"/>
-                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                                <color key="textColor" red="0.2627450980392157" green="0.41960784313725491" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </view>
@@ -760,24 +773,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMG-2V-ABB" customClass="SpringButton" customModule="JustOrders" customModuleProvider="target">
-                                                <rect key="frame" x="417" y="458" width="188" height="62"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
-                                                <inset key="contentEdgeInsets" minX="44" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="OK" backgroundImage="GreenButton">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideUp"/>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="delay">
-                                                        <real key="value" value="0.10000000000000001"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="doneAction:" destination="wgT-c2-I2C" eventType="touchUpInside" id="d88-ng-YEU"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34733173080000002" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -787,6 +782,23 @@
                                             <constraint firstItem="xXs-Ua-t3b" firstAttribute="leading" secondItem="FFo-GF-I75" secondAttribute="leading" id="mfn-AZ-LBH"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMG-2V-ABB" customClass="SpringButton" customModule="JustOrders" customModuleProvider="target">
+                                        <rect key="frame" x="418" y="454" width="188" height="62"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                        <inset key="contentEdgeInsets" minX="44" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="OK" backgroundImage="GreenButton">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideUp"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                                <real key="value" value="0.10000000000000001"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="doneAction:" destination="wgT-c2-I2C" eventType="touchUpInside" id="d88-ng-YEU"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="FFo-GF-I75" secondAttribute="bottom" id="1EN-jt-Hhj"/>
@@ -850,7 +862,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IhY-co-CO8" userLabel="BackgroundButton">
                                         <rect key="frame" x="-0.5" y="0.0" width="1024" height="768"/>
                                     </button>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HUf-vS-S1g" userLabel="Keypad" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HUf-vS-S1g" userLabel="Keypad" customClass="SpringView" customModule="JustOrders" customModuleProvider="target">
                                         <rect key="frame" x="548" y="103" width="380" height="530"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7oF-vn-d7v" userLabel="KeypadTopBg">
@@ -1196,31 +1208,6 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideRight"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="delay">
-                                                <real key="value" value="0.29999999999999999"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="duration">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="scaleY">
-                                                <real key="value" value="0.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                <color key="value" red="0.033201668411493301" green="0.1158713772892952" blue="0.21003004908561707" alpha="0.31935160429999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetY">
-                                                <real key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lbu-mK-mLa" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
                                         <rect key="frame" x="30" y="182" width="550" height="400"/>
@@ -1397,19 +1384,17 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideUp"/>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                <color key="value" red="0.033201668411493301" green="0.1158713772892952" blue="0.21003004908561707" alpha="0.31935160427807485" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" red="0.37234944105148315" green="0.37241855263710022" blue="0.37234506011009216" alpha="0.7411778846" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                <real key="value" value="2"/>
+                                                <real key="value" value="3"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetY">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -1422,7 +1407,6 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideUp"/>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="delay">
                                                 <real key="value" value="0.10000000000000001"/>
                                             </userDefinedRuntimeAttribute>
@@ -1440,7 +1424,6 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideUp"/>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="delay">
                                                 <real key="value" value="0.10000000000000001"/>
                                             </userDefinedRuntimeAttribute>
@@ -1611,6 +1594,7 @@
         <scene sceneID="ngl-MI-DeS">
             <objects>
                 <splitViewController id="vFU-30-vSs" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="p2W-1l-5Tr"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
@@ -2542,11 +2526,30 @@
                                                 <color key="textColor" red="0.63562130928039551" green="0.69132864475250244" blue="0.77910763025283813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Actualizar Stores" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wet-kZ-YQA">
+                                                <rect key="frame" x="20" y="131" width="224" height="24"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                                <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aoE-j8-cNR">
                                                 <rect key="frame" x="273" y="84" width="51" height="31"/>
                                                 <color key="onTintColor" red="0.48152422904968262" green="0.69784212112426758" blue="0.92645150423049927" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="configurationAction:" destination="GvV-gd-Pj1" eventType="valueChanged" id="Yrr-Xn-OcG"/>
+                                                </connections>
+                                            </switch>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Modo de Envio Sucursal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDw-AM-aEX">
+                                                <rect key="frame" x="20" y="170" width="224" height="24"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                                <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9UV-VW-VdO">
+                                                <rect key="frame" x="273" y="163" width="51" height="31"/>
+                                                <color key="onTintColor" red="0.48152422900000003" green="0.69784212109999999" blue="0.9264515042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="configurationAction:" destination="GvV-gd-Pj1" eventType="valueChanged" id="z7P-Mh-rRM"/>
                                                 </connections>
                                             </switch>
                                         </subviews>
@@ -2569,6 +2572,13 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bB-hZ-gA9">
+                                        <rect key="frame" x="689" y="137" width="30" height="25"/>
+                                        <state key="normal" image="Refresh-Blue"/>
+                                        <connections>
+                                            <action selector="updateStores:" destination="GvV-gd-Pj1" eventType="touchUpInside" id="MU5-CL-g42"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qyx-VW-QwP" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
                                         <rect key="frame" x="405" y="264" width="342" height="195"/>
                                         <subviews>
@@ -2745,6 +2755,7 @@
                         <outlet property="orderSecuences" destination="BTJ-pL-jXS" id="KDV-Qf-8C9"/>
                         <outlet property="passwordAPI" destination="jOI-qu-IDk" id="wca-2O-O25"/>
                         <outlet property="port" destination="6zi-pe-rPH" id="mHx-iL-Z9M"/>
+                        <outlet property="sendModeSW" destination="9UV-VW-VdO" id="rgZ-xc-fOM"/>
                         <outlet property="serverUrl" destination="Ldz-nA-o7y" id="oVg-JB-v5R"/>
                         <outlet property="terminalNumber" destination="UXW-hg-0Yy" id="xHC-3c-ybk"/>
                         <outlet property="token" destination="hfY-6g-Com" id="GHI-2T-i02"/>
@@ -2836,14 +2847,14 @@
                                                     <color key="titleColor" red="0.37818926572799683" green="0.64579451084136963" blue="0.87901562452316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEN-bB-A6Y">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEN-bB-A6Y">
                                                 <rect key="frame" x="-1" y="142" width="300" height="56"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
                                                 <state key="normal" title="MIS ORDENES">
                                                     <color key="titleColor" red="0.37818926572799683" green="0.64579451084136963" blue="0.87901562452316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="vFU-30-vSs" kind="presentation" identifier="Orders" id="Bg6-WL-GvX"/>
+                                                    <segue destination="vFU-30-vSs" kind="push" identifier="Orders" id="Bg6-WL-GvX"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6Z-Ov-pLd">
@@ -2972,6 +2983,7 @@
         <image name="HorizontalLineCalc" width="308" height="1"/>
         <image name="LoginBackground" width="1024" height="768"/>
         <image name="Menu" width="26" height="17"/>
+        <image name="NoImage" width="131" height="131"/>
         <image name="OrangeButtonPlain" width="188" height="62"/>
         <image name="OrangeLeftArrow" width="19" height="27"/>
         <image name="Password" width="186" height="50"/>
@@ -2985,7 +2997,7 @@
         <image name="VerticalLineCalc" width="2" height="420"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ahl-3C-Iu8"/>
         <segue reference="MkX-IH-pvN"/>
-        <segue reference="baS-bq-h9W"/>
     </inferredMetricsTieBreakers>
 </document>

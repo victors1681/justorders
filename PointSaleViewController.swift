@@ -29,6 +29,8 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchText: UITextField!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var sendOrdersBtn: DesignableButton!
     
     
     var isFilter: Bool = false
@@ -52,6 +54,15 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         }
         
         collectionView.reloadData()
+    }
+    
+    
+    @IBAction func findProduct(sender: AnyObject) {
+        
+        //clean Textbox
+        searchText.text = ""
+        searchText.becomeFirstResponder()
+        search(self)
     }
     
     @IBAction func goToEditClient(sender: AnyObject) {
@@ -80,6 +91,20 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         }
     }
     
+    
+    @IBAction func sendOrders(sender: AnyObject) {
+        
+       self.view.showLoading()
+        OrderModel().sendOrders { (qty) in
+            
+            self.view.hideLoading()
+            self.view.showCustomeAlert(title: "Enviaro", message: "Enviados \(qty)")
+            self.uptatePendingOrder()
+            
+        }
+        
+    }
+    
  
     required  init?(coder aDecoder: NSCoder) {
         
@@ -93,7 +118,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         
         super.viewDidLoad()
         
-        randomImg = ["http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg",
+        randomImg = [
                      "http://topinspired.com/wp-content/uploads/2013/08/healthy-food-recipes-for-kids_01.jpg",
                      "http://cdn.aarp.net/content/dam/aarp/food/recipes/2013-02/740-low-fat-recipes-by-pam-anderso.imgcache.rev1360943709278.jpg/_jcr_content/renditions/cq5dam.web.420.270.jpeg",
                      "http://foodnetwork.sndimg.com/content/dam/images/food/fullset/2012/10/26/0/FNK_Healthy-Hot-Chocolate-Banana-Nut-Oatmeal_s4x3.jpg.rend.snigalleryslide.jpeg",
@@ -109,27 +134,14 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
                      "http://www.topchinatravel.com/Pic/china-guide/cuisine/jiangsu-cuisine-1.jpg",
                      "http://www.thesaigoncafe.com/wp-content/uploads/2014/09/a1.jpg"]
         
-        let ser = ServicesData()
-      //  ser.getToken("victor", password: "genio1681")
-
-        
-        //Clear Cache
+      
+        //**Clear Cache**
         let cache = KingfisherManager.sharedManager.cache
         cache.clearMemoryCache()
         cache.clearMemoryCache()
         
-        
-        do{
-            
-           
-          //  try ser.getDataInventory()
-        }catch let error {
-            print("error Something bad: \(error)")
-        }
-        
-        //Load Point of Sale
-        // inventory = InventoryModel().getInventory()
-        
+        userName.text = UserDefaultModel().getDataUser().localUser
+        uptatePendingOrder()
         
     }
     
@@ -151,7 +163,12 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
             
             let toView = segue.destinationViewController as! PriceQuantityViewController
             toView.delegate = self
-            toView.selectedItem = pointSale.inventory[(indexPath?.row)!]
+          
+            if isFilter {
+                toView.selectedItem = filterProducts[(indexPath?.row)!]
+            }else{
+                toView.selectedItem = pointSale.inventory[(indexPath?.row)!]
+            }
         }
         
         if segue.identifier == "PriceQuantityEdit" {
@@ -203,6 +220,19 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         
     }
     
+    //MARK: update Pending Total Orders
+    func uptatePendingOrder() {
+        
+        let orderPending = OrderModel().getOrderPerdingSend()
+        
+        if orderPending != 0 {
+            sendOrdersBtn.hidden = false
+        sendOrdersBtn.setTitle("\(orderPending) Pendiente por Enviar", forState: .Normal)
+        }else{
+            sendOrdersBtn.hidden = true
+        }
+        
+    }
     
     //MARK: View Effect
     func minimizeView(sender: AnyObject) {
@@ -225,6 +255,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         pointSale = pointData
         OrderModel().insertOrder(pointSale)
         cleanView()
+        
     }
     
     func cleanView() {
@@ -240,6 +271,9 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         clientInformationView.hidden = true
         clientInformationView.animation = "fadeOut"
         clientInformationView.animate()
+        
+        //Update Pending Order for Send
+        uptatePendingOrder()
         
         totalOrderLabel.text = 0.0.FormatNumberCurrencyVS
     }
@@ -332,6 +366,9 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ItemsCollectionCell
+        
+      
+        
         /*
          let business = selectedBusiness[indexPath.row]
          
@@ -355,13 +392,10 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
         
         let range = UInt32(randomImg.count)
         let ranNum =  Int(arc4random_uniform(range))
-        
-        
         cell.url = (randomImg[ranNum])  //"http:/)/cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
-        
-        cell.selectedView.hidden = true
-        cell.selectedView.alpha = 0
-        cell.checked.hidden = true
+       // cell.selectedView.hidden = true
+      //  cell.selectedView.alpha = 0
+       // cell.checked.hidden = true
         
         
         return cell
@@ -371,33 +405,10 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let cell : ItemsCollectionCell = collectionView.cellForItemAtIndexPath(indexPath) as! ItemsCollectionCell
+       // let cell : ItemsCollectionCell = collectionView.cellForItemAtIndexPath(indexPath) as! ItemsCollectionCell
         
         
-        if !cell.checked.hidden {
-            
-            cell.checked.hidden = true
-            cell.checked.animation = "zoomIn"
-            cell.checked.animate()
-            
-            cell.selectedView.animation = "fadeOut"
-            cell.selectedView.animate()
-            cell.selectedView.hidden = true
-        }else{
-            
-            
-            cell.checked.animation = "zoomOut"
-            cell.checked.animate()
-            cell.checked.animateNext({ () -> () in
-                cell.checked.hidden = false
-            })
-            
-            cell.selectedView.hidden = false
-            cell.selectedView.animation = "fadeIn"
-            cell.selectedView.animate()
-            cell.selectedView.alpha = 0.5
         }
-    }
     
 }
 
@@ -431,7 +442,7 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.sectionName.text = currenSelectedItem.description
         let price = currenSelectedItem.price
-        let tax = currenSelectedItem.amountTax
+        //let tax = currenSelectedItem.amountTax
         let qty = currenSelectedItem.quantity
         let subTotal = price * qty
         
@@ -440,7 +451,7 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
         cell.quantity.text = "\(qty.FormatNumberNumberVS)"
         cell.subTotal.text = "\(subTotal.FormatNumberCurrencyVS)"
         
-        cell.url = "http://cdn.kiwilimon.com/recetaimagen/262/1286.jpg";
+        cell.url = "http://www.perfectspice.com/image/data/recipe/Spicy%20Ribs.jpg";
         
         return cell
         

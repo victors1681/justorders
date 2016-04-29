@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConfigurationViewController:UIViewController {
+class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
     
     @IBOutlet weak var serverUrl: UITextField!
     @IBOutlet weak var port: UITextField!
@@ -34,6 +34,7 @@ class ConfigurationViewController:UIViewController {
     //Other Config
     @IBOutlet weak var discountSW: UISwitch!
     @IBOutlet weak var changePriceSW: UISwitch!
+    @IBOutlet weak var sendModeSW: UISwitch!
     
     //Administrator
     @IBOutlet weak var administratorPassword: UITextField!
@@ -147,11 +148,41 @@ class ConfigurationViewController:UIViewController {
         
         let discount = discountSW.on
         let chagePrice = changePriceSW.on
+        let sendMode = sendModeSW.on
         
-        let data = Configurations(discount: discount, changePrice: chagePrice)
+        let data = Configurations(discount: discount, changePrice: chagePrice, sendMode: sendMode)
         
         UserDefaultModel().setConfiguration(data)
         
+    }
+    
+    @IBAction func updateStores(sender: AnyObject) {
+        
+     self.view.showLoading()
+        
+        let serviceData = ServicesData()
+        
+        do{
+            
+        
+      try serviceData.getDataStores { (qty) in
+            
+            self.view.hideLoading()
+           self.view.showCustomeAlert(title: "Store Sincronizado", message: "Cantidad: \(qty)")
+            
+        }
+        }catch{
+            print("No se pudo sincronizar los Stores: \(error)")
+            
+            self.view.hideLoading()
+            self.view.showCustomeAlert(AlertViewType.error, title: ":(", message: "Ocurrión algun problema al sincronizar los Stores")
+        }
+        self.view.hideLoading()
+        
+    }
+    
+    func alertBack(controller:CustomAlertView, acction:Bool){
+    
     }
     
     
@@ -192,7 +223,7 @@ class ConfigurationViewController:UIViewController {
         
         discountSW.setOn(data.discount, animated: true)
         changePriceSW.setOn(data.changePrice, animated: true)
-        
+        sendModeSW.setOn(data.discount, animated: true)
     }
     
     func loadAdministrator(){
