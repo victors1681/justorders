@@ -11,8 +11,15 @@
 		5731E8811CA9A516003A36F4 /* InventoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731E8801CA9A516003A36F4 /* InventoryModel.swift */; };
 		5731E89F1CA9BE4A003A36F4 /* DBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731E89E1CA9BE4A003A36F4 /* DBModel.swift */; };
 		5731E8A51CAAFA88003A36F4 /* PriceQuantityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731E8A41CAAFA88003A36F4 /* PriceQuantityViewController.swift */; };
+		5734CFCD1CD7BEEB00840BCF /* ConexionDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 5734CFCB1CD7BB1700840BCF /* ConexionDB.m */; };
+		5734CFCF1CD7BF6500840BCF /* libZSDK_API.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5734CFCE1CD7BF6500840BCF /* libZSDK_API.a */; };
+		5734CFD11CD8479800840BCF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5734CFD01CD8479800840BCF /* UIKit.framework */; };
+		5734CFD31CD8489400840BCF /* BluetoothPrinterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5734CFC81CD7BA8400840BCF /* BluetoothPrinterViewController.m */; };
+		5734CFD61CD8494400840BCF /* UserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 5734CFD51CD8494400840BCF /* UserDefault.m */; };
 		573F6D5A1CB7EE0F002D9EF4 /* CustomAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 573F6D591CB7EE0E002D9EF4 /* CustomAlertView.xib */; };
 		573F6D721CB7FEF2002D9EF4 /* CustomeAlertView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573F6D711CB7FEF2002D9EF4 /* CustomeAlertView2.swift */; };
+		575A3DCC1CD3CD51009764E0 /* ZebraPrintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 575A3DCA1CD3CD51009764E0 /* ZebraPrintViewController.m */; };
+		575A3DCE1CD3CD86009764E0 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 575A3DCD1CD3CD86009764E0 /* ExternalAccessory.framework */; };
 		575BC08F1CADBB38005C708C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A0DCC11CACC9E700C532BE /* Alamofire.framework */; };
 		575BC0901CADBB38005C708C /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 57A0DCC11CACC9E700C532BE /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		575BC0A51CADBB3E005C708C /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A0DCAC1CACC9E700C532BE /* SQLite.framework */; };
@@ -72,10 +79,11 @@
 		578DA7F31CBB30DB00B8A847 /* OrdersDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578DA7F21CBB30DB00B8A847 /* OrdersDetailTableViewController.swift */; };
 		5798C2F11C9904330003B54A /* PointSaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798C2F01C9904330003B54A /* PointSaleViewController.swift */; };
 		5798C2F31C99055C0003B54A /* ItemsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5798C2F21C99055C0003B54A /* ItemsCollectionCell.swift */; };
-		579DF93D1C9A00A0000706FA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579DF93C1C9A00A0000706FA /* CoreData.framework */; };
 		579DF9691C9F6DFF000706FA /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579DF9681C9F6DFF000706FA /* ItemsTableViewCell.swift */; };
 		57A0DC111CACC90F00C532BE /* ClientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A0DC101CACC90F00C532BE /* ClientViewController.swift */; };
 		57A0DCCF1CAD952600C532BE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A0DCCE1CAD952600C532BE /* LoginViewController.swift */; };
+		57A3B2B51CD3EB1900BF24B6 /* FormatosZebra.m in Sources */ = {isa = PBXBuildFile; fileRef = 57A3B2B41CD3EB1900BF24B6 /* FormatosZebra.m */; };
+		57A3B2F51CD69A9500BF24B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57A3B2F41CD69A9500BF24B6 /* Foundation.framework */; };
 		57F313CB1CCE9AEA00E4832E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F313C91CCE9AEA00E4832E /* Fabric.framework */; };
 		57F313CC1CCE9AEA00E4832E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57F313CA1CCE9AEA00E4832E /* Crashlytics.framework */; };
 		57F313CE1CD0671F00E4832E /* StoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F313CD1CD0671F00E4832E /* StoreModel.swift */; };
@@ -301,8 +309,45 @@
 		5731E8801CA9A516003A36F4 /* InventoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryModel.swift; sourceTree = "<group>"; };
 		5731E89E1CA9BE4A003A36F4 /* DBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBModel.swift; sourceTree = "<group>"; };
 		5731E8A41CAAFA88003A36F4 /* PriceQuantityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceQuantityViewController.swift; sourceTree = "<group>"; };
+		5734CFB31CD7BA0F00840BCF /* DiscoveredPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveredPrinter.h; sourceTree = "<group>"; };
+		5734CFB41CD7BA0F00840BCF /* DiscoveredPrinterNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveredPrinterNetwork.h; sourceTree = "<group>"; };
+		5734CFB51CD7BA0F00840BCF /* FieldDescriptionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldDescriptionData.h; sourceTree = "<group>"; };
+		5734CFB61CD7BA0F00840BCF /* FileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtil.h; sourceTree = "<group>"; };
+		5734CFB71CD7BA0F00840BCF /* FormatUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatUtil.h; sourceTree = "<group>"; };
+		5734CFB81CD7BA0F00840BCF /* GraphicsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsUtil.h; sourceTree = "<group>"; };
+		5734CFB91CD7BA0F00840BCF /* MagCardReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagCardReader.h; sourceTree = "<group>"; };
+		5734CFBA1CD7BA0F00840BCF /* MfiBtPrinterConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MfiBtPrinterConnection.h; sourceTree = "<group>"; };
+		5734CFBB1CD7BA0F00840BCF /* NetworkDiscoverer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkDiscoverer.h; sourceTree = "<group>"; };
+		5734CFBC1CD7BA0F00840BCF /* PrinterStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrinterStatus.h; sourceTree = "<group>"; };
+		5734CFBD1CD7BA0F00840BCF /* PrinterStatusMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrinterStatusMessages.h; sourceTree = "<group>"; };
+		5734CFBE1CD7BA0F00840BCF /* SGD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGD.h; sourceTree = "<group>"; };
+		5734CFBF1CD7BA0F00840BCF /* SmartCardReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartCardReader.h; sourceTree = "<group>"; };
+		5734CFC01CD7BA0F00840BCF /* TcpPrinterConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TcpPrinterConnection.h; sourceTree = "<group>"; };
+		5734CFC11CD7BA0F00840BCF /* ToolsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolsUtil.h; sourceTree = "<group>"; };
+		5734CFC21CD7BA0F00840BCF /* ZebraErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraErrorCode.h; sourceTree = "<group>"; };
+		5734CFC31CD7BA0F00840BCF /* ZebraPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraPrinter.h; sourceTree = "<group>"; };
+		5734CFC41CD7BA0F00840BCF /* ZebraPrinterConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraPrinterConnection.h; sourceTree = "<group>"; };
+		5734CFC51CD7BA0F00840BCF /* ZebraPrinterFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraPrinterFactory.h; sourceTree = "<group>"; };
+		5734CFC61CD7BA0F00840BCF /* ZplPrintMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZplPrintMode.h; sourceTree = "<group>"; };
+		5734CFC71CD7BA8400840BCF /* BluetoothPrinterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothPrinterViewController.h; sourceTree = "<group>"; };
+		5734CFC81CD7BA8400840BCF /* BluetoothPrinterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothPrinterViewController.m; sourceTree = "<group>"; };
+		5734CFCA1CD7BB1700840BCF /* ConexionDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConexionDB.h; sourceTree = "<group>"; };
+		5734CFCB1CD7BB1700840BCF /* ConexionDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConexionDB.m; sourceTree = "<group>"; };
+		5734CFCE1CD7BF6500840BCF /* libZSDK_API.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZSDK_API.a; sourceTree = "<group>"; };
+		5734CFD01CD8479800840BCF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5734CFD41CD8494400840BCF /* UserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefault.h; sourceTree = "<group>"; };
+		5734CFD51CD8494400840BCF /* UserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefault.m; sourceTree = "<group>"; };
 		573F6D591CB7EE0E002D9EF4 /* CustomAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlertView.xib; sourceTree = "<group>"; };
 		573F6D711CB7FEF2002D9EF4 /* CustomeAlertView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeAlertView2.swift; sourceTree = "<group>"; };
+		575A3DC51CD3CD51009764E0 /* ZebraErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraErrorCode.h; sourceTree = "<group>"; };
+		575A3DC61CD3CD51009764E0 /* ZebraPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraPrinter.h; sourceTree = "<group>"; };
+		575A3DC71CD3CD51009764E0 /* ZebraPrinterConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraPrinterConnection.h; sourceTree = "<group>"; };
+		575A3DC81CD3CD51009764E0 /* ZebraPrinterFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraPrinterFactory.h; sourceTree = "<group>"; };
+		575A3DC91CD3CD51009764E0 /* ZebraPrintViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZebraPrintViewController.h; sourceTree = "<group>"; };
+		575A3DCA1CD3CD51009764E0 /* ZebraPrintViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZebraPrintViewController.m; sourceTree = "<group>"; };
+		575A3DCB1CD3CD51009764E0 /* ZplPrintMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZplPrintMode.h; sourceTree = "<group>"; };
+		575A3DCD1CD3CD86009764E0 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		575A3DCF1CD3CD86009764E0 /* JustOrders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = JustOrders.entitlements; sourceTree = "<group>"; };
 		575BC0AD1CAE1FC1005C708C /* UserDefaultModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultModel.swift; sourceTree = "<group>"; };
 		5760D4AA1CB1D49700010EF1 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		5760D4AC1CB2E35300010EF1 /* CustomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
@@ -370,6 +415,11 @@
 		579DF9681C9F6DFF000706FA /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
 		57A0DC101CACC90F00C532BE /* ClientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientViewController.swift; sourceTree = "<group>"; };
 		57A0DCCE1CAD952600C532BE /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		57A3B29A1CD3EA0D00BF24B6 /* TcpPrinterConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TcpPrinterConnection.h; sourceTree = "<group>"; };
+		57A3B2B31CD3EB1900BF24B6 /* FormatosZebra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatosZebra.h; sourceTree = "<group>"; };
+		57A3B2B41CD3EB1900BF24B6 /* FormatosZebra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatosZebra.m; sourceTree = "<group>"; };
+		57A3B2B81CD4271000BF24B6 /* JustOrders-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JustOrders-Bridging-Header.h"; sourceTree = "<group>"; };
+		57A3B2F41CD69A9500BF24B6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		57F313C91CCE9AEA00E4832E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		57F313CA1CCE9AEA00E4832E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		57F313CD1CD0671F00E4832E /* StoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreModel.swift; sourceTree = "<group>"; };
@@ -380,7 +430,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				579DF93D1C9A00A0000706FA /* CoreData.framework in Frameworks */,
+				5734CFD11CD8479800840BCF /* UIKit.framework in Frameworks */,
+				5734CFCF1CD7BF6500840BCF /* libZSDK_API.a in Frameworks */,
+				57A3B2F51CD69A9500BF24B6 /* Foundation.framework in Frameworks */,
+				575A3DCE1CD3CD86009764E0 /* ExternalAccessory.framework in Frameworks */,
 				57F313CB1CCE9AEA00E4832E /* Fabric.framework in Frameworks */,
 				575BC08F1CADBB38005C708C /* Alamofire.framework in Frameworks */,
 				575BC0A91CADBB44005C708C /* Kingfisher.framework in Frameworks */,
@@ -392,14 +445,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5734CFB21CD7BA0F00840BCF /* include */ = {
+			isa = PBXGroup;
+			children = (
+				5734CFB31CD7BA0F00840BCF /* DiscoveredPrinter.h */,
+				5734CFB41CD7BA0F00840BCF /* DiscoveredPrinterNetwork.h */,
+				5734CFB51CD7BA0F00840BCF /* FieldDescriptionData.h */,
+				5734CFB61CD7BA0F00840BCF /* FileUtil.h */,
+				5734CFB71CD7BA0F00840BCF /* FormatUtil.h */,
+				5734CFB81CD7BA0F00840BCF /* GraphicsUtil.h */,
+				5734CFB91CD7BA0F00840BCF /* MagCardReader.h */,
+				5734CFBA1CD7BA0F00840BCF /* MfiBtPrinterConnection.h */,
+				5734CFBB1CD7BA0F00840BCF /* NetworkDiscoverer.h */,
+				5734CFBC1CD7BA0F00840BCF /* PrinterStatus.h */,
+				5734CFBD1CD7BA0F00840BCF /* PrinterStatusMessages.h */,
+				5734CFBE1CD7BA0F00840BCF /* SGD.h */,
+				5734CFBF1CD7BA0F00840BCF /* SmartCardReader.h */,
+				5734CFC01CD7BA0F00840BCF /* TcpPrinterConnection.h */,
+				5734CFC11CD7BA0F00840BCF /* ToolsUtil.h */,
+				5734CFC21CD7BA0F00840BCF /* ZebraErrorCode.h */,
+				5734CFC31CD7BA0F00840BCF /* ZebraPrinter.h */,
+				5734CFC41CD7BA0F00840BCF /* ZebraPrinterConnection.h */,
+				5734CFC51CD7BA0F00840BCF /* ZebraPrinterFactory.h */,
+				5734CFC61CD7BA0F00840BCF /* ZplPrintMode.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		575A3DC41CD3CD45009764E0 /* Zebra */ = {
+			isa = PBXGroup;
+			children = (
+				5734CFB21CD7BA0F00840BCF /* include */,
+				57A3B29A1CD3EA0D00BF24B6 /* TcpPrinterConnection.h */,
+				5734CFD41CD8494400840BCF /* UserDefault.h */,
+				5734CFD51CD8494400840BCF /* UserDefault.m */,
+				5734CFC71CD7BA8400840BCF /* BluetoothPrinterViewController.h */,
+				5734CFC81CD7BA8400840BCF /* BluetoothPrinterViewController.m */,
+				575A3DC51CD3CD51009764E0 /* ZebraErrorCode.h */,
+				575A3DC61CD3CD51009764E0 /* ZebraPrinter.h */,
+				575A3DC71CD3CD51009764E0 /* ZebraPrinterConnection.h */,
+				575A3DC81CD3CD51009764E0 /* ZebraPrinterFactory.h */,
+				57A3B2B31CD3EB1900BF24B6 /* FormatosZebra.h */,
+				57A3B2B41CD3EB1900BF24B6 /* FormatosZebra.m */,
+				5734CFCA1CD7BB1700840BCF /* ConexionDB.h */,
+				5734CFCB1CD7BB1700840BCF /* ConexionDB.m */,
+				575A3DC91CD3CD51009764E0 /* ZebraPrintViewController.h */,
+				575A3DCA1CD3CD51009764E0 /* ZebraPrintViewController.m */,
+				575A3DCB1CD3CD51009764E0 /* ZplPrintMode.h */,
+				57A3B2B81CD4271000BF24B6 /* JustOrders-Bridging-Header.h */,
+			);
+			name = Zebra;
+			sourceTree = "<group>";
+		};
 		5784317E1C979DCD00C713E0 = {
 			isa = PBXGroup;
 			children = (
+				5734CFD01CD8479800840BCF /* UIKit.framework */,
+				57A3B2F41CD69A9500BF24B6 /* Foundation.framework */,
+				575A3DCD1CD3CD86009764E0 /* ExternalAccessory.framework */,
+				575A3DC41CD3CD45009764E0 /* Zebra */,
 				57A0DC2B1CACC99E00C532BE /* Cells */,
 				57A0DC291CACC96A00C532BE /* View Controllers */,
 				57A0DC2A1CACC98600C532BE /* Models */,
 				578431891C979DCD00C713E0 /* JustOrders */,
 				578431881C979DCD00C713E0 /* Products */,
+				5734CFCE1CD7BF6500840BCF /* libZSDK_API.a */,
 				578B2CD11C98908F00E9DE13 /* Spring */,
 				578B2D561C98908F00E9DE13 /* TPKeyboardAvoiding */,
 				579DF93C1C9A00A0000706FA /* CoreData.framework */,
@@ -423,6 +533,7 @@
 		578431891C979DCD00C713E0 /* JustOrders */ = {
 			isa = PBXGroup;
 			children = (
+				575A3DCF1CD3CD86009764E0 /* JustOrders.entitlements */,
 				5784318A1C979DCD00C713E0 /* AppDelegate.swift */,
 				5784318C1C979DCD00C713E0 /* ViewController.swift */,
 				5784318E1C979DCD00C713E0 /* Main.storyboard */,
@@ -614,6 +725,14 @@
 					578431861C979DCD00C713E0 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = HDYHZ227JK;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.WAC = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -865,6 +984,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5734CFD31CD8489400840BCF /* BluetoothPrinterViewController.m in Sources */,
+				5734CFCD1CD7BEEB00840BCF /* ConexionDB.m in Sources */,
 				5784318D1C979DCD00C713E0 /* ViewController.swift in Sources */,
 				578B2D621C98908F00E9DE13 /* BlurView.swift in Sources */,
 				578B2D6C1C98908F00E9DE13 /* KeyboardLayoutConstraint.swift in Sources */,
@@ -890,6 +1011,7 @@
 				578B2DCD1C98908F00E9DE13 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				57A0DC111CACC90F00C532BE /* ClientViewController.swift in Sources */,
 				5731E8811CA9A516003A36F4 /* InventoryModel.swift in Sources */,
+				57A3B2B51CD3EB1900BF24B6 /* FormatosZebra.m in Sources */,
 				578DA7D11CBB2FAB00B8A847 /* OrdersTableViewController.swift in Sources */,
 				5760D4AF1CB5F8BF00010EF1 /* MenuViewController.swift in Sources */,
 				5760D4B11CB6106200010EF1 /* ConfigurationViewController.swift in Sources */,
@@ -900,8 +1022,10 @@
 				57F313CE1CD0671F00E4832E /* StoreModel.swift in Sources */,
 				578B2DCC1C98908F00E9DE13 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				5760D4AD1CB2E35300010EF1 /* CustomAlertView.swift in Sources */,
+				5734CFD61CD8494400840BCF /* UserDefault.m in Sources */,
 				578B2D781C98908F00E9DE13 /* SpringView.swift in Sources */,
 				5784318B1C979DCD00C713E0 /* AppDelegate.swift in Sources */,
+				575A3DCC1CD3CD51009764E0 /* ZebraPrintViewController.m in Sources */,
 				578B2D601C98908F00E9DE13 /* AsyncImageView.swift in Sources */,
 				578DA7F31CBB30DB00B8A847 /* OrdersDetailTableViewController.swift in Sources */,
 				578B2D631C98908F00E9DE13 /* DesignableButton.swift in Sources */,
@@ -1049,44 +1173,68 @@
 		5784319D1C979DCD00C713E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = JustOrders/JustOrders.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = (
+					/Users/victor/Applications/zebralink_sdk/iOS/v1.4.948/lib/include,
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = JustOrders/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_APPS_DIR)/zebralink_sdk/iOS/v1.4.948/lib",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.itsoluclick.JustOrders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
+				VALID_ARCHS = "armv7s armv7 arm64";
 			};
 			name = Debug;
 		};
 		5784319E1C979DCD00C713E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = JustOrders/JustOrders.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = (
+					/Users/victor/Applications/zebralink_sdk/iOS/v1.4.948/lib/include,
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = JustOrders/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_APPS_DIR)/zebralink_sdk/iOS/v1.4.948/lib",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.itsoluclick.JustOrders;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
+				VALID_ARCHS = "armv7s armv7 arm64";
 			};
 			name = Release;
 		};

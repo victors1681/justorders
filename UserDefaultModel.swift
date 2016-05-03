@@ -22,7 +22,7 @@ struct UserData {
     
 }
 
-struct CompanyData {
+ struct CompanyData {
     var name: String
     var phone: String
     var address: String
@@ -31,6 +31,7 @@ struct CompanyData {
     var taxId: String
     var email: String
     var web: String
+    var footer: String
 }
 
 struct Configurations {
@@ -41,7 +42,7 @@ struct Configurations {
 
 
 
-class UserDefaultModel {
+@objc class UserDefaultModel:NSObject {
     
     internal let userDefault = NSUserDefaults.standardUserDefaults()
     
@@ -171,6 +172,7 @@ class UserDefaultModel {
         let taxId = company.taxId
         let email = company.email
         let web = company.web
+        let footer = company.footer
         
         
         if !name.isEmpty { userDefault.setValue(name, forKey: "companyName") }
@@ -181,6 +183,7 @@ class UserDefaultModel {
         if !taxId.isEmpty { userDefault.setValue(taxId, forKey: "companyTaxId") }
         if !email.isEmpty { userDefault.setValue(email, forKey: "companyEmail") }
         if !web.isEmpty { userDefault.setValue(web, forKey: "companyWeb") }
+        if !footer.isEmpty { userDefault.setValue(footer, forKey: "footer") }
         
         userDefault.synchronize()
     }
@@ -198,11 +201,22 @@ class UserDefaultModel {
         let taxId = userDefault.stringForKey("companyTaxId") ?? ""
         let email = userDefault.stringForKey("companyEmail") ?? ""
         let web = userDefault.stringForKey("companyWeb") ?? ""
+        let footer = userDefault.stringForKey("footer") ?? ""
         
-        return CompanyData(name: name, phone: phone, address: address, city: city, region: region, taxId: taxId, email: email, web: web)
+        return CompanyData(name: name, phone: phone, address: address, city: city, region: region, taxId: taxId, email: email, web: web, footer: footer)
         
     }
     
+    //Retrieve data company for Objective c
+    func getCompanyObj()->NSDictionary {
+        
+       let dataCom = self.getCompany()
+        
+        let dic:[String:String] = ["name":dataCom.name, "phone":dataCom.phone, "address": dataCom.address, "city":dataCom.city, "region":dataCom.region, "taxId":dataCom.taxId, "email":dataCom.email, "web":dataCom.web, "footer":dataCom.footer]
+        
+        return dic
+        
+    }
     
     
     //MARK: Configurations

@@ -8,7 +8,7 @@
 
 import SQLite
 
-class ClientModel {
+@objc class ClientModel:NSObject {
     
     func insertClient(client:ClientSelection) -> Bool {
         
@@ -17,7 +17,6 @@ class ClientModel {
         
         
         if((db) != nil){
-            
             
             let userDef = UserDefaultModel()
             
@@ -49,6 +48,22 @@ class ClientModel {
         return true
     }
     
+    
+     //MARK: Objective-C Function
+    func getClientObj(clientId: String) -> [String:String] {
+     
+       let client =  getClient(clientId)
+       
+        let data: [String:String] = ["name": client.name,
+                                     "email": client.email,
+                                     "address": client.address,
+                                     "phone": client.phone,
+                                     "city": client.city,
+                                     "cellphone": client.cellPhone,
+                                     "taxId": client.taxId]
+        
+        return data
+    }
     
     
      func getClient(clientIdIn: String)-> ClientSelection {

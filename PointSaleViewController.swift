@@ -216,6 +216,10 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
             toPayment.pointSaleData = pointSale
         }
         
+        if segue.identifier == "OrderPrint" {
+            print("test")
+        }
+        
         
         
     }
@@ -255,6 +259,8 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         pointSale = pointData
         OrderModel().insertOrder(pointSale)
         cleanView()
+        
+        performSegueWithIdentifier("OrderPrint", sender: nil)
         
     }
     
@@ -306,7 +312,6 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
             performSegueWithIdentifier("Payment", sender: nil)
         }
         
-        print(clientSelected.name)
         
     }
     

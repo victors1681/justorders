@@ -137,8 +137,9 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
         let taxId = companyTaxId.text!
         let email = companyEmail.text!
         let web = companyWeb.text!
+        let footer = footerPrint.text!
         
-        let data = CompanyData(name: name, phone: phone, address: address, city: city, region: region, taxId: taxId, email: email, web: web)
+        let data = CompanyData(name: name, phone: phone, address: address, city: city, region: region, taxId: taxId, email: email, web: web, footer: footer)
         
         UserDefaultModel().setCompany(data)
         
@@ -214,6 +215,7 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
         companyTaxId.text = data.taxId
         companyEmail.text = data.email
         companyWeb.text = data.web
+        footerPrint.text = data.footer
         
     }
     

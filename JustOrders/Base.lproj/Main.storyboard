@@ -25,7 +25,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfN-8n-jWy" userLabel="BackgroundButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                             </button>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjC-tC-U5l">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjC-tC-U5l" customClass="SpringView" customModule="JustOrders" customModuleProvider="target">
                                                 <rect key="frame" x="293" y="182" width="490" height="316"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Poa-fq-isl">
@@ -114,6 +114,10 @@
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="SlideUp"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ouh-Mr-QK3" customClass="SpringButton" customModule="JustOrders" customModuleProvider="target">
                                                 <rect key="frame" x="696" y="456" width="84" height="79"/>
@@ -125,6 +129,7 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="delay">
                                                         <real key="value" value="0.10000000000000001"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="doneButtonAction:" destination="qk6-ba-PDC" eventType="touchUpInside" id="MR5-I1-7xE"/>
@@ -481,7 +486,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label Label Label Label Label Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3CZ-bo-E0f">
                                                             <rect key="frame" x="8" y="98" width="115" height="36"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -572,6 +577,7 @@
                         <segue destination="l4d-kO-mgO" kind="presentation" identifier="Payment" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="wBQ-p6-csB"/>
                         <segue destination="qj4-hL-rNT" kind="presentation" identifier="AlertView" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Pzt-Pk-Rti"/>
                         <segue destination="qk6-ba-PDC" kind="presentation" identifier="PriceQuantityEdit" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="MkX-IH-pvN"/>
+                        <segue destination="H7G-ys-EBB" kind="presentation" identifier="OrderPrint" modalPresentationStyle="overCurrentContext" id="MQb-FE-eRQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -628,7 +634,7 @@
                                                         <color key="backgroundColor" red="0.48152422900000003" green="0.69784212109999999" blue="0.9264515042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </view>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nombre" minimumFontSize="17" background="FieldBack" translatesAutoresizingMaskIntoConstraints="NO" id="zng-0A-agx" customClass="DesignableTextField" customModule="JustOrders" customModuleProvider="target">
-                                                        <rect key="frame" x="20" y="102" width="247" height="30"/>
+                                                        <rect key="frame" x="20" y="97" width="247" height="30"/>
                                                         <color key="textColor" red="0.55101895329999995" green="0.57911187409999998" blue="0.62321627140000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -650,7 +656,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" background="FieldBack" translatesAutoresizingMaskIntoConstraints="NO" id="3s0-2Q-yGx" customClass="DesignableTextField" customModule="JustOrders" customModuleProvider="target">
-                                                        <rect key="frame" x="21" y="182" width="247" height="30"/>
+                                                        <rect key="frame" x="21" y="187" width="247" height="30"/>
                                                         <color key="textColor" red="0.55101895329999995" green="0.57911187409999998" blue="0.62321627140000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
@@ -749,6 +755,7 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="delay">
                                                                         <real key="value" value="0.10000000000000001"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="clientOption:" destination="wgT-c2-I2C" eventType="touchUpInside" id="EDQ-c3-yxw"/>
@@ -794,6 +801,7 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="delay">
                                                 <real key="value" value="0.10000000000000001"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="doneAction:" destination="wgT-c2-I2C" eventType="touchUpInside" id="d88-ng-YEU"/>
@@ -1240,7 +1248,7 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Alguna observación?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6y-MU-fYT">
-                                                        <rect key="frame" x="15" y="44" width="358" height="30"/>
+                                                        <rect key="frame" x="15" y="44" width="273" height="49"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
@@ -1248,25 +1256,28 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enviar Orden a:" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ezO-tg-l3j" customClass="DesignableTextField" customModule="JustOrders" customModuleProvider="target">
-                                                        <rect key="frame" x="299" y="15" width="231" height="29"/>
+                                                        <rect key="frame" x="303" y="8" width="239" height="77"/>
                                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.26019230769230767" colorSpace="calibratedRGB"/>
                                                         <color key="textColor" red="0.98398476839065552" green="0.99217706918716431" blue="0.99621230363845825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" red="0.98398476839065552" green="0.99217706918716431" blue="0.99621230363845825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="value" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                 <real key="value" value="1"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="10"/>
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                                <color key="value" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9QZ-iQ-X47">
-                                                        <rect key="frame" x="321" y="14" width="181" height="30"/>
+                                                        <rect key="frame" x="315" y="15" width="181" height="30"/>
                                                         <connections>
                                                             <action selector="chooseSendMethodAction:" destination="l4d-kO-mgO" eventType="touchUpInside" id="QBI-Uw-OdS"/>
                                                         </connections>
@@ -1408,8 +1419,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideUp"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="delay">
-                                                <real key="value" value="0.10000000000000001"/>
+                                                <real key="value" value="0.20000000000000001"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="cashPaymentAction:" destination="l4d-kO-mgO" eventType="touchUpInside" id="cjt-fY-3C4"/>
@@ -1427,6 +1439,7 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="delay">
                                                 <real key="value" value="0.10000000000000001"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="creditCarPaymentAction:" destination="l4d-kO-mgO" eventType="touchUpInside" id="acR-Er-koV"/>
@@ -1499,7 +1512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izO-YM-X66" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2864" y="295"/>
+            <point key="canvasLocation" x="2868" y="263"/>
         </scene>
         <!--Storyboard Reference-->
         <scene sceneID="wW3-E3-AHL">
@@ -2882,6 +2895,16 @@
                                                     <action selector="productSync:" destination="2EN-hk-yCW" eventType="touchUpInside" id="IMO-ZM-5jE"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQU-Ub-yWA">
+                                                <rect key="frame" x="0.0" y="298" width="300" height="55"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="WwY-KN-nB9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                                                <state key="normal" title="TEST">
+                                                    <color key="titleColor" red="0.3781892657" green="0.64579451080000005" blue="0.87901562450000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -2962,6 +2985,218 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jJT-pG-Kx1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4044.5" y="-128"/>
+        </scene>
+        <!--Zebra Print View Controller-->
+        <scene sceneID="dMN-mQ-nFi">
+            <objects>
+                <viewController id="H7G-ys-EBB" customClass="ZebraPrintViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7jr-kO-FeH"/>
+                        <viewControllerLayoutGuide type="bottom" id="aJY-Wh-iHO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XIr-5z-bB2">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEk-Cf-l5M">
+                                <rect key="frame" x="207" y="163" width="609" height="442"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lfd-hF-UyZ">
+                                        <rect key="frame" x="43" y="238" width="530" height="121"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <string key="text">Es necesario que espere que la impresora conecte o puede realizar la conexión manualmente vía Bluetooth.                                                    </string>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JG4-Q8-p7c">
+                                        <rect key="frame" x="43" y="302" width="519" height="89"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <string key="text">Para conectar la impresora dirijase a "Configuraciones del teléfono" --&gt; Bluetooth --&gt; Elija la impresora modelo XX, Recuerde encenderla. El led indicador de la impresora marcará Azul cuando esté conectada.</string>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Asistente de Impresión" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tgp-Gn-pN5">
+                                        <rect key="frame" x="157" y="189" width="302" height="21"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LeG-H5-Rzr" customClass="DesignableButton" customModule="JustOrders" customModuleProvider="target">
+                                        <rect key="frame" x="433" y="402" width="166" height="30"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                        <state key="normal" title="Configurar Impresora">
+                                            <color key="titleColor" red="0.077964626252651215" green="0.58780306577682495" blue="0.74748736619949341" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.077964626252651215" green="0.58780306577682495" blue="0.74748736619949341" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="chooseBluetoothButtonPressed:" destination="H7G-ys-EBB" eventType="touchUpInside" id="0iK-EN-kUL"/>
+                                            <segue destination="QQJ-YS-LYh" kind="show" id="3lh-WT-5or"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nombre de la Impresora:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq5-Fu-nO9">
+                                        <rect key="frame" x="11" y="407" width="181" height="21"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nombre de la Impresora" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfL-hV-hCn">
+                                        <rect key="frame" x="193" y="407" width="191" height="21"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status : No Conectado" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jT-KF-qTu">
+                                        <rect key="frame" x="0.0" y="120" width="609" height="56"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCa-4F-5Yl">
+                                        <rect key="frame" x="0.0" y="221" width="609" height="1"/>
+                                        <color key="backgroundColor" red="0.86907693610000003" green="0.86907693610000003" blue="0.86907693610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6P-9P-1uF">
+                                        <rect key="frame" x="0.0" y="221" width="609" height="1"/>
+                                        <color key="backgroundColor" red="0.86907693610000003" green="0.86907693610000003" blue="0.86907693610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4z-ZZ-JZb">
+                                        <rect key="frame" x="0.0" y="171" width="609" height="1"/>
+                                        <color key="backgroundColor" red="0.86907693610000003" green="0.86907693610000003" blue="0.86907693610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Op7-Oo-OuI" customClass="DesignableButton" customModule="JustOrders" customModuleProvider="target">
+                                        <rect key="frame" x="83" y="50" width="451" height="55"/>
+                                        <color key="backgroundColor" red="0.45045042037963867" green="0.75607627630233765" blue="0.30384600162506104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="18"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="IMPRIMIR">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.32941176470588235" green="0.67843137254901964" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="imprimirDocumento:" destination="H7G-ys-EBB" eventType="touchUpInside" id="Mxk-bE-sJr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLl-Rt-84X">
+                                        <rect key="frame" x="551" y="8" width="50" height="40"/>
+                                        <state key="normal" image="CloseButton"/>
+                                        <connections>
+                                            <action selector="close:" destination="H7G-ys-EBB" eventType="touchUpInside" id="8Qe-9T-aGw"/>
+                                            <action selector="closeView:" destination="l4d-kO-mgO" eventType="touchUpInside" id="CyE-js-EoS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="442" id="HeI-bu-Rls"/>
+                                    <constraint firstAttribute="width" constant="609" id="Yp7-Qg-5zp"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaI-4f-RNw" userLabel="BackgroundButton">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.17211538461538461" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="close:" destination="H7G-ys-EBB" eventType="touchUpInside" id="uor-pz-Yoi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HaI-4f-RNw" firstAttribute="leading" secondItem="XIr-5z-bB2" secondAttribute="leading" id="3bd-d3-oWg"/>
+                            <constraint firstItem="yEk-Cf-l5M" firstAttribute="centerX" secondItem="XIr-5z-bB2" secondAttribute="centerX" id="7AX-Jn-6qW"/>
+                            <constraint firstItem="yEk-Cf-l5M" firstAttribute="centerY" secondItem="XIr-5z-bB2" secondAttribute="centerY" id="Cf7-pL-obk"/>
+                            <constraint firstItem="aJY-Wh-iHO" firstAttribute="top" secondItem="HaI-4f-RNw" secondAttribute="bottom" id="S37-Ce-a15"/>
+                            <constraint firstItem="HaI-4f-RNw" firstAttribute="top" secondItem="XIr-5z-bB2" secondAttribute="top" id="ZSf-bm-Dc5"/>
+                            <constraint firstAttribute="trailing" secondItem="HaI-4f-RNw" secondAttribute="trailing" id="vHJ-L0-MQo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="NiB-QJ-K6d"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="bluetoothButton" destination="LeG-H5-Rzr" id="f1c-IL-Daz"/>
+                        <outlet property="bluetoothPrinterLabel" destination="xfL-hV-hCn" id="lcR-eM-XtC"/>
+                        <outlet property="imprimirButton" destination="Op7-Oo-OuI" id="8o3-8p-G7X"/>
+                        <outlet property="statusLabel" destination="9jT-KF-qTu" id="feG-uu-Rj5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jBd-yc-FmZ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3979" y="898"/>
+        </scene>
+        <!--Bluetooth Printer View Controller-->
+        <scene sceneID="sNj-d2-3NF">
+            <objects>
+                <tableViewController id="J42-zc-Mj6" customClass="BluetoothPrinterViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="O3e-cN-0pX">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="55" id="MTn-jO-Dqm">
+                                <rect key="frame" x="0.0" y="86" width="1024" height="55"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MTn-jO-Dqm" id="TSs-hw-xdK">
+                                    <rect key="frame" x="0.0" y="0.0" width="810" height="54.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="XMt-Kt-sgS" kind="unwind" unwindAction="unwindBlue:" id="N1s-Ke-aKY"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="J42-zc-Mj6" id="oM3-vy-dzk"/>
+                            <outlet property="delegate" destination="J42-zc-Mj6" id="M2l-5O-09H"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="IVe-Gl-Cqg"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y2L-L5-MS0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XMt-Kt-sgS" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="6563" y="911"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FdN-mC-qWg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QQJ-YS-LYh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RA2-EQ-Y1G">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="J42-zc-Mj6" kind="relationship" relationship="rootViewController" id="jz9-Me-4vj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tmA-kg-gIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5327" y="911"/>
         </scene>
     </scenes>
     <resources>

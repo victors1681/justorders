@@ -7,8 +7,9 @@
 //
 
 import SQLite 
+import UIKit
 
-class OrderModel {
+@objc class OrderModel:NSObject {
 
     enum FindOrderBy {
         case Id
@@ -17,6 +18,7 @@ class OrderModel {
         case NoSync
         case Client
         case Date
+        case LastOrder
     }
     
     
@@ -51,7 +53,7 @@ class OrderModel {
             
             do{
                 
-                try db!.run("INSERT INTO Orders (orderId, clientId, newClient, terminalNo, totalOrder, totalTax, subTotal, amountPaid, amountChange, paymentMethod, totalDiscount, discountPercent, documentType, ncf, orderNote, username, sendTo, date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, date('now')) ", orderSec, clientId, newClient, terminalNo, totalOrder, totalTax, subTotal, amountPaid, amountChange, paymentMethod, totalDiscount, discountPercent, documentType, ncf, orderNote, userName, sendTo)
+                try db!.run("INSERT INTO Orders (orderId, clientId, newClient, terminalNo, totalOrder, totalTax, subTotal, amountPaid, amountChange, paymentMethod, totalDiscount, discountPercent, documentType, ncf, orderNote, username, sendTo, date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, datetime('now')) ", orderSec, clientId, newClient, terminalNo, totalOrder, totalTax, subTotal, amountPaid, amountChange, paymentMethod, totalDiscount, discountPercent, documentType, ncf, orderNote, userName, sendTo)
                 
                 //Insert Detailts
                 insertOrderDetail(order.selection, orderId: orderSec)
@@ -101,6 +103,77 @@ class OrderModel {
         }
         
         return detailQty
+        
+    }
+    
+    
+    //MARK: Objective-C Function
+    func getLastOrderObj() -> NSDictionary {
+      
+       let order =  getOrders(OrderModel.FindOrderBy.LastOrder)
+        
+        if order.count > 0 && order.indices.contains(0){
+            let current = order[0]
+            
+            let orderId: NSString = String(current.orderId)
+            let clientId: NSString = current.client.code
+            
+            let testDic:NSDictionary = ["test":"probando dictionary"]
+            
+            print(testDic["test"])
+            
+            let data:NSDictionary! = ["orderId": orderId,
+                                        "clientId": clientId,
+                                        "clientName": current.client.name,
+                                        "email": current.client.email,
+                                        "phone": current.client.phone,
+                                        "address": current.client.address,
+                                        "city": current.client.city,
+                                        "taxId": current.client.taxId,
+                                        "terminalNo": String(current.terminalNo),
+                                        "totalOrder": String(current.totalOrder),
+                                        "subTotal": String(current.subTotal),
+                                        "amountPaid": String(current.amountPaid),
+                                        "amountChange": String(current.amountPaid),
+                                        "paymentMethod":  current.paymentMethod.rawValue,
+                                        "totalDiscount": String(current.totalDiscount),
+                                        "discountPercent": String(current.discountPercent),
+                                        "documentType":  current.documentType.rawValue,
+                                        "ncf": current.ncf,
+                                        "orderNote": current.orderNote,
+                                        "userName": current.userName,
+                                        "date": current.date,
+                                        "sendTo": current.sendTo]
+            
+        print("client id : \(data["clientId"])")
+            
+        return data
+           
+        }
+        
+        return ["":""]
+        
+    }
+    
+    
+    func getOrderDetailObj(orderIdIn: Int) ->  NSMutableArray {
+        
+        let orderDetail = getOrderDetail(orderIdIn)
+        
+        let detailArray:NSMutableArray = NSMutableArray()
+        
+        for detail in orderDetail {
+            let data:[String:String] = ["code":detail.code,
+                                        "description": detail.description,
+                                        "unit": detail.unit,
+                                        "amountTax": String(detail.amountTax),
+                                        "quantity": String(detail.quantity),
+                                        "price": String(detail.price)]
+            
+            detailArray.addObject(data)
+        }
+        
+        return detailArray
         
     }
     
@@ -171,6 +244,10 @@ class OrderModel {
                 }
                 
                 break
+                
+            case .LastOrder:
+                    orderFilter = orders.order(orderId.desc).limit(5)
+                break
             default: //All orders
                 
                 break
@@ -178,7 +255,6 @@ class OrderModel {
             }
             
             do{
-                
                 
                 for order in try db!.prepare(orderFilter) {
                     
