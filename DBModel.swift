@@ -224,7 +224,6 @@ class DBModel {
         let numReg = Expression<Int64>("numReg")
         let orderId = Expression<Int64>("orderId")
         let terminalNo  = Expression<Int64>("terminalNo")
-        
         let code = Expression<String>("code")
         let description = Expression<String>("description")
         let unit = Expression<String>("unit")

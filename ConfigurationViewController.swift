@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
+class ConfigurationViewController:UIViewController, CustomAlertViewDelegate, UITextViewDelegate {
     
     @IBOutlet weak var serverUrl: UITextField!
     @IBOutlet weak var port: UITextField!
@@ -19,7 +19,6 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
     @IBOutlet weak var localPassword: UITextField!
     @IBOutlet weak var terminalNumber: UITextField!
     @IBOutlet weak var token: UITextView!
-    
     
     //Company
     @IBOutlet weak var companyName: UITextField!
@@ -42,9 +41,9 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
     @IBOutlet weak var clientSecuences: UITextField!
     @IBOutlet weak var lastOrderSec: UILabel!
     
-    
     //Printer
     
+    @IBOutlet weak var printerName: UIButton!
     @IBOutlet weak var footerPrint: UITextView!
     
     
@@ -67,8 +66,6 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
         UserDefaultModel().setClientSec(clientSec)
         
     }
-    
-    
     
     @IBAction func refreshTokenAction(sender: AnyObject) {
        
@@ -93,15 +90,12 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
             default:
                 //Sucess
                 self.view.showCustomeAlert(AlertViewType.information, title: "Exito!", message: "Conexión exitosa, se ha actualizado el tocken")
-                
-               self.token.text = data.token
-                
+                self.token.text = data.token
                 break
             }
             
         }
         
-    
     }
     
     @IBAction func userAndServer(sender: AnyObject) {
@@ -116,7 +110,7 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
         let server = serverUrl.text!
         let serverPort = port.text!
         
-        guard let localpass:String = localPassword.text! where validateLongField(4, field: localPassword) else{
+        guard let localpass:String = localPassword.text! where validateLongField(4, field: localPassword) else {
             return
         }
         
@@ -125,7 +119,6 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
        userDefault.addDataUser(data)
         
     }
-    
     
     @IBAction func companyAction(sender: AnyObject) {
         
@@ -164,7 +157,6 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
         let serviceData = ServicesData()
         
         do{
-            
         
       try serviceData.getDataStores { (qty) in
             
@@ -182,10 +174,12 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
         
     }
     
+    
+    
+    
     func alertBack(controller:CustomAlertView, acction:Bool){
     
     }
-    
     
     //MARK: Load content
     
@@ -219,13 +213,20 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
         
     }
     
-    
     func loadConfiguration() {
         let data = UserDefaultModel().getConfiguration()
         
         discountSW.setOn(data.discount, animated: true)
         changePriceSW.setOn(data.changePrice, animated: true)
         sendModeSW.setOn(data.discount, animated: true)
+        
+        let userDefaultObjc:UserDefault = UserDefault()
+        
+        let printNameUD = userDefaultObjc.getZebraImpresora()
+        
+        printerName.setTitle(printNameUD, forState: .Normal)
+        
+        
     }
     
     func loadAdministrator(){
@@ -262,7 +263,6 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         loadUserAndServer()
         loadCompany()
         loadConfiguration()
@@ -276,4 +276,12 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
+    
+    //MARK: UITextView
+    func textViewDidEndEditing(textView: UITextView) {
+        
+        companyAction(self)
+        
+    }
+    
 }

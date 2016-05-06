@@ -281,8 +281,11 @@ class PaymentViewController: UIViewController {
             
             print("Total:\(totalOrder)\n Subtotal:\(subTotal) \n AmountRecibe: \(amountPaid)\n Change: \(amountChange)\n Discount: \(totalDiscount) \n DiscountPercent\(discountPercent)")
             
-            delegate?.billPaid(self, pointData: pointSaleData!)
-            dismissViewControllerAnimated(true, completion: nil)
+            
+            dismissViewControllerAnimated(true, completion: { 
+                self.delegate?.billPaid(self, pointData: self.pointSaleData!)
+            })
+            
             
         }else{
             paymentView.animation = "shake"

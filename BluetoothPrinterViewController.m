@@ -86,9 +86,7 @@
 {
     EAAccessory *accessory = [self.bluetoothPrinters objectAtIndex:indexPath.row];
 
-    //MARK: IMPORTAN!
     UserDefault *config = [[UserDefault alloc]init];
-    
     [config setZebraImpresora:accessory.serialNumber];
 }
 

@@ -134,7 +134,7 @@ import UIKit
                                         "totalOrder": String(current.totalOrder),
                                         "subTotal": String(current.subTotal),
                                         "amountPaid": String(current.amountPaid),
-                                        "amountChange": String(current.amountPaid),
+                                        "amountChange": String(current.amountChange),
                                         "paymentMethod":  current.paymentMethod.rawValue,
                                         "totalDiscount": String(current.totalDiscount),
                                         "discountPercent": String(current.discountPercent),

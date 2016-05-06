@@ -117,6 +117,7 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        definesPresentationContext = true
         
         randomImg = [
                      "http://topinspired.com/wp-content/uploads/2013/08/healthy-food-recipes-for-kids_01.jpg",
@@ -204,16 +205,14 @@ class PointSaleViewController: UIViewController, PriceQuantityViewControllerDele
         
         if segue.identifier == "Payment" {
             
-            
             let toPayment = segue.destinationViewController as! PaymentViewController
             toPayment.delegate = self
-            
             toPayment.totalOrder = pointSale.totalOrder
             toPayment.totalTax = pointSale.totalTax
             toPayment.subTotal = pointSale.subTotal
             toPayment.clientName = pointSale.client.name
-            
             toPayment.pointSaleData = pointSale
+            
         }
         
         if segue.identifier == "OrderPrint" {
@@ -397,7 +396,7 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
         
         let range = UInt32(randomImg.count)
         let ranNum =  Int(arc4random_uniform(range))
-        cell.url = (randomImg[ranNum])  //"http:/)/cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
+       // cell.url = (randomImg[ranNum])  //"http:/)/cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
        // cell.selectedView.hidden = true
       //  cell.selectedView.alpha = 0
        // cell.checked.hidden = true
@@ -456,7 +455,7 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
         cell.quantity.text = "\(qty.FormatNumberNumberVS)"
         cell.subTotal.text = "\(subTotal.FormatNumberCurrencyVS)"
         
-        cell.url = "http://www.perfectspice.com/image/data/recipe/Spicy%20Ribs.jpg";
+       // cell.url = "http://www.perfectspice.com/image/data/recipe/Spicy%20Ribs.jpg";
         
         return cell
         

@@ -107,23 +107,9 @@
     
  
  
-    
-    /*Clientes *datosCliente = [[Clientes alloc]init];
-    NSMutableArray *datosClienteArray = [datosCliente DataDB:currenPedido.pCliente nombre:@"" andCiudad:@"" andActivos:@"" ];
-    
-    Clientes *currenCliente = [datosClienteArray objectAtIndex:0];
-    */
-    
-    //---------------Detalle pedido-----------
-    
-    
- //PedidoDetalle *datosPedidoDetalle = [[PedidoDetalle alloc]init];
- ///   NSMutableArray *datosDetalleArray = [datosPedidoDetalle getDetallePedidos:@"" id_Pedido:currenPedido.pIDPedido];
-    
-    
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm a"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    //NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     
     //Clean Buffer
    // [[printer getToolsUtil] reset:&error];
@@ -133,25 +119,31 @@
                        
                        @"^XA^POI^PW828^MNN^LL220^LH0,0" \
                         //Nombre de la Empresa
-                        @"^FO5,50" \
-                        @"^A0,N,25,22" \
-                        @"^FD%@^FS" \
+                      //  @"^FO5,50" \
+                      //  @"^A0,N,25,22" \
+                      //  @"^FD%@^FS" \
+                       
+                       @"^FO5,50" \
+                       @"^ADN,36,20" \
+                       @"^FD%@^FS" \
+                       
                        //Status - Original O Reimpresión
                        @"^FO390,50" \
-                       @"^A0,N,25,22" \
+                       @"^A0N,25,22" \
                        @"^FD%@^FS" \
                        
                         //DIRECCION
-                        @"^FO5,80" \
-                        @"^A0,N,16,14" \
+                        @"^FO5,85" \
+                        @"^A0N,24,21" \
                         @"^FD%@^FS" \
                         //CIUDAD
                         @"^FO5,110" \
-                        @"^A0,16,14" \
+                        @"^A0N,24,21" \
                         @"^FD%@^FS" \
+                       
                        //TELEFONO HEADER
                        @"^FO5,140" \
-                       @"^A0,19,15" \
+                       @"^A0N,19,15" \
                        @"^FDTEL.:^FS" \
                        //TELEFONO
                        @"^FO60,140" \
@@ -293,7 +285,7 @@
                         
                                @"^FO120,10" \
                                @"^A0,21,17" \
-                               @"^FDMEDIDA ^FS" \
+                               @"^FDTIPO ^FS" \
                                
                                @"^FO270,10" \
                                @"^A0,21,17" \
@@ -350,8 +342,8 @@
         @"^ACN" \
         @"^FD%@^FS" \
         
-        //MEDIDA
-        @"^FO125,30"\
+        //TIPO
+        @"^FO120,30"\
         @"^ACN" \
         @"^FD%@^FS" \
         
@@ -406,7 +398,13 @@
     
     
     
-    float totalGeneral = total + itbis;
+    float totalGeneral = (total - [discountPercent floatValue]) + itbis;
+    float pendiente = totalGeneral - [amountPaid floatValue];
+    
+    if(pendiente < 0) {
+        pendiente = 0.0;
+    }
+    
     NSString *totales ;
                          
         totales = [NSString stringWithFormat:
@@ -437,12 +435,12 @@
                    
                    @"^FO400,60" \
                    @"^ACN" \
-                   @"^FD$0.00^FS" \
+                   @"^FD$%@^FS" \
                    
                    //ITBIS
                    @"^FO270,80" \
                    @"^ACN" \
-                   @"^FDITEBIS: ^FS" \
+                   @"^FDITBIS: ^FS" \
                    
                    @"^FO400,80" \
                    @"^ACN" \
@@ -466,37 +464,48 @@
                    @"^ACN" \
                    @"^FD$%@ ^FS" \
                    
-                   //Balance Pendiente
+                   //Change
                    @"^FO270,140" \
                    @"^ACN" \
-                   @"^FDPENDIENTE: ^FS" \
+                   @"^FDCAMBIO: ^FS" \
                    
                    @"^FO400,140" \
                    @"^ACN" \
                    @"^FD$%@ ^FS" \
                    
+                   //Balance Pendiente
+                   @"^FO270,160" \
+                   @"^ACN" \
+                   @"^FDPENDIENTE: ^FS" \
+                   
+                   @"^FO400,160" \
+                   @"^ACN" \
+                   @"^FD$%@ ^FS" \
+                   
                    
                    //DIVISION
-                   @"^FO150,170" \
+                   @"^FO150,190" \
                    @"^A0,22,17" \
                    @"^FD******FIN DEL PEDIDO****** ^FS"\
                    
                    
                    //DIVISION
-                   @"^FO150,200" \
+                   @"^FO30,210" \
                    @"^ACN" \
                    @"^FDPara recoger en: ^FS"\
                    
-                   @"^FO270,200" \
-                   @"^ACN" \
+                   @"^FO220,210" \
+                   @"^A0N,24,21" \
                    @"^FD%@^FS^XZ",
                    
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",articulos]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",total]],
+                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[totalDiscount floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",itbis]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",totalGeneral]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[amountPaid floatValue]]],
-                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",totalGeneral - [amountPaid floatValue]]],
+                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[amountChange floatValue]]],
+                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f", pendiente]],
                    sendTo
                    ];
     
@@ -511,9 +520,14 @@
                         //@"^XA^POI^LL460" \
                         //@"^XA^POI^LL460^CI28"
                         
+                        //Pie de Recibo
+                        @"^FO015,10" \
+                        @"^A0,24,20" \
+                        @"^FB480,4,,j"\
+                        @"^FD%@^FS" \
                         
-                         //Nota
-                         @"^FO015,30" \
+                         //Pie de Recibo
+                         @"^FO015,50" \
                          @"^A0,19,16" \
                          @"^FB480,4,,j"\
                          @"^FD%@^FS" \
@@ -556,7 +570,7 @@
                         @"^A0,18,16" \
                         @"^FD^FS" \
 
-                        @"^XZ", datosEmpresa[@"footer"]];
+                        @"^XZ", orderNote, datosEmpresa[@"footer"]];
     
     
     
