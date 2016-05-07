@@ -13,7 +13,7 @@ protocol PointSaleType {
     var selection: [InventorySelectionItem] { get set }
     
     var inventory : [ProductItems]{ get }
-    var paymentMethod: PaymentMethod { get }
+    var paymentMethod: PaymentMethod { get set }
     
     var orderId: Int { get set }
     var totalOrder: Double { get set}

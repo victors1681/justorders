@@ -34,6 +34,8 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate, UIT
     @IBOutlet weak var discountSW: UISwitch!
     @IBOutlet weak var changePriceSW: UISwitch!
     @IBOutlet weak var sendModeSW: UISwitch!
+    @IBOutlet weak var maxDiscount: UITextField!
+    
     
     //Administrator
     @IBOutlet weak var administratorPassword: UITextField!
@@ -143,8 +145,9 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate, UIT
         let discount = discountSW.on
         let chagePrice = changePriceSW.on
         let sendMode = sendModeSW.on
+        let maxDis = maxDiscount.text!
         
-        let data = Configurations(discount: discount, changePrice: chagePrice, sendMode: sendMode)
+        let data = Configurations(discount: discount, changePrice: chagePrice, sendMode: sendMode, maxDiscount: maxDis)
         
         UserDefaultModel().setConfiguration(data)
         
@@ -219,6 +222,7 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate, UIT
         discountSW.setOn(data.discount, animated: true)
         changePriceSW.setOn(data.changePrice, animated: true)
         sendModeSW.setOn(data.discount, animated: true)
+        maxDiscount.text = data.maxDiscount
         
         let userDefaultObjc:UserDefault = UserDefault()
         

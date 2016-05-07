@@ -31,6 +31,7 @@
     NSString *terminalNo = @"";
     NSString *totalOrder = @"";
     NSString *subTotal = @"";
+    NSString *totalTax = @"";
     NSString *amountPaid = @"";
     NSString *amountChange = @"";
     NSString *paymentMethod = @"";
@@ -52,7 +53,7 @@
     NSString *phone = @"";
     NSString *city = @"";
     NSString *taxId = @"";
-    
+    int taxeable = 0;
     
     if (NoDocumento > 0) {
         //buscar un pedido especifico
@@ -78,9 +79,10 @@
         terminalNo = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"terminalNo"]];
         totalOrder = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"totalOrder"]];
         subTotal = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"subTotal"]];
+        totalTax = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"totalTax"]];
         amountPaid = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"amountPaid"]];
         amountChange = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"amountChange"]];
-        paymentMethod = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"paymentMethd"]];
+        paymentMethod = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"paymentMethod"]];
         totalDiscount = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"totalDiscount"]];
         discountPercent = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"discountPercent"]];
         documentType = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"documentType"]];
@@ -97,7 +99,7 @@
         phone = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"phone"]];
         city = [[NSString alloc] initWithFormat:@"%@", dataOrder[@"city"]];
         taxId =  [[NSString alloc] initWithFormat:@"%@", dataOrder[@"taxId"]];
-        
+        taxeable = [[[NSString alloc] initWithFormat:@"%@", dataOrder[@"taxeable"]] intValue];
         
         //Order Detail
         dataDetail = [orderObj  getOrderDetailObj:[dataOrder[@"orderId"] intValue]];
@@ -113,6 +115,12 @@
     
     //Clean Buffer
    // [[printer getToolsUtil] reset:&error];
+    
+   NSString *valorFiscal = @"";
+    
+    if (taxeable == 1) {
+        valorFiscal = @"CREDITO FISCAL";
+    }
     
    NSString *header = [NSString stringWithFormat:
                       //  @"^XA^POI^PW828^MNN^LL220^LH0^CI28,0" \
@@ -174,7 +182,7 @@
                        @"^GB820,1,1,B,0^FS^XZ",
                        
                        datosEmpresa[@"name"],
-                       @"",//status,
+                       valorFiscal,//status,
                        datosEmpresa[@"address"],
                        datosEmpresa[@"city"],
                        datosEmpresa[@"phone"],
@@ -265,7 +273,7 @@
                         @"^FO5,170" \
                         @"^GB820,1,1,B,0^FS^XZ",
                          orderId,
-                         @"", //currenPedido.pCondicionPago,
+                         paymentMethod, //currenPedido.pCondicionPago,
                          terminalNo, //currenPedido.pVendedor,
                          userName, //currenCliente.cVendedor,
                          phone,
@@ -315,7 +323,7 @@
         NSString *code = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"code"]];
         NSString *description = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"description"]];
         NSString *unit = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"unit"]];
-        NSString *amountTax = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"amountTax"]];
+        //NSString *amountTax = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"amountTax"]];
         NSString *quantity = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"quantity"]];
         NSString *price = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"price"]];
        
@@ -323,7 +331,7 @@
         //NSString *Nombre = currenDetalle.peDescripcion;
         float Cantidad = [quantity floatValue];
         float Precio = [price floatValue];
-        float Impuesto = [amountTax floatValue];
+       // float Impuesto = [amountTax floatValue];
         
         
         
@@ -363,7 +371,7 @@
         total +=subtotal;
         renglones ++;
         articulos += Cantidad;
-        itbis += Cantidad * Impuesto ;
+        //itbis += Cantidad * Impuesto ;
         
         
         //Eliminar espacios en blanco
@@ -408,7 +416,7 @@
     NSString *totales ;
                          
         totales = [NSString stringWithFormat:
-                   @"^XA^POI^LL240" \
+                   @"^XA^POI^LL270" \
                    
                    //RENGLONES
                    @"^FO270,20" \
@@ -490,19 +498,19 @@
                    
                    
                    //DIVISION
-                   @"^FO30,210" \
+                   @"^FO30,240" \
                    @"^ACN" \
                    @"^FDPara recoger en: ^FS"\
                    
-                   @"^FO220,210" \
-                   @"^A0N,24,21" \
+                   @"^FO225,235" \
+                   @"^A0N,30,26" \
                    @"^FD%@^FS^XZ",
                    
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",articulos]],
-                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",total]],
+                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[subTotal floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[totalDiscount floatValue]]],
-                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",itbis]],
-                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",totalGeneral]],
+                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[totalTax floatValue]]],
+                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[totalOrder floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[amountPaid floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[amountChange floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f", pendiente]],
@@ -515,19 +523,19 @@
    
     
     NSString *footer = [NSString stringWithFormat:
-                         @"^XA^POI^LL470" \
+                         @"^XA^POI^LL500" \
                         
                         //@"^XA^POI^LL460" \
                         //@"^XA^POI^LL460^CI28"
                         
                         //Pie de Recibo
-                        @"^FO015,10" \
+                        @"^FO015,40" \
                         @"^A0,24,20" \
                         @"^FB480,4,,j"\
                         @"^FD%@^FS" \
                         
                          //Pie de Recibo
-                         @"^FO015,50" \
+                         @"^FO015,110" \
                          @"^A0,19,16" \
                          @"^FB480,4,,j"\
                          @"^FD%@^FS" \

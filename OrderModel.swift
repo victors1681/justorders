@@ -122,7 +122,15 @@ import UIKit
             
             print(testDic["test"])
             
-            let data:NSDictionary! = ["orderId": orderId,
+            var taxeableStr = "0"
+            if current.client.taxeable {
+                taxeableStr = "1"
+            }
+            
+            let totalTax = String(current.totalTax)
+            
+            
+            let data:NSDictionary! = ["orderId":orderId,
                                         "clientId": clientId,
                                         "clientName": current.client.name,
                                         "email": current.client.email,
@@ -133,6 +141,7 @@ import UIKit
                                         "terminalNo": String(current.terminalNo),
                                         "totalOrder": String(current.totalOrder),
                                         "subTotal": String(current.subTotal),
+                                        "totalTax": totalTax,
                                         "amountPaid": String(current.amountPaid),
                                         "amountChange": String(current.amountChange),
                                         "paymentMethod":  current.paymentMethod.rawValue,
@@ -143,7 +152,8 @@ import UIKit
                                         "orderNote": current.orderNote,
                                         "userName": current.userName,
                                         "date": current.date,
-                                        "sendTo": current.sendTo]
+                                        "sendTo": current.sendTo,
+                                        "taxeable": taxeableStr]
             
         print("client id : \(data["clientId"])")
             

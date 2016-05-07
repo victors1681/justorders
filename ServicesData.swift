@@ -213,12 +213,9 @@ class ServicesData:ServicesDataType {
         Alamofire.request(method!, longUrl, headers: header, parameters: parameter, encoding: .URL )
             .responseJSON { response in
                 
-                
-                
                 if let response = response.result.value {
                     //print(response.response) // URL response
                     //print(response.result)   // result of response serialization
-                    
                     responseData(JSON(response))
                 }else{
                     if response.response == nil {
@@ -231,3 +228,4 @@ class ServicesData:ServicesDataType {
     }
     
 }
+

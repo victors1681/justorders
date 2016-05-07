@@ -53,6 +53,12 @@ import SQLite
     func getClientObj(clientId: String) -> [String:String] {
      
        let client =  getClient(clientId)
+        
+        var taxeableStr = "0"
+        if client.taxeable {
+            taxeableStr = "1"
+        }
+        
        
         let data: [String:String] = ["name": client.name,
                                      "email": client.email,
@@ -60,7 +66,8 @@ import SQLite
                                      "phone": client.phone,
                                      "city": client.city,
                                      "cellphone": client.cellPhone,
-                                     "taxId": client.taxId]
+                                     "taxId": client.taxId,
+                                     "taxeable": taxeableStr]
         
         return data
     }

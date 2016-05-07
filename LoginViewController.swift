@@ -164,6 +164,9 @@ class LoginViewController: UIViewController {
                 //Update User Tocken
                 ser.getToken(userData.username, password: userData.password, completion: { (error) in
                     
+                    if error != ServicesDataError.NoError {
+                        self.view.showCustomeAlert(AlertViewType.error, title: "Error", message: "Error al optener el token")
+                    }
                 })
                 
                 performSegueWithIdentifier("home", sender: nil)

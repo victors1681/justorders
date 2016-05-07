@@ -2558,6 +2558,12 @@
                                                 <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Descuento Máximo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctu-34-Al8">
+                                                <rect key="frame" x="21" y="204" width="224" height="24"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                                <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9UV-VW-VdO">
                                                 <rect key="frame" x="273" y="163" width="51" height="31"/>
                                                 <color key="onTintColor" red="0.48152422900000003" green="0.69784212109999999" blue="0.9264515042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2565,6 +2571,15 @@
                                                     <action selector="configurationAction:" destination="GvV-gd-Pj1" eventType="valueChanged" id="z7P-Mh-rRM"/>
                                                 </connections>
                                             </switch>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="FieldBackgroundPlane" translatesAutoresizingMaskIntoConstraints="NO" id="pJq-xP-Wot">
+                                                <rect key="frame" x="261" y="200" width="73" height="30"/>
+                                                <color key="textColor" red="0.63562130930000005" green="0.6913286448" blue="0.77910763029999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="configurationAction:" destination="GvV-gd-Pj1" eventType="editingChanged" id="qDt-sz-W26"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
@@ -2770,6 +2785,7 @@
                         <outlet property="lastOrderSec" destination="IbI-2S-AfC" id="tvu-GZ-F7a"/>
                         <outlet property="localPassword" destination="n9I-Lh-OJ3" id="QoP-rt-Bm7"/>
                         <outlet property="localUser" destination="j1X-GJ-a3M" id="JoN-18-NNI"/>
+                        <outlet property="maxDiscount" destination="pJq-xP-Wot" id="8tP-b5-luy"/>
                         <outlet property="orderSecuences" destination="BTJ-pL-jXS" id="KDV-Qf-8C9"/>
                         <outlet property="passwordAPI" destination="jOI-qu-IDk" id="wca-2O-O25"/>
                         <outlet property="port" destination="6zi-pe-rPH" id="mHx-iL-Z9M"/>

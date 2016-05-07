@@ -38,6 +38,7 @@ struct Configurations {
     var discount: Bool
     var changePrice: Bool
     var sendMode: Bool
+    var maxDiscount: String
 }
 
 
@@ -226,11 +227,12 @@ struct Configurations {
         let discount = config.discount
         let changePrice = config.changePrice
         let sendMode = config.sendMode
-        
+        let maxDiscount = config.maxDiscount
         
          userDefault.setBool(discount, forKey: "discount")
          userDefault.setBool(changePrice, forKey: "changePrice")
          userDefault.setBool(sendMode, forKey: "sendMode")
+         userDefault.setValue(maxDiscount, forKey: "maxDiscount")
         
         userDefault.synchronize()
     }
@@ -241,8 +243,13 @@ struct Configurations {
         let discount = userDefault.boolForKey("discount")
         let changePrice = userDefault.boolForKey("changePrice")
         let sendMode = userDefault.boolForKey("sendMode")
+        var maxDiscount:String = userDefault.stringForKey("maxDiscount") ?? ""
      
-        return Configurations(discount: discount, changePrice: changePrice, sendMode: sendMode)
+        if maxDiscount.isEmpty {
+            maxDiscount = "100"
+        }
+        
+        return Configurations(discount: discount, changePrice: changePrice, sendMode: sendMode, maxDiscount: maxDiscount)
     }
     
     

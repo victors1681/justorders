@@ -175,11 +175,11 @@ class PaymentViewController: UIViewController {
     
     @IBAction func cashPaymentAction(sender: AnyObject) {
         
-        payNow()
+        payNow(PaymentMethod.Cash)
     }
     
     @IBAction func creditCarPaymentAction(sender: AnyObject) {
-        payNow()
+        payNow(PaymentMethod.CreditCard)
     }
     
     
@@ -248,12 +248,14 @@ class PaymentViewController: UIViewController {
     //MARK: HELPERS
     
     
-    func payNow(){
+    func payNow(paymentMethod:PaymentMethod = PaymentMethod.NoPayment ){
         
         sendTo = sendToText.text!
         var validateSendTo = true
         
         let data = UserDefaultModel().getConfiguration()
+        let maxDiscountProperty = data.maxDiscount
+        
         if data.sendMode {
             //Choose Strore validation
             if sendTo.isEmpty {
@@ -263,7 +265,8 @@ class PaymentViewController: UIViewController {
             }
         }
         
-        if Double(String(amountArr)) > 0 && validateSendTo {
+        
+        if Double(String(amountArr)) > 0 && validateSendTo && Int(discountPercent) <= Int(maxDiscountProperty) {
             
             pointSaleData?.totalOrder = totalOrder
             pointSaleData?.subTotal = subTotal
@@ -274,6 +277,7 @@ class PaymentViewController: UIViewController {
             pointSaleData?.discountPercent = discountPercent
             pointSaleData?.orderNote = orderNote
             pointSaleData?.sendTo = sendTo
+            pointSaleData?.paymentMethod = paymentMethod
             
            
             
