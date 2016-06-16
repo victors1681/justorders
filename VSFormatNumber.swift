@@ -64,5 +64,29 @@ extension String {
         let newStr2 = newStr.stringByReplacingOccurrencesOfString(",", withString: "")
         return newStr2
     }
+    
+    func toDateTime() -> NSDate
+    {
+        //Create Date Formatter
+        let dateFormatter = NSDateFormatter()
+        
+        //Specify Format of String to Parse
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        
+        //Parse into NSDate
+        let dateFromString : NSDate = dateFormatter.dateFromString(self)!
+        
+        //Return Parsed Date
+        return dateFromString
+    }
+    
+
 }
 
+extension NSDate {
+    func dateStringWithFormat(format: String) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.stringFromDate(self)
+    }
+}

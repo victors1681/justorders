@@ -266,7 +266,7 @@ class InventoryModel {
          
             do{
           
-                for product in try db!.prepare(inventory) {
+                for product in try db!.prepare(inventory.order(description)) {
                 
                 let prices = Prices(price1: product[price1], price2: product[price2], price3: product[price3], price4: product[price4], price5: product[price5])
                 let freeCamp = FreeCamp(camp1: product[camp1], camp2: product[camp2], camp3: product[camp3], campNum1: product[campNum1], campNum2: product[campNum2], campNum3: product[campNum3])

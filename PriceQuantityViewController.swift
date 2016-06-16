@@ -123,7 +123,6 @@ class PriceQuantityViewController: UIViewController {
             priceText.text = result.pricePlusTax.FormatNumberCurrencyVS
             descriptionLabel.text = selectedItem?.description
             
-            
             updateTotal(self)
         }else{
             priceText.text = "0.0"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qbC-Sw-GID">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qbC-Sw-GID">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -190,6 +190,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M72-1X-8m3">
+                                <rect key="frame" x="-1" y="56" width="695" height="712"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="0.0" id="yRI-Cb-x2G">
+                                    <size key="itemSize" width="137" height="137"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="2" minY="2" maxX="8" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="NyU-xX-2bu" customClass="ItemsCollectionCell" customModule="JustOrders" customModuleProvider="target">
+                                        <rect key="frame" x="2" y="2" width="137" height="137"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="137" height="137"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4sn-wq-nBd">
+                                                    <rect key="frame" x="1" y="2" width="135" height="135"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="vqJ-ez-4Fe">
+                                                            <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$15" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKK-Ig-dS0">
+                                                            <rect key="frame" x="0.0" y="0.0" width="135" height="72"/>
+                                                            <color key="backgroundColor" red="0.094117647060000004" green="0.098039215690000001" blue="0.1137254902" alpha="0.35461538461538461" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                                                            <color key="textColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Mf-Gv-PtQ">
+                                                            <rect key="frame" x="0.0" y="69" width="137" height="66"/>
+                                                            <color key="backgroundColor" white="1" alpha="0.70417067307692305" colorSpace="calibratedWhite"/>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label Label Label Label Label Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3CZ-bo-E0f">
+                                                            <rect key="frame" x="8" y="74" width="115" height="60"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <size key="customSize" width="137" height="137"/>
+                                        <connections>
+                                            <outlet property="descriptionItem" destination="3CZ-bo-E0f" id="JXZ-j6-EmG"/>
+                                            <outlet property="imageView" destination="vqJ-ez-4Fe" id="FiD-gT-kRU"/>
+                                            <outlet property="price" destination="sKK-Ig-dS0" id="ste-N4-QFf"/>
+                                            <segue destination="qk6-ba-PDC" kind="presentation" identifier="PriceQuantity" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Ye6-8R-hPk"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="HaE-LY-0sn"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="P1q-A5-LQN"/>
+                                </connections>
+                            </collectionView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yUH-6R-5Rw" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
                                 <rect key="frame" x="694" y="0.0" width="330" height="768"/>
                                 <subviews>
@@ -456,58 +516,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M72-1X-8m3">
-                                <rect key="frame" x="-1" y="56" width="695" height="712"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="0.0" id="yRI-Cb-x2G">
-                                    <size key="itemSize" width="137" height="137"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="2" minY="2" maxX="8" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="NyU-xX-2bu" customClass="ItemsCollectionCell" customModule="JustOrders" customModuleProvider="target">
-                                        <rect key="frame" x="2" y="2" width="137" height="137"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="137" height="137"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4sn-wq-nBd">
-                                                    <rect key="frame" x="2" y="2" width="135" height="135"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="NoImage" translatesAutoresizingMaskIntoConstraints="NO" id="vqJ-ez-4Fe">
-                                                            <rect key="frame" x="0.0" y="0.0" width="135" height="135"/>
-                                                        </imageView>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Mf-Gv-PtQ">
-                                                            <rect key="frame" x="0.0" y="98" width="137" height="37"/>
-                                                            <color key="backgroundColor" white="1" alpha="0.70417067307692305" colorSpace="calibratedWhite"/>
-                                                        </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label Label Label Label Label Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3CZ-bo-E0f">
-                                                            <rect key="frame" x="8" y="98" width="115" height="36"/>
-                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <size key="customSize" width="137" height="137"/>
-                                        <connections>
-                                            <outlet property="descriptionItem" destination="3CZ-bo-E0f" id="JXZ-j6-EmG"/>
-                                            <outlet property="imageView" destination="vqJ-ez-4Fe" id="FiD-gT-kRU"/>
-                                            <segue destination="qk6-ba-PDC" kind="presentation" identifier="PriceQuantity" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Ye6-8R-hPk"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="HaE-LY-0sn"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="P1q-A5-LQN"/>
-                                </connections>
-                            </collectionView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lpx-br-8OB">
                                 <rect key="frame" x="0.0" y="719" width="694" height="49"/>
                                 <subviews>
@@ -1427,7 +1435,7 @@
                                             <action selector="cashPaymentAction:" destination="l4d-kO-mgO" eventType="touchUpInside" id="cjt-fY-3C4"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03J-nI-I2B" customClass="SpringButton" customModule="JustOrders" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03J-nI-I2B" customClass="SpringButton" customModule="JustOrders" customModuleProvider="target">
                                         <rect key="frame" x="138" y="550" width="188" height="60"/>
                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                         <inset key="contentEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2119,7 +2127,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="doneButton:" destination="qj4-hL-rNT" eventType="touchUpInside" id="kFm-Y3-J0I"/>
+                                            <action selector="doneButton:" destination="qj4-hL-rNT" eventType="touchUpInside" id="0Ws-Yv-FD8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="202-uO-IZx" customClass="SpringButton" customModule="JustOrders" customModuleProvider="target">
@@ -2136,7 +2144,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="doneButton:" destination="qj4-hL-rNT" eventType="touchUpInside" id="SK3-NR-ruC"/>
+                                            <action selector="doneButton:" destination="qj4-hL-rNT" eventType="touchUpInside" id="Mx2-QG-xK9"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2e-aR-S8v" customClass="SpringButton" customModule="JustOrders" customModuleProvider="target">
@@ -2512,7 +2520,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C58-Ak-mEj" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
-                                        <rect key="frame" x="405" y="9" width="342" height="245"/>
+                                        <rect key="frame" x="405" y="9" width="342" height="296"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CONFIGURACIONES VARIAS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1he-iM-31w">
                                                 <rect key="frame" x="20" y="10" width="224" height="24"/>
@@ -2608,7 +2616,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qyx-VW-QwP" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
-                                        <rect key="frame" x="405" y="264" width="342" height="195"/>
+                                        <rect key="frame" x="405" y="339" width="342" height="195"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="IMPRESORA &amp; RECIBOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufz-qk-aZK">
                                                 <rect key="frame" x="20" y="10" width="187" height="24"/>
@@ -2667,7 +2675,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BIH-WQ-urT" customClass="DesignableView" customModule="JustOrders" customModuleProvider="target">
-                                        <rect key="frame" x="757" y="9" width="258" height="186"/>
+                                        <rect key="frame" x="757" y="9" width="258" height="220"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ADMINISTRACION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvd-iU-Brm">
                                                 <rect key="frame" x="20" y="10" width="147" height="24"/>
@@ -2675,6 +2683,16 @@
                                                 <color key="textColor" red="0.48152422900000003" green="0.69784212109999999" blue="0.9264515042" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ukf-Bs-znn">
+                                                <rect key="frame" x="8" y="175" width="176" height="30"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                                <state key="normal" title="Eliminar tabla de Ordenes">
+                                                    <color key="titleColor" red="1" green="0.59282988309860229" blue="0.364296555519104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="deleteOrders:" destination="GvV-gd-Pj1" eventType="touchUpInside" id="bdo-wO-GXv"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
@@ -3073,7 +3091,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nombre de la Impresora:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq5-Fu-nO9">
                                         <rect key="frame" x="11" y="407" width="181" height="21"/>
                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nombre de la Impresora" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfL-hV-hCn">
@@ -3267,9 +3285,9 @@
         <image name="VerticalLineCalc" width="2" height="420"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4sd-Xr-g7I"/>
+        <segue reference="MQb-FE-eRQ"/>
         <segue reference="MkX-IH-pvN"/>
-        <segue reference="w7J-6o-6aP"/>
         <segue reference="ahl-3C-Iu8"/>
+        <segue reference="w7J-6o-6aP"/>
     </inferredMetricsTieBreakers>
 </document>

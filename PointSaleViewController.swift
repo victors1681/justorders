@@ -393,10 +393,10 @@ extension PointSaleViewController :  UICollectionViewDataSource, UICollectionVie
         }
         
         cell.descriptionItem.text = currentItem.description
-        
+        cell.price.text = (currentItem.prices.price1 * ((currentItem.tax / 100.00) + 1)).FormatNumberCurrencyVS
         let range = UInt32(randomImg.count)
         let ranNum =  Int(arc4random_uniform(range))
-       // cell.url = (randomImg[ranNum])  //"http:/)/cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
+        //cell.url = (randomImg[ranNum])  //"http:/)/cdn.kiwilimon.com/recetaimagen/262/1286.jpg"
        // cell.selectedView.hidden = true
       //  cell.selectedView.alpha = 0
        // cell.checked.hidden = true
@@ -446,16 +446,16 @@ extension PointSaleViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.sectionName.text = currenSelectedItem.description
         let price = currenSelectedItem.price
-        //let tax = currenSelectedItem.amountTax
+        let tax = currenSelectedItem.amountTax
         let qty = currenSelectedItem.quantity
-        let subTotal = price * qty
+        let subTotal = (price + tax) * qty
         
         
-        cell.price.text = "\(price.FormatNumberCurrencyVS)"
+        cell.price.text = "\((price + tax).FormatNumberCurrencyVS)"
         cell.quantity.text = "\(qty.FormatNumberNumberVS)"
         cell.subTotal.text = "\(subTotal.FormatNumberCurrencyVS)"
         
-       // cell.url = "http://www.perfectspice.com/image/data/recipe/Spicy%20Ribs.jpg";
+        //cell.url = "http://www.perfectspice.com/image/data/recipe/Spicy%20Ribs.jpg";
         
         return cell
         

@@ -176,7 +176,7 @@ class DBModel {
         let date  = Expression<String>("date")
         let sendTo  = Expression<String>("sendTo")
         let sync  = Expression<Bool>("sync")
-        let syncDate  = Expression<String>("syncDate")
+        let syncDate  = Expression<NSDate>("syncDate")
         
         do{
             
@@ -201,13 +201,32 @@ class DBModel {
                 t.column(date)
                 t.column(sendTo)
                 t.column(sync, defaultValue: false)
-                t.column(syncDate, defaultValue: "")
+                t.column(syncDate)
                 
                 })
             
         }catch {
             print("creation failed: \(error)")
         }
+    }
+    
+    func dropOrderTable() {
+        
+         let orders = Table("orders")
+         let orderDetail = Table("orderDetail")
+        
+          do{
+            try db.run(orders.drop())
+         }catch{
+         
+         }
+        
+        do{
+            try db.run(orderDetail.drop())
+        }catch{
+            
+        }
+ 
     }
 
     

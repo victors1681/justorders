@@ -13,6 +13,7 @@ class ItemsCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView : UIImageView!
     @IBOutlet weak var sectionName : UILabel!
+    @IBOutlet weak var price : UILabel!
     @IBOutlet weak var checked : SpringImageView!
     @IBOutlet weak var selectedView: SpringView!
     @IBOutlet weak var descriptionItem: UILabel!

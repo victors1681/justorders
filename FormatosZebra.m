@@ -104,6 +104,12 @@
         //Order Detail
         dataDetail = [orderObj  getOrderDetailObj:[dataOrder[@"orderId"] intValue]];
         
+        //Translating
+        if([paymentMethod isEqualToString:@"Cash"]){
+            paymentMethod = @"Efectivo";
+        }else{
+            paymentMethod = @"Tarjeta";
+        }
          
     }
     
@@ -111,7 +117,6 @@
  
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm a"];
-    //NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     
     //Clean Buffer
    // [[printer getToolsUtil] reset:&error];
@@ -135,10 +140,11 @@
                        @"^ADN,36,20" \
                        @"^FD%@^FS" \
                        
-                       //Status - Original O Reimpresión
+                       //Factura con valor fiscal Derecha
                        @"^FO390,50" \
                        @"^A0N,25,22" \
                        @"^FD%@^FS" \
+                       
                        
                         //DIRECCION
                         @"^FO5,85" \
@@ -192,86 +198,103 @@
    [[printer getToolsUtil] sendCommand:header error:&error];
     
     NSString *header2 = [NSString stringWithFormat:
-                        @"^XA^POI^LL190^CI28" \
+                        @"^XA^POI^LL230^CI28" \
+                         
+                         //TITULO
+                         @"^FO210,10" \
+                         @"^A0N,25,22" \
+                         @"^FD%s^FS" \
+                         
+                         
                         //NO PEDIDO
-                        @"^FO5,10" \
+                        @"^FO5,40" \
                         @"^A0,19,15" \
                         @"^FDNO.PEDIDO:^FS" \
                         
-                        @"^FO140,10" \
+                        @"^FO140,40" \
                         @"^A0,19,18" \
                         @"^FD%@^FS" \
                         
                         //CONDICION DE PAGO
-                        @"^FO5,30" \
+                        @"^FO5,60" \
                         @"^A0,19,15" \
                         @"^FDFORMA PAGO:^FS" \
                         
-                        @"^FO140,30" \
+                        @"^FO140,60" \
                         @"^A0,19,18" \
                         @"^FD%@^FS" \
                         
                         
                         //VENDEDOR
-                        @"^FO5,50" \
+                        @"^FO5,80" \
                         @"^A0,19,18" \
                         @"^FDVENDEDOR  :^FS" \
                         
-                        @"^FO140,50" \
+                        @"^FO140,80" \
                         @"^A0,19,18" \
                         @"^FD(%@) %@^FS" \
                          
                          
                          //TELEFONO
-                         @"^FO5,70" \
+                         @"^FO5,100" \
                          @"^A0,19,15" \
                          @"^FDTELEFONO  :^FS" \
                          
-                         @"^FO140,70" \
+                         @"^FO140,100" \
                          @"^A0,19,18" \
                          @"^FD%@^FS" \
                          
                          //NO.CUENTA
-                         @"^FO5,90" \
+                         @"^FO5,120" \
                          @"^A0,19,15" \
                          @"^FDNO. CUENTA :^FS" \
                          
-                         @"^FO140,90" \
+                         @"^FO140,120" \
                          @"^A0,19,18" \
                          @"^FD%@^FS" \
                          
                          //CLIENTE
-                         @"^FO5,110" \
+                         @"^FO5,140" \
                          @"^A0,19,15" \
                          @"^FDCLIENTE :^FS" \
                          
-                         @"^FO140,110" \
+                         @"^FO140,140" \
                          @"^A0,19,18" \
                          @"^FD%@^FS" \
                         
                          //DIRECCION
-                         @"^FO5,130" \
+                         @"^FO5,160" \
                          @"^A0,19,15" \
                          @"^FDDIRECCION :^FS" \
                          
-                         @"^FO140,130" \
+                         @"^FO140,160" \
+                         @"^A0,19,18" \
+                         @"^FD%@^FS" \
+                         
+                         //RNC CLIENTE
+                         @"^FO5,180" \
+                         @"^A0,19,15" \
+                         @"^FDRNC :^FS" \
+                         
+                         @"^FO140,180" \
                          @"^A0,19,18" \
                          @"^FD%@^FS" \
                          
                          
                          //FECHA
-                         @"^FO5,150" \
+                         @"^FO5,200" \
                          @"^A0,19,15" \
                          @"^FDFECHA :^FS" \
                          
-                         @"^FO140,150" \
+                         @"^FO140,200" \
                          @"^A0,19,18" \
                          @"^FD%@ ^FS" \
                          
                          
                         //DIVISION
-                        @"^FO5,170" \
+                        @"^FO5,220" \
                         @"^GB820,1,1,B,0^FS^XZ",
+                         "PEDIDO",
                          orderId,
                          paymentMethod, //currenPedido.pCondicionPago,
                          terminalNo, //currenPedido.pVendedor,
@@ -280,7 +303,8 @@
                          clientId,
                          clientName,
                          address,
-                        [conDB formatoFechaHora:date]];
+                         taxId,
+                        [conDB formatoFechaHoraCorto:date]];
     
     [[printer getToolsUtil] sendCommand:header2 error:&error];
     
@@ -309,12 +333,8 @@
     
     [[printer getToolsUtil] sendCommand:headerDetalle error:&error];
     
-    
-    float total = 0;
-    int renglones = 0;
     float articulos = 0.0;
-    float itbis = 0;
-    int count = 0;
+     int count = 0;
     
     for (int i = 0; i < dataDetail.count; i++) {
         
@@ -323,15 +343,15 @@
         NSString *code = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"code"]];
         NSString *description = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"description"]];
         NSString *unit = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"unit"]];
-        //NSString *amountTax = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"amountTax"]];
+        NSString *amountTax = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"amountTax"]];
         NSString *quantity = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"quantity"]];
         NSString *price = [[NSString alloc] initWithFormat:@"%@", currenDetalle[@"price"]];
        
         
         //NSString *Nombre = currenDetalle.peDescripcion;
         float Cantidad = [quantity floatValue];
-        float Precio = [price floatValue];
-       // float Impuesto = [amountTax floatValue];
+        float Precio = [price floatValue] + [amountTax floatValue];
+        //float Impuesto = [amountTax floatValue];
         
         
         
@@ -368,11 +388,10 @@
         @"^XZ";
         
         subtotal = Cantidad * Precio;
-        total +=subtotal;
-        renglones ++;
+       // total +=subtotal;
+       //renglones ++;
         articulos += Cantidad;
         //itbis += Cantidad * Impuesto ;
-        
         
         //Eliminar espacios en blanco
         NSString *codigo = [code stringByTrimmingCharactersInSet:
@@ -406,7 +425,7 @@
     
     
     
-    float totalGeneral = (total - [discountPercent floatValue]) + itbis;
+    float totalGeneral = ([subTotal floatValue] - [totalDiscount floatValue]) + [totalTax floatValue];
     float pendiente = totalGeneral - [amountPaid floatValue];
     
     if(pendiente < 0) {
@@ -510,7 +529,7 @@
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[subTotal floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[totalDiscount floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[totalTax floatValue]]],
-                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[totalOrder floatValue]]],
+                   [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[totalOrder floatValue] - [totalDiscount floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[amountPaid floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f",[amountChange floatValue]]],
                    [conDB formatoNumero:[NSString stringWithFormat:@"%0.2f", pendiente]],
@@ -518,8 +537,7 @@
                    ];
     
     
-     
-        [[printer getToolsUtil] sendCommand:totales error:&error];
+    [[printer getToolsUtil] sendCommand:totales error:&error];
    
     
     NSString *footer = [NSString stringWithFormat:

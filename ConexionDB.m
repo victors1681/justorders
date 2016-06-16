@@ -11,11 +11,21 @@
 
 @implementation ConexionDB
 
-
  
-
-
-
+-(NSString *)formatoFechaHoraCorto:(NSString *)FechaHora
+{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date = [dateFormatter dateFromString: FechaHora];
+    
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy hh:mm a"];
+    NSString *convertedString = [dateFormatter stringFromDate:date];
+    // NSLog(@"Converted String : %@",convertedString);
+    
+    return convertedString;
+}
 
 
 -(NSString *)formatoFechaHora:(NSString *)FechaHora

@@ -17,10 +17,9 @@
  -(NSString *)formatoNumero:(NSString *)Numero;
 -(NSString *)formatoFechaHora:(NSString *)FechaHora;
 -(NSString *)formatoFechaHoraEnglish:(NSString *)FechaHora;
--(NSString *)formatoFechaEnglish:(NSString *)Fecha;
--(NSString *)removerAcentos:(NSString *)string;
+-(NSString *)formatoFechaEnglish:(NSString *)Fecha; 
 
 -(NSString *)formatoFechaToSql:(NSString *)Fecha;
-
+-(NSString *)formatoFechaHoraCorto:(NSString *)FechaHora;
 
 @end

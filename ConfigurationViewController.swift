@@ -55,6 +55,20 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate, UIT
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func deleteOrders(sender: AnyObject) {
+        self.view.showCustomeAlert(AlertViewType.question, delegate: self , title: "Advertencia", message: "Seguro que desea eliminar todas las ordenes?", tag: 100)
+      
+    }
+    
+    
+    func alertBack(controller: CustomAlertView, acction: Bool, tag: Int) {
+        
+        //Delete Orders
+        if tag == 100 {
+              DBModel()?.dropOrderTable()
+        }
+    }
+    
     @IBAction func administratorPasswordAction(sender: AnyObject) {
         
         let admPwd = administratorPassword.text!
@@ -180,9 +194,7 @@ class ConfigurationViewController:UIViewController, CustomAlertViewDelegate, UIT
     
     
     
-    func alertBack(controller:CustomAlertView, acction:Bool){
     
-    }
     
     //MARK: Load content
     

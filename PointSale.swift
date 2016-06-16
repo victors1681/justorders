@@ -289,15 +289,16 @@ class PointSale: PointSaleType {
         
         for item in selection {
             
-            self.totalOrder += item.quantity * (item.price + item.amountTax)
-            self.totalTax += item.amountTax
+            self.totalOrder += (item.quantity * (item.price + item.amountTax))
+            self.totalTax += (item.quantity * item.amountTax)
+            
+            
+            print("\(item.quantity)  price:\(item.price) tax:\(item.amountTax)")
         }
         
         self.subTotal = totalOrder - totalTax
                 
     }
-    
-    
     
     func save(){
         

@@ -265,8 +265,14 @@ class PaymentViewController: UIViewController {
             }
         }
         
+        //Note Obligatoria
+        var noteBool = false
         
-        if Double(String(amountArr)) > 0 && validateSendTo && Int(discountPercent) <= Int(maxDiscountProperty) {
+        if !orderNote.isEmpty{
+            noteBool = true
+        }
+        
+        if Double(String(amountArr)) > 0 && validateSendTo && Int(discountPercent) <= Int(maxDiscountProperty) && noteBool {
             
             pointSaleData?.totalOrder = totalOrder
             pointSaleData?.subTotal = subTotal

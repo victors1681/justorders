@@ -51,9 +51,10 @@ import UIKit
             let sendTo:String = order.sendTo
             let userName:String = userDef.getDataUser().localUser ?? ""
             
+            let dateNow = NSDate().dateStringWithFormat("yyyy-MM-dd HH:mm:ss")
+            
             do{
-                
-                try db!.run("INSERT INTO Orders (orderId, clientId, newClient, terminalNo, totalOrder, totalTax, subTotal, amountPaid, amountChange, paymentMethod, totalDiscount, discountPercent, documentType, ncf, orderNote, username, sendTo, date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, datetime('now')) ", orderSec, clientId, newClient, terminalNo, totalOrder, totalTax, subTotal, amountPaid, amountChange, paymentMethod, totalDiscount, discountPercent, documentType, ncf, orderNote, userName, sendTo)
+                try db!.run("INSERT INTO Orders (orderId, clientId, newClient, terminalNo, totalOrder, totalTax, subTotal, amountPaid, amountChange, paymentMethod, totalDiscount, discountPercent, documentType, ncf, orderNote, username, sendTo, date, syncDate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, '0000-00-00 00:00:00') ", orderSec, clientId, newClient, terminalNo, totalOrder, totalTax, subTotal, amountPaid, amountChange, paymentMethod, totalDiscount, discountPercent, documentType, ncf, orderNote, userName, sendTo, dateNow)
                 
                 //Insert Detailts
                 insertOrderDetail(order.selection, orderId: orderSec)
@@ -264,11 +265,15 @@ import UIKit
                 
             }
             
+            
+            
             do{
                 
                 for order in try db!.prepare(orderFilter) {
                     
                     let orderObj = PointSale(inventory: products)
+                    
+                    let test = order[date]
                     
                     orderObj.orderId = order[orderId]
                     orderObj.terminalNo = order[terminalNo]

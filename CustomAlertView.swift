@@ -17,7 +17,7 @@ public enum AlertViewType {
 }
 
 public protocol  CustomAlertViewDelegate: class  {
-    func alertBack(controller:CustomAlertView, acction:Bool)
+    func alertBack(controller:CustomAlertView, acction:Bool, tag:Int)
 }
 
 public class CustomAlertView: UIView {
@@ -33,7 +33,7 @@ public class CustomAlertView: UIView {
     @IBOutlet weak var aceptarButtonRight: SpringButton!
     @IBOutlet weak var aceptarButtonCenter: SpringButton!
     @IBOutlet weak var topAlertTitle: UIView!
-    
+    internal var innerTag: Int = 0
     
     @IBAction func closeView(sender: AnyObject) {
         
@@ -44,19 +44,11 @@ public class CustomAlertView: UIView {
     @IBAction func doneButton(sender: AnyObject) {
         
         
-        delegate?.alertBack(self, acction: true)
+        delegate?.alertBack(self, acction: true, tag:innerTag )
         
-        switch alertViewType {
-            
-        case  AlertViewType.question :
-            
-            break
-            
-        default:
-            //Whether information / error / caution just show OK button
-            hideCustomeAlert()
-        }
-        
+        //Whether information / error / caution just show OK button
+        hideCustomeAlert()
+
     }
     
     override public func awakeFromNib() {
@@ -75,7 +67,7 @@ public extension UIView {
         static let Tag = 1000
     }
     
-    public func showCustomeAlert(alertViewType:AlertViewType? = .information, delegate:CustomAlertViewDelegate? = nil, title:String, message:String) {
+    public func showCustomeAlert(alertViewType:AlertViewType? = .information, delegate:CustomAlertViewDelegate? = nil, title:String, message:String, tag:Int? = 0) {
         
         let customAlertXibView = CustomAlertView.designCodeAlertView()
         customAlertXibView.frame = self.bounds
@@ -85,6 +77,7 @@ public extension UIView {
         customAlertXibView.messageLabel.text = message
         customAlertXibView.alertViewType = alertViewType!
         customAlertXibView.delegate = delegate
+        customAlertXibView.innerTag = tag!
         
         selectTop(alertViewType!, customAlertXibView: customAlertXibView)
         self.addSubview(customAlertXibView)
